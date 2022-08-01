@@ -40,7 +40,7 @@
 </div>
 <div class="py-1 block w-full"></div>
 
-<section id="mode_-1" class="hidden">
+<section id="mode_-1" class="">
     <div class="jsc_wc_connect cursor-pointer grid grid-cols-6 gap-3 border  rounded-lg w-[320px]   items-center mx-auto h-[50px] justify-start pl-[48px]">
         <div class="col-span-1 flex items-center">
             <img src="{{ asset('img/walletconnect-circle-blue.svg') }}" class="w-[32px] mx-auto block">
@@ -119,9 +119,58 @@
 
 </section>
 
+
+<section id="mode_2" class="hidden">
+    <div class="w-[320px] mx-auto">
+        <div class="rounded-md bg-yellow-50 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <!-- Heroicon name: solid/exclamation -->
+                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-yellow-800">Your wallet is not match with your account</h3>
+                    <div class="mt-2 text-sm text-yellow-700">
+                        <p>
+                            <strong> Your web3 wallet :</strong>
+                            <span class="jsc_wallet_address text-xs break-all"></span>
+                        </p>
+
+                        <p class="mt-2">
+                            <strong> Your account :</strong>
+                            <span class="text-xs break-all">{{ auth()->user()->wallet }}</span>
+                        </p>
+
+                    </div>
+                </div>
+
+                <button type="button"
+                    class="jsc_wc_connect mt-4 w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Disconnect
+                    R</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="mode_3" class="hidden">
+    <div class="w-[320px] mx-auto">
+
+        <button type="button"
+            class="jsc_wc_disconnect w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Disconnect
+            Wallet</button>
+    </div>
+
+</section>
+
+
 <style>
     #walletconnect-wrapper {
         display: none;
+        /* FIXME its not perfect way */
     }
 </style>
 <script>
@@ -132,7 +181,17 @@
         infuraId: "43fc8fa086844be0831a586fe4b764b5",
         chainId: 3,
     })
-    provider.enable();
+
+    provider.enable().then(function(accounts) {
+        currentAccount = accounts[0];
+        ConnectionMode()
+    });
+    provider.on('disconnect', function() {
+        window.location.reload()
+    })
+
+
+
     $('.jsc_wc_connect').on('click', () => {
         $('#walletconnect-wrapper').show();
     });
@@ -157,8 +216,6 @@
         }
     });
 
-    ConnectionMode();
-
     function getCurrentAccount() {
         web3.eth.getAccounts().then(function(accounts) {
             currentAccount = accounts[0];
@@ -168,7 +225,9 @@
             console.log(e);
         })
     }
-
+    $('.jsc_wc_disconnect').on('click', () => {
+        provider.disconnect();
+    })
 
     function ConnectionMode() {
         /*
@@ -183,7 +242,6 @@
         }
         if (currentAccount != null && databaseWallet.length == 0) {
             connectionMode = '0';
-            $('.jsc_wallet_address').text(currentAccount);
         }
         if (currentAccount == null && databaseWallet.length != 0) {
             connectionMode = '1';
@@ -198,6 +256,9 @@
     }
 
     function showConnectionSection() {
+        $("#mode_-1").hide();
+        $('.jsc_wallet_address').text(currentAccount);
+
         if (connectionMode == '-1') {
             $("#mode_-1").show();
         }

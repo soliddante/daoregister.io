@@ -77,4 +77,7 @@ class UserController extends Controller
         Auth::login($user);
         return redirect()->route('discover_dao');
     }
+    public function upgrade(){
+        return view('auth.upgrade');
+    }
 }

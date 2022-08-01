@@ -1,5 +1,14 @@
 <x-layouts.app>
-
+    @if (auth()->user()->type != 'writer')
+        <script>
+            window.location.href = "{{ URL::previous() }}";
+        </script>
+    @endif
+    <script>
+        if (connectionStatus != 1 || currentAccount == null || databaseWallet.length == 0 || currentAccount != databaseWallet) {
+            window.location.href = "{{ URL::previous() }}";
+        }
+    </script>
     <x-dao_modal />
     <form action="#" class="jsc_form">
         <input type="hidden" name="token" class="jsc_random_token" value="{{ rand('100', '99999999') }}">

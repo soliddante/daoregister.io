@@ -16,7 +16,6 @@
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-
                         </ul>
                     </div>
                 </div>
@@ -31,7 +30,7 @@
         <div class="rounded-md bg-green-50 p-4">
             <div class="flex">
                 <div class="ml-3">
-                    <div class="mt-2 text-sm text-green-700">
+                    <div class="my-2 text-sm text-green-700">
                         <ul role="list" class="list-disc pl-5 space-y-1">
                             {{ Session::get('msg') }}
                         </ul>

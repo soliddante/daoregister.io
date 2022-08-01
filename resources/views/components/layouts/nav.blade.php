@@ -12,7 +12,8 @@
                 <div class="hidden md:ml-6 md:flex md:space-x-8">
                     <a href="{{ route('start') }}" class=" {{ Route::is('start') ? 'border-indigo-500' : 'border-transparent' }}  text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"> Discover </a>
                     <a href="{{ route('create_dao') }}"
-                        class=" {{ Route::is('create_dao') ? 'border-indigo-500' : 'border-transparent' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"> Generate
+                        class="jsc_anchor_create_dao {{ Route::is('create_dao') ? 'border-indigo-500' : 'border-transparent' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        Generate
                         Dao </a>
                     <a href="#" class=" {{ Route::is('start') ? 'border-transparent' : 'border-transparent' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         About </a>
@@ -20,7 +21,7 @@
                         Contact </a>
                 </div>
             </div>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2">
                 <div class="flex items-center">
                     <ion-icon class="text-gray-600 text-[24px]" name="menu-outline"></ion-icon>
                 </div>
@@ -54,6 +55,16 @@
 <script>
     $('.gls_menu_show').on('click', () => {
         $('.gls_menu').show();
+    })
+
+    $('.jsc_anchor_create_dao').on('click', function(e) {
+        e.preventDefault();
+        var userType = "{{ auth()->user()->type }}";
+        if (userType != 'writer') {
+            $('.gls_menu_show').click();
+            $('.jsc_account_type_error').show();
+            $('.jsc_account_type_error').delay(10000).fadeOut();
+        }
     })
 </script>
 <x-layouts.menu />
