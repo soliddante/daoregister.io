@@ -1,0 +1,167 @@
+/*********************************************************************************
+ * METAMASKO NEMISHE BE ONVANE WEB3 PROVIDER ESTEFADE KARD VASE HAMIN BAYAD KOLE *
+ *          FUNCTIONARO AZ AVAL NEVESHT KE TOO ZAMAN BE SARFE NIST ALAN          *
+ *********************************************************************************/
+
+
+
+
+
+<div id="card" class="jsc_card px-4 py-2 text-white bg-theme-dark hidden w-[320px] h-[200px] mx-auto rounded-lg ">
+    <section class="flex  justify-between  flex-col">
+        {{-- top --}}
+        <div class=" flex justify-between items-center">
+            <div>
+                <div class="jsc_username ">
+                    {{-- {{ auth()->user()->firstname}}
+                   {{ auth()->user()->lastname}} --}}
+                </div>
+                <div class="text-xl font-bold">Binance Smart Chain</div>
+            </div>
+            <div>
+                <div class="w-[44px]">
+                    <img src="{{ asset('qrcode.svg') }}" alt="">
+                </div>
+            </div>
+        </div>
+        {{-- middle --}}
+        <div class="mt-4">
+            <img src="{{ asset('img/simcard.svg') }}" alt="">
+            <div class="jsc_wallet_address mt-1 text-[11px]">0x0000000000000000000000000000000000000000</div>
+        </div>
+        {{-- bottom --}}
+        <div class="mt-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-gray-500 text-sm "> Total Balance </div>
+                    <div class="flex">
+                        <div class="text-white font-lg font-semibold jsc_balance"> 0.0 </div> <span>BNB</span>
+                    </div>
+                </div>
+                <div>
+                    <button type="button"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add
+                        funds</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<section class=" mx-auto w-[320px]">
+    <div class=" border w-full rounded-lg py-2 cursor-pointer mt-2 text-black">
+        <div class="grid grid-cols-6 gap-3 pb-2 jsc_login_btn items-center w-full h-[45px] justify-start pl-[48px]">
+            <div class="col-span-1 flex items-center">
+                <img src="{{ asset('img/metamask.svg') }}" class="w-[42px] mx-auto block">
+            </div>
+            <div class="col-span-5 flex items-center">
+                <div class="text  text-lg font-medium">Metamask</div>
+            </div>
+        </div>
+        <div class="jsc_wc_connect grid grid-cols-6 gap-3 pt-2 border-t items-center w-full h-[45px] justify-start pl-[48px]">
+            <div class="col-span-1 flex items-center">
+                <img src="{{ asset('img/walletconnect-circle-blue.svg') }}" class="w-[32px] mx-auto block">
+            </div>
+            <div class="col-span-5 flex items-center">
+                <div class="text text-lg font-medium">Wallet Connect</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    /********************
+     * ETHEREUM STARTED *
+     ********************/
+    if (window.ethereum != undefined) {
+        ethereum.on("chainChanged", function() {
+            window.location.reload();
+        });
+        ethereum.on("accountsChanged", function() {
+            window.location.reload();
+        });
+
+
+
+        function metamask_login() {
+            ethereum
+                .request({
+                    method: 'eth_requestAccounts'
+                })
+                .then(function() {
+                    window.location.reload()
+                })
+                .catch((error) => {
+                    if (error.code === 4001) {
+                        console.log('Please connect to MetaMask.');
+                    } else {
+                        console.error(error);
+                    }
+                });
+        }
+
+
+        ethereum
+            .request({
+                method: 'eth_accounts'
+            })
+            .then(function(accounts) {
+                if (account.length !== 0) {
+                    providerMachine = 'metamask';
+                }
+            })
+
+    } else {
+        // FIXME click on metamask   should return install link 
+
+
+
+    }
+
+    /*************************
+     * WALLETCONNECT STARTED *
+     *************************/
+
+    $('.jsc_wc_connect').on('click', () => {
+        provider.enable().then(function(e, r) {
+            console.log(e, r);
+        }).catch(function(e) {
+            console.dir(e.message);
+            window.location.reload()
+        });
+    })
+
+
+    // WEB3
+
+
+    let providerMachine;
+    let provider;
+    if (providerMachine == 'metamask') {
+        provider = window.ethereum;
+    } else {
+        provider = new WalletConnectProvider({
+            infuraId: "43fc8fa086844be0831a586fe4b764b5",
+            chainId: 3,
+        });
+    }
+    console.log(provider);
+
+    web3.eth.getAccounts().then(function() {
+        if (result.length != 0) {
+            currentAccount = result[0];
+            console.log(result[0]);
+            $(".jsc_login_btn").hide();
+            $(".jsc_card").removeClass("bg-gray-900");
+            $(".jsc_card").addClass("bg-theme-dark");
+            $(".jsc_wallet_address").text(currentAccount);
+            //getBalance
+            web3.eth.getBalance(currentAccount, (err, balance) => {
+                balance = web3.utils.fromWei(balance, "ether");
+                $(".jsc_balance").text(balance.slice(0, 6));
+            });
+        }
+    })
+</script>
+<script>
+    // const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+</script>
