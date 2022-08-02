@@ -51,4 +51,5 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_account', 'dashboard_account')->name('dashboard_account');
     Route::get('/dashboard_address', 'dashboard_address')->name('dashboard_address');
     Route::get('/dashboard_upgrade', 'dashboard_upgrade')->name('dashboard_upgrade');
+    Route::get('/dashboard_social', 'dashboard_social')->name('dashboard_social');
 });

@@ -1,5 +1,5 @@
 <x-layouts.dashboard>
-    <div class="border rounded px-8 py-12 bg-white mt-16 shadow block w-4/5 mx-auto ">
+    <section class="hidden jsc_upgrade_section border rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
         <div class="col-span-2">
             <div class="flex w-full items-center justify-between">
                 <div class="text-lg leading-6 font-semibold  text-theme-dark ">Upgrade Profile</div>
@@ -19,5 +19,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <script>
+        if (connectionMode == 3) {
+            $('.jsc_upgrade_section').show();
+        }
+    </script>
 </x-layouts.dashboard>

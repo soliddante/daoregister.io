@@ -22,4 +22,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.upgrade');
     }
+    public function dashboard_social()
+    {
+        return view('dashboard.social');
+    }
 }
