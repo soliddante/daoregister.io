@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app_full>
     <style>
         .glb_navigation {
             display: none;

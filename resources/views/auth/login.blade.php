@@ -12,7 +12,8 @@
                     <button type="button"
                         class="block items-center px-4 py-3 text-center border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 w-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
                     <a href="{{ route('register_form') }}"
-                        class="block items-center px-4 py-3 text-center border border-white text-base w-full font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Account</a>
+                        class="block items-center px-4 py-3 text-center border border-white text-base w-full font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create
+                        Account</a>
                 </div>
 
                 <div class="mt-8">

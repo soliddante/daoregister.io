@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DaoController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeCotnroller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
@@ -44,4 +45,8 @@ Route::controller(DaoController::class)->group(function () {
     Route::get('/create_dao', 'create_dao')->name('create_dao')->middleware(['auth']);
     Route::get('/store_dao', 'store_dao')->name('store_dao')->middleware(['auth']);
     Route::get('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
+});
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/dashboard_personal', 'dashboard_personal')->name('dashboard_personal');
+    Route::get('/dashboard_account', 'dashboard_account')->name('dashboard_account');
 });

@@ -80,4 +80,7 @@ class UserController extends Controller
     public function upgrade(){
         return view('auth.upgrade');
     }
+    public function profile(){
+        return view('auth.profile');
+    }
 }

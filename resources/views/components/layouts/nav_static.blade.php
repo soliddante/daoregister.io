@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 
-<nav class="bg-white fixed top-0 right-0 w-full z-50   shadow glb_navigation">
+<nav class="bg-white w-full z-50   shadow glb_navigation">
     <div class="DIS_max-w-7xl mx-auto px-2 sm:px-6 lg:px-6">
 
         <div class="relative flex justify-between h-[64px]">
@@ -51,7 +51,6 @@
 
 
 </nav>
-<div class="w-full mb-[128px]"></div>
 <script>
     $('.gls_menu_show').on('click', () => {
         $('.gls_menu').show();

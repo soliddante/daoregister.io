@@ -18,7 +18,6 @@
             font-family: inter;
             src: url({{ asset('fonts/inter.woff2') }});
         }
-
         * {
             font-family: inter;
         }

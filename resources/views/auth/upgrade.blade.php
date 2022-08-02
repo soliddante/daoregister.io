@@ -16,7 +16,7 @@
                 </div>
             </nav>
             <section class="mt-4">
-                <div id="card" class="jsc_card px-4 py-2 text-white bg-theme-dark  w-[320px] h-[200px] mx-auto rounded-lg ">
+                <div id="card" class="jsc_card px-4 py-2 text-white bg-theme-dark  w-full xl:w-full h-[200px] mx-auto rounded-lg ">
                     <section class="flex  justify-between  flex-col">
                         {{-- top --}}
                         <div class=" flex justify-between items-center">
@@ -59,7 +59,7 @@
                 <div class="py-1 block w-full"></div>
 
                 <section id="mode_-1" class="">
-                    <div class="jsc_wc_connect cursor-pointer grid grid-cols-6 gap-3 border  rounded-lg w-[320px]   items-center mx-auto h-[50px] justify-start pl-[48px]">
+                    <div class="jsc_wc_connect cursor-pointer grid grid-cols-6 gap-3 border  rounded-lg w-full   items-center mx-auto h-[50px] justify-start pl-[48px]">
                         <div class="col-span-1 flex items-center">
                             <img src="{{ asset('img/walletconnect-circle-blue.svg') }}" class="w-[32px] mx-auto block">
                         </div>
@@ -71,8 +71,8 @@
 
 
                 <section id="mode_0" class="hidden">
-                    <div class="w-[320px] mx-auto">
-                        <div class="rounded-md w-[320px] mx-auto bg-blue-50 p-4">
+                    <div class="w-full mx-auto">
+                        <div class="rounded-md w-full mx-auto bg-blue-50 p-4">
                             <div class="flex">
                                 <div class="flex-shrink-0">
                                     <!-- Heroicon name: solid/information-circle -->
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="rounded-md mt-2 w-[320px] mx-auto bg-red-50 p-4">
+                        <div class="rounded-md mt-2 w-full mx-auto bg-red-50 p-4">
                             <div class="flex">
                                 <div class="flex-shrink-0">
                                     <!-- Heroicon name: solid/x-circle -->
@@ -115,7 +115,7 @@
                 </section>
 
                 <section id="mode_1" class="hidden">
-                    <div class="w-[320px] mx-auto">
+                    <div class="w-full mx-auto">
                         <div class="rounded-md bg-blue-50 p-4">
                             <div class="flex">
                                 <div class="flex-shrink-0">
@@ -125,7 +125,7 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3 flex-1 md:flex md:justify-between">
-                                    <p class="text-sm text-blue-700"><strong>Wallet Address : </strong><span class="text-xs break-all block ">{{ auth()->user()->wallet }}</span></p>
+                                    <p class="text-sm text-blue-700"><strong>Wallet Address : </strong><span class="text-xs break-all block ">{{ auth()->user()->wallet ?? '' }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
 
 
                 <section id="mode_2" class="hidden">
-                    <div class="w-[320px] mx-auto">
+                    <div class="w-full mx-auto">
                         <div class="rounded-md bg-yellow-50 p-4">
                             <div class="flex">
                                 <div class="flex-shrink-0">
@@ -160,7 +160,7 @@
 
                                         <p class="mt-2">
                                             <strong> Your account :</strong>
-                                            <span class="text-xs break-all">{{ auth()->user()->wallet }}</span>
+                                            <span class="text-xs break-all">{{ auth()->user()->wallet ?? '' }}</span>
                                         </p>
 
                                     </div>
@@ -175,7 +175,7 @@
                 </section>
 
                 <section id="mode_3" class="hidden">
-                    <div class="w-[320px] mx-auto">
+                    <div class="w-full mx-auto">
 
                         <button type="button"
                             class="jsc_wc_disconnect w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Disconnect
