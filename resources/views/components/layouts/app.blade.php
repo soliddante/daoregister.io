@@ -10,9 +10,8 @@
             {{ $slot }}
         </div>
     </main>
-    <script>
-        $('.gls_alert').delay(3000).fadeOut();
-    </script>
+
+    @include('components.layouts.footer')
 </body>
 
 </html>

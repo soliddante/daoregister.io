@@ -11,3 +11,4 @@
         }
     })
 </script>
+<x-walletjs></x-walletjs>

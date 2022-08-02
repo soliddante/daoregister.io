@@ -30,7 +30,7 @@
                     <div class="my-2 text-sm text-red-700">
                         <ul role="list" class="list-disc pl-5 space-y-1">
                             Before generate Dao you should upgrade your account to writer
-                            <strong class="jsc_account_upgrade block underline underline-offset-4">Click here for upgrade</strong>
+                            <a href="{{ route('dashboard_upgrade') }}" class="jsc_account_upgrade block underline underline-offset-4">Click here for upgrade</a>
                         </ul>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         Become DaoGenerator :
     </span>
     <button type="button"
-        class="jsc_account_upgrade block items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Upgrade me
-    </button>
+    class="jsc_account_upgrade block items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    Upgrade me
+</button>
 </footer>

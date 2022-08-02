@@ -10,19 +10,20 @@
             </div>
             <div class="col-span-1">
                 <x-ui.select name="country" lable="country">
-                    <option value="US">US</option>
+                    <option value="US" @if (auth()->user()->country == 'US') selected @endif>US</option>
+                </x-ui.select>
+
+            </div>
+            <div class="col-span-1">
+                <x-ui.select name="City" lable="city">
+                    <option value="New York" @if (auth()->user()->city == 'New York') selected @endif>New York</option>
                 </x-ui.select>
             </div>
             <div class="col-span-1">
-                <x-ui.select name="City" lable="country">
-                    <option value="New York">New York</option>
-                </x-ui.select>
-            </div>
-            <div class="col-span-1">
-                <x-ui.input name="postalcode" lable="postalcode"></x-ui.input>
+                <x-ui.input name="postalcode" lable="postalcode" placeholder="{{ auth()->user()->postalcode }}" ></x-ui.input>
             </div>
             <div class="col-span-2">
-                <x-ui.textarea name="postalcode" lable="postalcode" class="h-[150px]"></x-ui.textarea>
+                <x-ui.textarea name="address" lable="Address" class="h-[150px]">{{ auth()->user()->address }}</x-ui.textarea>
             </div>
             {{-- /*********
                  SUBMIT

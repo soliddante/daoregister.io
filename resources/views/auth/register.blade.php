@@ -71,27 +71,29 @@
                             </div>
                         </div>
                         <div class="sm:col-span-3 col-span-2">
-                            <label for="email_confirmation " class="block text-sm font-medium text-gray-700">Email-confrimation </label>
+                            <label for="email_confirmation " class="block text-sm font-medium text-gray-700">Email repeat </label>
                             <div class="mt-1">
                                 <input type="email" name="email_confirmation" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
 
                         <div class="sm:col-span-6 col-span-2">
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone number </label>
+                            <label for="phone" class=" block text-sm font-medium text-gray-700">Phone number </label>
                             <div class="mt-1">
-                                <input type="text" name="phone" value="{{ old('phone') ?? '' }}" id="phone" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                <input type="text" name="phone" value="{{ old('phone') ?? '' }}" id="phone"
+                                    class="global_phone shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block !w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
 
                         <div class="sm:col-span-3 ">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password </label>
                             <div class="mt-1">
-                                <input type="password" name="password" value="{{ old('password') ?? '' }}" id="password" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                <input type="password" placeholder="at least 8 characters" name="password" value="{{ old('password') ?? '' }}" id="password"
+                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
                         <div class="sm:col-span-3 ">
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Password confirm </label>
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Password repeat </label>
                             <div class="mt-1">
                                 <input type="password" name="password_confirmation" value="{{ old('password') ?? '' }}" id="password_confirmation"
                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
@@ -157,9 +159,9 @@
                     <div class="mt-2 grid grid-cols-2 gap-y-6 gap-x-4 sm:grid-cols-6">
 
                         <div class="sm:col-span-3 col-span-2">
-                            <label class="block text-sm font-medium text-gray-700">Proffesion </label>
+                            <label class="block text-sm font-medium text-gray-700">Profession </label>
                             <div class="mt-1">
-                                <input type="text" name="proffesion" value="{{ old('proffesion') ?? '' }}" autocomplete="given-name"
+                                <input type="text" name="profession" value="{{ old('profession') ?? '' }}" autocomplete="given-name"
                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                             </div>
                         </div>
@@ -313,4 +315,4 @@
             })
         }
     </script>
-</x-layouts.app>
+    </x-layouts.app>

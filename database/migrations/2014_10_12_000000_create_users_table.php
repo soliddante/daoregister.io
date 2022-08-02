@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->string('wallet')->nullable();
+            $table->string('wallet')->nullable()->unique();
             $table->string('type')->nullable();
             $table->string("firstname")->nullable();
             $table->string("lastname")->nullable();
@@ -28,13 +28,19 @@ return new class extends Migration
             $table->string("city")->nullable();
             $table->string("postalcode")->nullable();
             $table->string("address")->nullable();
-            $table->string("proffesion")->nullable();
+            $table->string("profession")->nullable();
             $table->string("education")->nullable();
             $table->string("university")->nullable();
             $table->string("language_first")->nullable();
             $table->string("language_second")->nullable();
             $table->string("security_question")->nullable();
             $table->string("security_answer")->nullable();
+            $table->string("instagram")->nullable();
+            $table->string("Twitter")->nullable();
+            $table->string("Facebook")->nullable();
+            $table->string("Whatsapp")->nullable();
+            $table->string("Telegram")->nullable();
+            $table->string("linkedin")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
