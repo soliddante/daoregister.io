@@ -14,4 +14,12 @@ class DashboardController extends Controller
     {
         return view('dashboard.account');
     }
+    public function dashboard_address()
+    {
+        return view('dashboard.address');
+    }
+    public function dashboard_upgrade()
+    {
+        return view('dashboard.upgrade');
+    }
 }

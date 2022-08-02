@@ -28,21 +28,18 @@
                         <ion-icon class="text-2xl" name="person-outline"></ion-icon>
                         <span class="mt-2">Personal</span>
                     </a>
-
-                    <a href="" class="{!! aClass('') !!}">
-
-                        <span class="mt-2">Photos</span>
+                  
+                    <a href="{{ route('dashboard_address') }}" class="{!! aClass('dashboard_address') !!}">
+                        <ion-icon class="text-2xl" name="map-outline"></ion-icon>
+                        <span class="mt-2">Address</span>
                     </a>
 
-                    <a href="#" class="{!! aClass('') !!}">
-
-                        <span class="mt-2">Shared</span>
+                    <a href="{{ route('dashboard_upgrade') }}" class="{!! aClass('dashboard_upgrade') !!}">
+                        <ion-icon class="text-2xl" name="flask-outline"></ion-icon>
+                        <span class="mt-2">Upgrade</span>
                     </a>
 
-                    <a href="#" class="{!! aClass(' ') !!}">
-
-                        <span class="mt-2">Albums</span>
-                    </a>
+               
 
                 </div>
             </div>
@@ -198,7 +195,7 @@
                     <!-- Primary column -->
                     <section aria-labelledby="primary-heading" class="min-w-0 flex-1 h-full  flex flex-col lg:order-last">
                         {{ $slot }}
-                    </section> 
+                    </section>
                     <div class="pb-28 block w-full "></div>
                 </main>
 

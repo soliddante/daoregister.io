@@ -49,4 +49,6 @@ Route::controller(DaoController::class)->group(function () {
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_personal', 'dashboard_personal')->name('dashboard_personal');
     Route::get('/dashboard_account', 'dashboard_account')->name('dashboard_account');
+    Route::get('/dashboard_address', 'dashboard_address')->name('dashboard_address');
+    Route::get('/dashboard_upgrade', 'dashboard_upgrade')->name('dashboard_upgrade');
 });

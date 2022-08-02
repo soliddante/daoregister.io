@@ -55,6 +55,16 @@
             <div class="col-span-2">
                 <x-ui.input name="university" lable="university"></x-ui.input>
             </div>
+            <div class="col-span-1">
+                <x-ui.select name="first_language" lable="Primary language">
+                    <option value="English">English</option>
+                </x-ui.select>
+            </div>
+            <div class="col-span-1">
+                <x-ui.select name="first_language" lable="Secondary language">
+                    <option value="Spanish">Spanish</option>
+                </x-ui.select>
+            </div>
             {{-- /*********
                  SUBMIT
                 ***********/ --}}

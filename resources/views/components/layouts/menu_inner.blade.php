@@ -12,7 +12,7 @@
 
     <div>
         <div class="flex gap-2 text-sm rounded px-2 py-1 text-theme-dark bg-theme-light bg-opacity-5 items-center ">
-            <ion-icon name="book"></ion-icon>
+            <ion-icon name="book-outline"></ion-icon>
             <span class="font-medium">Observer</span>
         </div>
     </div>

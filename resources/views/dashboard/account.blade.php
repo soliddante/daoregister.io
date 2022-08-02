@@ -14,20 +14,28 @@
             <div class="col-span-1">
                 <x-ui.input name="email_confrimation" type="email" lable="Email conftimation"></x-ui.input>
             </div>
-            <div class="col-span-2">
+            <div class="col-span-1 ">
                 <x-ui.input name="phone" lable="Phone Number"></x-ui.input>
             </div>
-
+            <div class="col-span-1">
+                <div class="hidden">space</div>
+            </div>
             <div class="col-span-1">
                 <x-ui.input name="password" lable="Password" type="password"></x-ui.input>
             </div>
             <div class="col-span-1">
                 <x-ui.input name="password_confrimation" lable="Password confrimation" type="password"></x-ui.input>
             </div>
-            <div class="col-span-2">
-                <x-ui.input name="password_confrimation" lable="Password confrimation" type="password"></x-ui.input>
+
+            <div class="col-span-1">
+                <x-ui.select name="security_answer" lable="security_question">
+                    <option>Whats you favorite animal</option>
+                </x-ui.select>
             </div>
-      
+            <div class="col-span-1">
+                <x-ui.input name="security_answer" lable="Answer"></x-ui.input>
+            </div>
+
             {{-- /*********
                  SUBMIT
                 ***********/ --}}
