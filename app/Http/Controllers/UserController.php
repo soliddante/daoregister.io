@@ -90,7 +90,7 @@ class UserController extends Controller
         $user = User::find(auth()->user()->id);
         $user->update([
             'email' => $request->email ?? $user->email,
-            'password' => $request->password ?? $user->password,
+            'password' => Hash::make($request->password) ?? $user->password,
             'wallet' => $request->wallet ?? $user->wallet,
             "firstname" => $request->firstname ?? $user->firstname,
             "lastname" => $request->lastname ?? $user->lastname,

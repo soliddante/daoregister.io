@@ -1267,6 +1267,9 @@ select {
 .top-1 {
   top: 0.25rem;
 }
+.top-24 {
+  top: 6rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1561,6 +1564,9 @@ select {
 }
 .hidden {
   display: none;
+}
+.\!hidden {
+  display: none !important;
 }
 .h-5 {
   height: 1.25rem;
@@ -2360,6 +2366,14 @@ select {
 .bg-gray-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+}
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 .bg-opacity-40 {
   --tw-bg-opacity: 0.4;

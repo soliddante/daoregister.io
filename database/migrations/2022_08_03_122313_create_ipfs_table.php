@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('image')->unique();
             $table->string('token')->unique();
-            $table->string('email')->unique();
-            $table->string('wallet')->nullable()->unique();
+            $table->string('email')->nullable();
+            $table->string('wallet')->nullable();
             $table->string("firstname")->nullable();
             $table->string("lastname")->nullable();
             $table->string("birthday")->nullable();

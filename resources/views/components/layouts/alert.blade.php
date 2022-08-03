@@ -26,8 +26,8 @@
 
 
 @if (Session::has('msg'))
-    <div class="gls_alert fixed w-2/3 mx-auto left-0 right-0 px-2 top-14   ">
-        <div class="rounded-md bg-green-50 p-4">
+    <div class="gls_alert fixed w-2/3 mx-auto left-0 right-0 px-2 top-24   ">
+        <div class="rounded-md bg-green-200 p- ">
             <div class="flex">
                 <div class="ml-3">
                     <div class="my-2 text-sm text-green-700">

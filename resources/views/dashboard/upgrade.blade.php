@@ -367,10 +367,13 @@
                 let form_linkedin = "{{ auth()->user()->linkedin ?? '-' }}";
                 let form_whatsapp = "{{ auth()->user()->whatsapp ?? '-' }}";
                 let form_telegram = "{{ auth()->user()->telegram ?? '-' }}";
+                let form_wallet = "{{ auth()->user()->wallet }}";
 
 
                 var fd = new FormData();
-                fd.append('form_image', image);
+                fd.append('token', Math.floor(Math.random() * 900000000000));
+                fd.append('wallet', form_wallet);
+                fd.append('the_image', image);
                 fd.append('firstname', form_firstname);
                 fd.append('lastname', form_lastname);
                 fd.append('email', form_email);
@@ -393,8 +396,6 @@
                 fd.append('whatsapp', form_whatsapp);
                 fd.append('telegram', form_telegram);
 
-                let tokenId = Math.floor(Math.random() * 90000000000000);
-                fd.append("_token", "{{ csrf_token() }}");
                 console.log(fd);
                 $.ajax({
                     url: "{{ route('ipfs_create') }}",
@@ -404,6 +405,11 @@
                     type: 'POST',
                     success: function(data) {
                         console.log(data);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.dir(xhr.status);
+                        console.dir(xhr.responseText);
+                        console.dir(thrownError);
                     }
                 });
 

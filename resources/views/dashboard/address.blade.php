@@ -17,7 +17,7 @@
 
             </div>
             <div class="md:col-span-1 col-span-2">
-                <x-ui.select name="City" lable="city">
+                <x-ui.select name="city" lable="city">
                     <option value="New York" @if (auth()->user()->city == 'New York') selected @endif>New York</option>
                 </x-ui.select>
             </div>

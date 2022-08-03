@@ -38,7 +38,8 @@
         </div>
     </div>
 </section>
-<footer class="border-t {{ $nofooter ?? '' ? 'hidden' : '' }} shadow flex items-center justify-between px-[20px]  h-[60px] absolute w-[360px] bottom-[64px] right-0">
+{{-- //FIXME CSS --}}
+<footer class="!hidden border-t {{ $nofooter ?? '' ? 'hidden' : '' }} shadow flex items-center justify-between px-[20px]  h-[60px] absolute w-[360px] bottom-[64px] right-0">
     <span>
         Become DaoGenerator :
     </span>
