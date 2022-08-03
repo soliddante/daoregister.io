@@ -151,11 +151,12 @@
                             </p>
 
                         </div>
+                        <button type="button"
+                        class="jsc_wc_connect mt-4 w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Disconnect
+                        </button>
                     </div>
 
-                    <button type="button"
-                        class="jsc_wc_connect mt-4 w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Disconnect
-                        R</button>
+                  
                 </div>
             </div>
         </div>

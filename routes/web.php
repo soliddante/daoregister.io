@@ -3,6 +3,7 @@
 use App\Http\Controllers\DaoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeCotnroller;
+use App\Http\Controllers\IpfsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,7 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(HomeCotnroller::class)->group(function () {
     Route::get('/', 'start')->name('start')->middleware(['auth']);
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 Route::controller(WalletController::class)->group(function () {
@@ -53,4 +55,9 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_address', 'dashboard_address')->name('dashboard_address');
     Route::get('/dashboard_upgrade', 'dashboard_upgrade')->name('dashboard_upgrade');
     Route::get('/dashboard_social', 'dashboard_social')->name('dashboard_social');
+});
+
+Route::controller(IpfsController::class)->group(function () {
+    Route::any('/ipfs_create', 'ipfs_create')->name('ipfs_create');
+    
 });

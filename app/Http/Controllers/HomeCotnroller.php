@@ -10,4 +10,8 @@ class HomeCotnroller extends Controller
     {
         return view('dao.discover');
     }
+    public function contact()
+    {
+        return view('contact');
+    }
 }

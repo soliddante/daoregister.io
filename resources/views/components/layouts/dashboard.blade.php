@@ -23,7 +23,9 @@
         <div class="hidden w-28 bg-indigo-700 overflow-y-auto md:block">
             <div class="w-full py-6 flex flex-col items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white" alt="Workflow">
+                    <div>
+                        <ion-icon class="text-3xl text-white" name="prism"></ion-icon>
+                    </div>
                 </div>
                 <div class="flex-1 mt-6 w-full px-2 space-y-1">
                     <a href="{{ route('dashboard_account') }}" class="{!! aClass('dashboard_account') !!}">
@@ -128,8 +130,7 @@
                                     <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false"
                                         aria-haspopup="true">
                                         <span class="sr-only">Open user menu</span>
-                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
-                                            alt="">
+                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
                                     </button>
                                 </div>
 
@@ -166,14 +167,13 @@
         </div>
     </div>
     <x-walletjs></x-walletjs>
-    {{-- for upgrade --}}
+    {{-- for upgrade codes here --}}
     <script>
         if (connectionMode != 3) {
             $('.jsc_wallet_error').show();
         } else {
             $('.jsc_upgrade_section').show();
         }
-
         $('.jsc_dash_close_menu').on('click', function(e) {
             $('.jsc_dash_menu').hide();
         })
@@ -181,6 +181,25 @@
             $('.jsc_dash_menu').show();
         })
     </script>
-
+    {{-- contract_abi --}}
+    <x-upgrade_json></x-upgrade_json>
+    <script>
+        const web3 = new Web3(provider);
+        $('.jsc_upgrade_magic_button').on('click', function() {
+            let contract_address = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
+            let contract = new web3.eth.Contract(contract_abi, contract_address);
+            let tokenId = Math.floor(Math.random() * 90000000000000);
+            let recipient = databaseWallet;
+            // let tokenURI = "https://daoregistre.io/ipfs1.json";
+            let tokenURI = "https://raw.githubusercontent.com/PatrickAlphaC/dungeons-and-dragons-nft/7be02828b5afa425bad9da05753efad2bface085/metadata/the-chainlink-knight.json";
+            contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
+                from: databaseWallet
+            }, function(error, transactionHash) {
+                // if hash dad tokeno save kon 
+                console.log(error);
+                console.log(transactionHash);
+            });
+        })
+    </script>
 
 </x-layouts.app_full>

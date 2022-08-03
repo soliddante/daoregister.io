@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Dao::class);
     }
+    public function ipfs()
+    {
+        return $this->hasMany(ipfs::class);
+    }
 }

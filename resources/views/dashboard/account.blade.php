@@ -1,6 +1,6 @@
 <x-layouts.dashboard>
     <form id="form" action="{{ route('user_update') }}">
-        <div class="border rounded px-8 py-12 bg-white mt-4 mb-4 md:mt-16 shadow block md:w-4/5 w-[90vw] mx-auto ">
+        <div class="border rounded px-8 py-12 bg-white mt-4  md:mt-16 shadow block md:w-4/5 w-[90vw] mx-auto ">
             <div class="grid-cols-2 md:gap-4 gap-y-4 px-0 md:px-8 grid ">
                 {{-- /***********************
                  ACCOUNT INFORMATION 

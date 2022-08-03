@@ -2,7 +2,7 @@
     let currentAccount = null;
     let connectionMode = null;
     let databaseWallet = "{{ auth()->user()->wallet ?? '' }}";
-    let provider = new WalletConnectProvider({
+    var provider = new WalletConnectProvider({
         infuraId: "43fc8fa086844be0831a586fe4b764b5",
         chainId: 3,
     })
@@ -44,6 +44,8 @@
     function getCurrentAccount() {
         web3.eth.getAccounts().then(function(accounts) {
             currentAccount = accounts[0];
+
+
             console.log(currentAccount);
             ConnectionMode()
         }).catch(function(e) {
@@ -71,10 +73,10 @@
         if (currentAccount == null && databaseWallet.length != 0) {
             connectionMode = '1';
         }
-        if (currentAccount != null && databaseWallet.length != 0 && currentAccount != databaseWallet) {
+        if (connectionMode != null && databaseWallet.length != 0 && currentAccount.toLowerCase() != databaseWallet.toLowerCase()) {
             connectionMode = '2';
         }
-        if (currentAccount != null && databaseWallet.length != 0 && currentAccount == databaseWallet) {
+        if (currentAccount != null && databaseWallet.length != 0 && currentAccount.toLowerCase() == databaseWallet.toLowerCase()) {
             connectionMode = '3';
         }
         showConnectionSection();

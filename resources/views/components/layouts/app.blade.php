@@ -5,12 +5,10 @@
     <main class="h-full">
         <x-layouts.alert></x-layouts.alert>
         <x-layouts.nav />
-        <div class="max-w-7xl mx-auto pb-4 px-2 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto pb-4 px-2 sm:px-6 lg:px-8 css_main_div">
             {{ $slot }}
         </div>
     </main>
-
     @include('components.layouts.footer')
 </body>
-
 </html>

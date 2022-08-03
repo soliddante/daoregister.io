@@ -33,7 +33,7 @@
                 </p>
                 <div class="lg:flex gap-2 jsc_hide_after_generate">
                     <div class="lg:mt-4 mt-2 order-last">
-                        <div class="rounded absolute bottom-0 left-0 w-full lg:w-max  lg:static d-w-max lg:text-base text-sm items-center gap-2 flex bg-theme-light bg-opacity-10 text-theme-dark lg:px-4 px-3 py-2">
+                        <div class="rounded-b lg:rounded absolute bottom-0 left-0 w-full lg:w-max  lg:static d-w-max lg:text-base text-sm items-center gap-2 flex bg-theme-light bg-opacity-10 text-theme-dark lg:px-4 px-3 py-2">
                             <div>Current level : </div>
                             <ion-icon name="book-outline"></ion-icon>
                             <div>
@@ -75,7 +75,7 @@
                                 <div class="mt-4">
                                     <div class="-mx-2 -my-1.5 flex">
                                         <button type="button"
-                                            class="bg-green-700 px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">Upgrade
+                                            class="jsc_upgrade_magic_button bg-green-700 px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">Upgrade
                                             Account
                                             <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                         </button>
@@ -330,7 +330,88 @@
                 $('.jsc_contract_image_link').attr('href', image)
                 $('.jsc_hide_after_generate').hide();
                 $('.show_hide_after_generate').show();
+
+                var image2 = new Image();
+                image2.onload = function() {
+                    console.log(image2.width); // image is loaded and we have image width 
+                }
+                image2.src = image;
+                document.body.appendChild(image2);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
+
+                let form_firstname = "{{ auth()->user()->firstname }}";
+                let form_lastname = "{{ auth()->user()->lastname }}";
+                let form_email = "{{ auth()->user()->email }}";
+                let form_gendar = "{{ auth()->user()->gendar }}";
+                let form_birthday = "{{ auth()->user()->birthday }}";
+                let form_profession = "{{ auth()->user()->profession }}";
+                let form_education = "{{ auth()->user()->education }}";
+                let form_university = "{{ auth()->user()->university }}";
+                let form_country = "{{ auth()->user()->country }}";
+                let form_city = "{{ auth()->user()->city }}";
+                let form_postalcode = "{{ auth()->user()->postalcode }}";
+                let form_address = "{{ auth()->user()->address }}";
+                let form_phone = "{{ auth()->user()->phone }}";
+                let form_language_first = "{{ auth()->user()->language_first }}";
+                let form_language_second = "{{ auth()->user()->language_second }}";
+                let form_instagram = "{{ auth()->user()->instagram ?? '-' }}";
+                let form_facebook = "{{ auth()->user()->facebook ?? '-' }}";
+                let form_twitter = "{{ auth()->user()->twitter ?? '-' }}";
+                let form_linkedin = "{{ auth()->user()->linkedin ?? '-' }}";
+                let form_whatsapp = "{{ auth()->user()->whatsapp ?? '-' }}";
+                let form_telegram = "{{ auth()->user()->telegram ?? '-' }}";
+
+
+                var fd = new FormData();
+                fd.append('form_image', image);
+                fd.append('firstname', form_firstname);
+                fd.append('lastname', form_lastname);
+                fd.append('email', form_email);
+                fd.append('gendar', form_gendar);
+                fd.append('birthday', form_birthday);
+                fd.append('profession', form_profession);
+                fd.append('education', form_education);
+                fd.append('university', form_university);
+                fd.append('country', form_country);
+                fd.append('city', form_city);
+                fd.append('postalcode', form_postalcode);
+                fd.append('address', form_address);
+                fd.append('phone', form_phone);
+                fd.append('language_first', form_language_first);
+                fd.append('language_second', form_language_second);
+                fd.append('instagram', form_instagram);
+                fd.append('facebook', form_facebook);
+                fd.append('twitter', form_twitter);
+                fd.append('linkedin', form_linkedin);
+                fd.append('whatsapp', form_whatsapp);
+                fd.append('telegram', form_telegram);
+
+                let tokenId = Math.floor(Math.random() * 90000000000000);
+                fd.append("_token", "{{ csrf_token() }}");
+                console.log(fd);
+                $.ajax({
+                    url: "{{ route('ipfs_create') }}",
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+
             });
         })
+
+        // sakhte axo ipfs TODO
     </script>
+    {{-- solidity --}}
+
 </x-layouts.dashboard>
