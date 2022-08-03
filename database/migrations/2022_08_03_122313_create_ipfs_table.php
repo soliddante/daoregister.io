@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('image')->unique();
+            $table->string('json')->unique();
             $table->string('token')->unique();
             $table->string('email')->nullable();
             $table->string('wallet')->nullable();

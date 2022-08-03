@@ -11,6 +11,7 @@ class ipfs extends Model
     protected $fillable = [
     'user_id',
     'image',
+    'json',
     'token',
     'email',
     'wallet',
