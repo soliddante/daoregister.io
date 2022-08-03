@@ -182,20 +182,26 @@
         })
     </script>
     {{-- contract_abi --}}
+    <script>
+        var database_ipfs = null;
+    </script>
+    {{-- set contract_abi --}}
     <x-upgrade_json></x-upgrade_json>
+    {{-- set database_ipfs --}}
+    <x-create_ipfs_js></x-create_ipfs_js>
+    {{-- solidity --}}
+
     <script>
         const web3 = new Web3(provider);
         $('.jsc_upgrade_magic_button').on('click', function() {
             let contract_address = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
             let contract = new web3.eth.Contract(contract_abi, contract_address);
-            // let tokenId = Math.floor(Math.random() * 90000000000000); get tokeno ipfs from db
+            let tokenId = database_ipfs.token;
             let recipient = databaseWallet;
-            // let tokenURI = "https://daoregistre.io/ipfs1.json";
-            let tokenURI = "https://raw.githubusercontent.com/PatrickAlphaC/dungeons-and-dragons-nft/7be02828b5afa425bad9da05753efad2bface085/metadata/the-chainlink-knight.json";
+            let tokenURI = database_ipfs.json;
             contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
                 from: databaseWallet
             }, function(error, transactionHash) {
-                // if hash dad tokeno save kon 
                 console.log(error);
                 console.log(transactionHash);
             });
