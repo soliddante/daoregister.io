@@ -26,6 +26,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/register_store', 'register_store')->name('register_store');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/upgrade', 'upgrade')->name('upgrade');
+    Route::get('/user_update', 'user_update')->name('user_update');
 });
 
 

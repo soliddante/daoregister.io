@@ -14,6 +14,8 @@
     <script src="{{ asset('js/walletconnect2.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+    <script src="{{ asset('js/just-validate.production.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v?@php echo(rand(0,100000)) @endphp">
     <style>
         @font-face {
@@ -24,10 +26,10 @@
         * {
             font-family: inter;
         }
-        .iti{
+
+        .iti {
             width: 100%;
         }
     </style>
-
 
 </head>

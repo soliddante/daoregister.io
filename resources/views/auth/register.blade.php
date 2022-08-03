@@ -291,6 +291,7 @@
             </section>
         </div>
     </form>
+
     <script>
         let current_page = 0;
         $('.jsc_page_next').on('click', function() {
