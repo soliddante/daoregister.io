@@ -333,7 +333,7 @@
 
                 var image2 = new Image();
                 image2.onload = function() {
-                    console.log(image2.width); // image is loaded and we have image width 
+
                 }
                 image2.src = image;
                 document.body.appendChild(image2);
@@ -396,7 +396,6 @@
                 fd.append('whatsapp', form_whatsapp);
                 fd.append('telegram', form_telegram);
 
-                console.log(fd);
                 $.ajax({
                     url: "{{ route('ipfs_create') }}",
                     data: fd,
@@ -404,7 +403,7 @@
                     contentType: false,
                     type: 'POST',
                     success: function(data) {
-                        console.log(data);
+                        create_account_nft();
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.dir(xhr.status);
@@ -415,7 +414,15 @@
 
             });
         })
-
+        function create_account_nft(){
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('ipfs_last_get') }}",
+                    success: function (response) {
+                            console.log(response);                        
+                    }
+                });
+        }
         // sakhte axo ipfs TODO
     </script>
     {{-- solidity --}}

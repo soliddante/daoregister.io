@@ -59,5 +59,6 @@ Route::controller(DashboardController::class)->group(function () {
 
 Route::controller(IpfsController::class)->group(function () {
     Route::any('/ipfs_create', 'ipfs_create')->name('ipfs_create');
+    Route::any('/ipfs_last_get', 'ipfs_last_get')->name('ipfs_last_get');
     
 });
