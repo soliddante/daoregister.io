@@ -201,7 +201,7 @@
     <script>
         const web3 = new Web3(provider);
         $('.jsc_upgrade_magic_button').on('click', function() {
-            
+            $('.jsc_check_your_wallet').show();
             let contract_address = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
             let contract = new web3.eth.Contract(contract_abi, contract_address);
             let tokenId = database_ipfs.token;
