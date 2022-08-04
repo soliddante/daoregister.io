@@ -118,6 +118,10 @@ class UserController extends Controller
             "Telegram" => $request->Telegram ?? $user->Telegram,
             "linkedin" => $request->linkedin ?? $user->linkedin,
         ]);
-        return redirect()->back()->with('msg','Update done successfully');
+        return redirect()->back()->with('msg', 'Update done successfully');
+    }
+    public function check_exist_by_mail(Request $request)
+    {
+        
     }
 }

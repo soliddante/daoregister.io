@@ -631,7 +631,7 @@
             $('.jsc_partner_modal').modal();
         })
         $('.jsc_partner_email_submit').on('click', function() {
-    //  is mail exists?
+            //  is mail exists?
 
 
         })
