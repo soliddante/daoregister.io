@@ -395,6 +395,7 @@
                     "slideshow",
                     "fullscreen",
                     "download",
+                    "share",
                     "thumbs",
                     "close",
                 ],
