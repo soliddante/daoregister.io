@@ -371,7 +371,7 @@
     </section>
     <div class="border jsc_generated_image hidden rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></scr>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
 
 
