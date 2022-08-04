@@ -215,27 +215,6 @@
             menubar: ' edit view insert format tools table help',
         });
     </script>
-    {{-- <script>
-        let currentWalletForCss = null;
-        ethereum.request({
-            method: 'eth_accounts'
-        }).then(function(result) {
-            if (result.length != 0) {
-                currentWalletForCss = result[0]
-                console.log(result[0]);
-                $('.jsc_login_btn').hide();
-                $('.jsc_card').removeClass('bg-gray-900')
-                $('.jsc_card').addClass('bg-theme-dark')
-                if (currentWalletForCss == null) {
-                    $('.gls_menu').show();
-                    $('.jsc_menu_hide').hide()
-                    $('.jsc_wallet_error').show()
-                }
-            }
-        })
-    </script> --}}
-
-    {{-- solidity --}}
     <script>
         let ipfs = 'https://ipfs.io/ipfs/QmaSED9ZSbdGts5UZqueFJjrJ4oHH3GnmGJdSDrkzpYqRS?filename=the-chainlink-knight.json'
         let token = $('.jsc_random_token').val();
