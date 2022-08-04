@@ -118,7 +118,9 @@
             </div>
         @else
             <div class="grid grid-cols-5 gap-4">
-                <!-- This example requires Tailwind CSS v2.0+ -->
+                <div class="col-span-5">
+
+           
                 <div class="rounded-md bg-green-50 p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
@@ -135,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
             </div>
         @endif
 
