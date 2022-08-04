@@ -163,6 +163,15 @@
         </section>
     </form>
 
+    <div class="jsc_partner_modal">
+        <div class="p-4">
+            <p>Enter your partner mail: </p>
+            <input type="text" class="new_partnet_email border rounded py-2  w-full mt-2 px-2" placeholder="mail@example.com" id="">
+            <button type="button"
+                class="jsc_partner_email_submit block  items-center mt-2 px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Button
+                text</button>
+        </div>
+    </div>
 
 
     <script>
@@ -618,7 +627,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <script>
-        $('.jsc_partner_input').on('click', function() {
+        $('body').on('click', '.jsc_partner_input', function() {
+            $('.jsc_partner_modal').modal();
+        })
+        $('.jsc_partner_email_submit').on('click', function() {
+    //  is mail exists?
+
 
         })
     </script>
