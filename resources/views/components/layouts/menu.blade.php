@@ -12,4 +12,4 @@
     })
 </script>
 <x-walletjs></x-walletjs>
-// TODO add wallet exists error ssss
+// TODO add wallet exists error fffffffffffffffffff
