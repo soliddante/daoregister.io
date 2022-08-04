@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -122,6 +123,35 @@ class UserController extends Controller
     }
     public function check_exist_by_mail(Request $request)
     {
-        
+        if (User::where('email', $request->email)->exists()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function send_mail_to_user(Request $request)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/sandbox1104d40b34394802b9736b011aba0525.mailgun.org/messages');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        $post = array(
+            'from' => 'Mailgun Sandbox <postmaster@sandbox1104d40b34394802b9736b011aba0525.mailgun.org>',
+            'to' => "$request->email <$request->email>",
+            'subject' => 'DaoGeneratorInvitation',
+            'text' => Str::random(40)
+        );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . '423c914ed29fc126720eb87ff564e288-1b3a03f6-1136c99e');
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        return $result;
+    }
+    public function create_empty_mail_user(Request $request)
+    {
     }
 }

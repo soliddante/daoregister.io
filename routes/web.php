@@ -29,6 +29,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/upgrade', 'upgrade')->name('upgrade');
     Route::any('/user_update', 'user_update')->name('user_update');
     Route::any('/check_exist_by_mail', 'check_exist_by_mail')->name('check_exist_by_mail');
+    Route::any('/send_mail_to_user', 'send_mail_to_user')->name('send_mail_to_user');
 });
 
 
