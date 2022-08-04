@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         Share it
-                        <div class="shareon">
+                        <div class="shareon" data-url="{{ auth()->user()->ipfs()->latest()->first()->image }}">
                             <a class="facebook"></a>
                             <a class="linkedin"></a>
                             <a class="mastodon"></a>
