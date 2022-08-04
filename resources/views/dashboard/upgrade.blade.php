@@ -131,9 +131,9 @@
                             <p class="text-sm font-medium text-green-800">Your subscription is <strong>Premium</strong> and you can sign or create a new contract</p>
                         </div>
                         <div class="ml-auto pl-3">
-                            {{-- <div class="-mx-1.5 -my-1.5">
-                                <a href="{{ auth()->user()->ipfs()->image }}" data-fancybox type="button" class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch certificate </a>
-                            </div> --}}
+                            <div class="-mx-1.5 -my-1.5">
+                                <a href="{{ auth()->user()->ipfs()->lastest()->first()->image }}" data-fancybox type="button" class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch certificate </a>
+                            </div>
                         </div>
                     </div>
                 </div>
