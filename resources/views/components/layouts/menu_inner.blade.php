@@ -18,7 +18,7 @@
         </div>
     @else
     <div>
-        <div class="flex gap-2 text-sm rounded px-2 py-1 text-green-700 bg-green-300  items-center ">
+        <div class="flex gap-2 text-sm rounded px-2 py-1 text-green-700 bg-green-100  items-center ">
             <ion-icon name="diamond-outline"></ion-icon>
             <span class="font-medium">Premuim</span>
         </div>
