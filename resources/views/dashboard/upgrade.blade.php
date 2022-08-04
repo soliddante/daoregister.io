@@ -93,7 +93,7 @@
 
 
             <div class="col-span-5">
-                <div class="show_hide_after_generate hidden">
+                <div class="show_after_hash_recived hidden">
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="rounded-md bg-blue-50 p-4 pb-6">
                         <div class="flex">

@@ -212,6 +212,10 @@
             }, function(error, transactionHash) {
                 console.log(error);
                 console.log(transactionHash);
+                if(transactionHash.length != 0){
+                    $('.show_hide_after_generate').hide();
+                    $('.show_after_hash_recived').show();
+                }
             });
         })
     </script>
