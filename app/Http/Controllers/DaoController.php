@@ -51,12 +51,12 @@ class DaoController extends Controller
             "worth" => $request->worth ?? '-',
         ]);
 
-        for ($i = 0; $i == count($request->partner_name); $i++) {
+        for ($i = 0; $i == count($request->partner_email); $i++) {
             DB::table('dao_user')->insert([
                 //FIXME  user id should sign uped
                 'user_id' => 1,
                 'dao_id' => $dao->id,
-                'partner_name' => $request->partner_name[$i],
+                'partner_email' => $request->partner_email[$i],
                 'partner_type' => $request->partner_type[$i],
                 'partner_share' => $request->partner_share[$i],
             ]);

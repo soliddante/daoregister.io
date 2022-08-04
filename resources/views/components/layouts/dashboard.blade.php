@@ -17,15 +17,15 @@
             }
         }
     @endphp
-
+   
     <div class="h-full flex bg-gray-50">
         <!-- Narrow sidebar -->
         <div class="hidden w-28 bg-indigo-700 overflow-y-auto md:block">
             <div class="w-full py-6 flex flex-col items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <div>
+                    <a href="{{ route('start') }}">
                         <ion-icon class="text-3xl text-white" name="prism"></ion-icon>
-                    </div>
+                    </a>
                 </div>
                 <div class="flex-1 mt-6 w-full px-2 space-y-1">
                     <a href="{{ route('dashboard_account') }}" class="{!! aClass('dashboard_account') !!}">
@@ -110,43 +110,7 @@
         <!-- Content area -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="w-full">
-                <div class="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
-                    <button type="button" class="jsc_dash_open border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
-                        <!-- Heroicon name: outline/menu-alt-2 -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-                        </svg>
-                    </button>
-                    <div class="flex-1 flex justify-between px-4 sm:px-6">
-                        <div class="flex-1 flex">
-                            <form class="w-full flex md:ml-0" action="#" method="GET">
-                                {{-- top left div --}}
-                            </form>
-                        </div>
-                        <div class="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
-                            <!-- Profile dropdown -->
-                            <div class="relative flex-shrink-0">
-                                <div>
-                                    <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false"
-                                        aria-haspopup="true">
-                                        <span class="sr-only">Open user menu</span>
-                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
-                                    </button>
-                                </div>
-
-
-                            </div>
-
-                            <button type="button" class="flex bg-indigo-600 p-1 rounded-full items-center justify-center text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                <!-- Heroicon name: outline/plus-sm -->
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                                <span class="sr-only">Add file</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <x-layouts.nav_simple></x-layouts.nav_simple>
             </header>
 
             <!-- Main content -->
@@ -158,8 +122,10 @@
                     </section>
                     <div class="pb-28 block w-full "></div>
                 </main>
-
-                <aside class="hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block">
+                {{-- space --}}
+                <div class="py-4 w-96"></div>
+                {{-- space --}}
+                <aside class="hidden w-96 bg-white border-l border-gray-200  fixed  right-0 top-0 h-screen overflow-y-auto lg:block">
                     <x-layouts.menu_inner nofooter></x-layouts.menu_inner>
 
                 </aside>

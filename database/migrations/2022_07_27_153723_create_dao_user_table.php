@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('dao_id');
-            $table->string('partner_name');
+            $table->string('partner_email');
             $table->string('partner_type');
             $table->integer('partner_share');
             $table->timestamps();

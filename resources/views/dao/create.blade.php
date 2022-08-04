@@ -1,5 +1,5 @@
 <x-layouts.app>
-    @if (auth()->user()->type != 'writer')
+    {{-- @if (auth()->user()->type != 'writer')
         <script>
             window.location.href = "{{ URL::previous() }}";
         </script>
@@ -8,7 +8,7 @@
         if (connectionStatus != 1 || currentAccount == null || databaseWallet.length == 0 || currentAccount != databaseWallet) {
             window.location.href = "{{ URL::previous() }}";
         }
-    </script>
+    </script> --}}
     <x-dao_modal />
     <form action="#" class="jsc_form">
         <input type="hidden" name="token" class="jsc_random_token" value="{{ rand('100', '99999999') }}">
@@ -244,7 +244,7 @@
             ipfs = 'https://ipfs.io/ipfs/QmaSED9ZSbdGts5UZqueFJjrJ4oHH3GnmGJdSDrkzpYqRS?filename=the-chainlink-knight.json'
             token = $('.jsc_random_token').val();
             const web3 = new Web3(window.ethereum);
-            const contract_abi = [{
+            const dao_contract_abi = [{
                     "anonymous": false,
                     "inputs": [{
                             "indexed": true,
@@ -620,7 +620,7 @@
             ];
 
             const contract_address = "0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9";
-            const theContract = new web3.eth.Contract(contract_abi, contract_address, function(e, processedContract) {
+            const theContract = new web3.eth.Contract(dao_contract_abi, contract_address, function(e, processedContract) {
                 console.log(processedContract);
             });
 
@@ -632,6 +632,14 @@
                     $('.jsc_form').submit();
                 }
             })
+
+        })
+    </script>
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <script>
+        $('.jsc_partner_input').on('click', function() {
 
         })
     </script>
