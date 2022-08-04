@@ -80,7 +80,7 @@
                                             <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                         </button>
                                         <div 
-                                        class=" bg-blue-700 px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-50 focus:ring-blue-600">Upgrade
+                                        class=" text-green-700 underline underline-offset-4 px-3 py-2 ml-2 ">Upgrade
                                         Account
                                         <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                     </div>
