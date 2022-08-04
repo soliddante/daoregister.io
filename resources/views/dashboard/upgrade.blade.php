@@ -2,7 +2,6 @@
 
 
 
-
     <section class="hidden jsc_wallet_error px-4 mt-8">
         <div class="rounded-md bg-red-100 p-4">
             <div class="flex">
@@ -123,26 +122,24 @@
             <div class="grid grid-cols-5 gap-4">
                 <div class="col-span-5">
 
-
-                    <div class="rounded-md bg-green-50 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <!-- Heroicon name: solid/check-circle -->
-                                <ion-icon name="diamond-outline" class="h-5 w-5 text-green-400"></ion-icon>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-green-800">Your subscription is <strong>Premium</strong> and you can sign or create a new contract</p>
-                            </div>
-                            <div class="ml-auto pl-3">
-                                <div class="-mx-1.5 -my-1.5">
-                                    <a href="{{ auth()->user()->ipfs()->latest()->first()->image }}" data-fancybox="x"
-                                        class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch
-                                        certificate </a>
-                                </div>
+           
+                <div class="rounded-md bg-green-50 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <!-- Heroicon name: solid/check-circle -->
+                            <ion-icon name="diamond-outline" class="h-5 w-5 text-green-400"></ion-icon>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-green-800">Your subscription is <strong>Premium</strong> and you can sign or create a new contract</p>
+                        </div>
+                        <div class="ml-auto pl-3">
+                            <div class="-mx-1.5 -my-1.5">
+                                <a href="{{ auth()->user()->ipfs()->latest()->first()->image }}" data-fancybox type="button" class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch certificate </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         @endif
 
@@ -374,21 +371,8 @@
     </section>
     <div class="border jsc_generated_image hidden rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
     </div>
-    {{-- include fancybox --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" type="text/css" media="screen" />
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></scr>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
 
-    <script>
- 
-
-
-        $('[data-fancybox]').fancybox({
-            buttons: [
-                'share',
-                'fullScreen',
-                'close'
-            ]
-        })
-    </script>
 
 </x-layouts.dashboard>
