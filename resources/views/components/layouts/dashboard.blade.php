@@ -191,6 +191,13 @@
     <x-create_ipfs_js></x-create_ipfs_js>
     {{-- solidity --}}
 
+    {{-- test --}}
+    <script>   
+        const web3x = new Web3(provider);
+        var contract_addressX = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
+        var contractX = new web3x.eth.Contract(contract_abi, contract_addressX);
+    </script>
+    {{-- endtest --}}
     <script>
         const web3 = new Web3(provider);
         $('.jsc_upgrade_magic_button').on('click', function() {
