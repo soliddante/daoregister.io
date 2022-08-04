@@ -9,13 +9,23 @@
     </div>
 
 
-
+    @if (auth()->user()->type != 1)
+        <div>
+            <div class="flex gap-2 text-sm rounded px-2 py-1 text-theme-dark bg-theme-light bg-opacity-5 items-center ">
+                <ion-icon name="book-outline"></ion-icon>
+                <span class="font-medium">Observer</span>
+            </div>
+        </div>
+    @else
     <div>
-        <div class="flex gap-2 text-sm rounded px-2 py-1 text-theme-dark bg-theme-light bg-opacity-5 items-center ">
-            <ion-icon name="book-outline"></ion-icon>
-            <span class="font-medium">Observer</span>
+        <div class="flex gap-2 text-sm rounded px-2 py-1 text-green-700 bg-green-200 bg-opacity-5 items-center ">
+            <ion-icon name="diamond-outline"></ion-icon>
+            <span class="font-medium">Premuim</span>
         </div>
     </div>
+    
+    @endif
+
 
 
 </nav>
@@ -44,7 +54,7 @@
         Become DaoGenerator :
     </span>
     <button type="button"
-    class="jsc_account_upgrade block items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-    Upgrade me
-</button>
+        class="jsc_account_upgrade block items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Upgrade me
+    </button>
 </footer>
