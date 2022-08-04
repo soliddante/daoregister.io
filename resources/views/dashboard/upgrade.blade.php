@@ -23,104 +23,100 @@
         </div>
     </section>
     <section class="hidden relative jsc_upgrade_section border rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
-        <div class="grid grid-cols-5 gap-4 ">
-            <div class="col-span-5 lg:col-span-3">
-                <div class="flex w-full items-center justify-between">
-                    <div class="text-lg leading-6 font-semibold  text-theme-dark ">Upgrade Profile</div>
-                </div>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum quarat repellendus qui enim iure porro deserunt officia atque incidunt, neque culpa repudiandae molestiae est tempora sunt. Dolores totam ipsam doloremque!
-                </p>
-                <div class="lg:flex gap-2 jsc_hide_after_generate">
-                    <div class="lg:mt-4 mt-2 order-last">
-                        <div class="rounded-b lg:rounded absolute bottom-0 left-0 w-full lg:w-max  lg:static d-w-max lg:text-base text-sm items-center gap-2 flex bg-theme-light bg-opacity-10 text-theme-dark lg:px-4 px-3 py-2">
-                            <div>Current level : </div>
-                            <ion-icon name="book-outline"></ion-icon>
-                            <div>
-                                Observer
+
+        @if (auth()->user()->type != 1)
+            <div class="grid grid-cols-5 gap-4 ">
+                <div class="col-span-5 lg:col-span-3">
+                    <div class="flex w-full items-center justify-between">
+                        <div class="text-lg leading-6 font-semibold  text-theme-dark ">Upgrade Profile</div>
+                    </div>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum quarat repellendus qui enim iure porro deserunt officia atque incidunt, neque culpa repudiandae molestiae est tempora sunt. Dolores totam ipsam doloremque!
+                    </p>
+                    <div class="lg:flex gap-2 jsc_hide_after_generate">
+                        <div class="lg:mt-4 mt-2 order-last">
+                            <div class="rounded-b lg:rounded absolute bottom-0 left-0 w-full lg:w-max  lg:static d-w-max lg:text-base text-sm items-center gap-2 flex bg-theme-light bg-opacity-10 text-theme-dark lg:px-4 px-3 py-2">
+                                <div>Current level : </div>
+                                <ion-icon name="book-outline"></ion-icon>
+                                <div>
+                                    Observer
+                                </div>
                             </div>
                         </div>
+                        <x-ui.button class="mt-4 jsc_generate_nft ">Generate</x-ui.button>
                     </div>
-                    <x-ui.button class="mt-4 jsc_generate_nft ">Generate</x-ui.button>
-                </div>
 
-
-            </div>
-            <div class="col-span-5 lg:col-span-2 flex items-end">
-                <div class="w-full">
-                    <a class="jsc_contract_image_link" data-fancybox>
-                        <img src="" class="w-full  shadow  jsc_contract_image">
-                    </a>
 
                 </div>
-            </div>
+                <div class="col-span-5 lg:col-span-2 flex items-end">
+                    <div class="w-full">
+                        <a class="jsc_contract_image_link" data-fancybox>
+                            <img src="" class="w-full  shadow  jsc_contract_image">
+                        </a>
 
-            <div class="col-span-5">
-                <div class="show_hide_after_generate hidden">
-                    <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="rounded-md bg-green-50 p-4 pb-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <!-- Heroicon name: solid/check-circle -->
-                                <svg class="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-sm font-bold text-green-800">Account NFT Generated Successfully</h3>
-                                <div class="mt-2 text-sm text-green-700">
-                                    <p>Your ipfs file is ready. To upgrade the user level, you need to mint it in the blockchain
+                    </div>
+                </div>
+
+                <div class="col-span-5">
+                    <div class="show_hide_after_generate hidden">
+                        <!-- This example requires Tailwind CSS v2.0+ -->
+                        <div class="rounded-md bg-green-50 p-4 pb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <!-- Heroicon name: solid/check-circle -->
+                                    <svg class="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
                                 </div>
-                                <div class="mt-4">
-                                    <div class="-mx-2 -my-1.5 flex">
-                                        <button type="button"
-                                            class="jsc_upgrade_magic_button bg-green-700 px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">Upgrade
-                                            Account
-                                            <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
-                                        </button>
-                                        <div class="jsc_check_your_wallet text-blue-700 hidden text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-bold text-green-800">Account NFT Generated Successfully</h3>
+                                    <div class="mt-2 text-sm text-green-700">
+                                        <p>Your ipfs file is ready. To upgrade the user level, you need to mint it in the blockchain
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="-mx-2 -my-1.5 flex">
+                                            <button type="button"
+                                                class="jsc_upgrade_magic_button bg-green-700 px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">Upgrade
+                                                Account
+                                                <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
+                                            </button>
+                                            <div class="jsc_check_your_wallet text-blue-700 hidden text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
-            <div class="col-span-5">
-                <div class="show_after_hash_recived hidden">
-                    <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="rounded-md bg-blue-50 p-4 pb-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <!-- Heroicon name: solid/check-circle -->
-                                <ion-icon name="alarm-outline" class="h-5 w-5 text-blue-600" ></ion-icon>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-sm font-bold text-blue-800">Transaction Sent Successfully</h3>
-                                <div class="mt-2 text-sm text-blue-700">
-                                    <p>Wait a few moment. After your NFT is minted in the blockchain, your account will be changed to professional user level.</p>
+                <div class="col-span-5">
+                    <div class="show_after_hash_recived hidden">
+                        <!-- This example requires Tailwind CSS v2.0+ -->
+                        <div class="rounded-md bg-blue-50 p-4 pb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <!-- Heroicon name: solid/check-circle -->
+                                    <ion-icon name="alarm-outline" class="h-5 w-5 text-blue-600"></ion-icon>
                                 </div>
-                            </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-bold text-blue-800">Transaction Sent Successfully</h3>
+                                    <div class="mt-2 text-sm text-blue-700">
+                                        <p>Wait a few moment. After your NFT is minted in the blockchain, your account will be changed to professional user level.</p>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
-        </div>
-
-
-{{--  --}}
-
-{{--  --}}
-
-
+        @endif
 
     </section>
     <section class="w-[700px]  mx-auto jsc_account_nft bg-white shadow fixed -z-50 -top-[9000px]">

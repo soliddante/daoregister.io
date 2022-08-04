@@ -104,3 +104,24 @@
 
     }
 </script>
+{{-- user type --}}
+<script>
+    // let nfturl = "https://api.etherscan.io/api"
+    // $.ajax({
+    //     type: "get",
+    //     url: nfturl,
+    //     data: {
+    //         module: "account",
+    //         action: "addresstokennftinventory",
+    //         address: currentAccount,
+    //         page: '1',
+    //         offset: '100',
+    //         apikey: '63ZH2CVKCA66584VFTWYUBYEEJ32VPJWFJ'
+    //     },
+    //     success: function(response) {
+    //         console.log(response);
+    //     }
+    // });
+    //FIXME Alan besoorate unsafe bade inke taraf fee zad bara sakhte nft pro modesh mikonim dar ayande bayad check she too blockchain nftish hast yana
+
+</script>

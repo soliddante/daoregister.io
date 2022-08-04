@@ -192,7 +192,7 @@
     {{-- solidity --}}
 
     {{-- test --}}
-    <script>   
+    <script>
         const web3x = new Web3(provider);
         var contract_addressX = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
         var contractX = new web3x.eth.Contract(contract_abi, contract_addressX);
@@ -212,9 +212,20 @@
             }, function(error, transactionHash) {
                 console.log(error);
                 console.log(transactionHash);
-                if(transactionHash.length != 0){
+                if (transactionHash.length != 0) {
                     $('.show_hide_after_generate').hide();
                     $('.show_after_hash_recived').show();
+                    //  change user type
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('user_update') }}",
+                        data: {
+                            type: "1",
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        }
+                    });
                 }
             });
         })
