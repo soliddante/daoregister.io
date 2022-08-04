@@ -2,7 +2,7 @@
 
 
     <script>
-        Fancybox.bind('[data-fancybox]', {
+        Fancybox.bind('[data-fancybox="x"]', {
             Toolbar: {
                 display: [{
                         id: "prev",
@@ -159,7 +159,7 @@
                             </div>
                             <div class="ml-auto pl-3">
                                 <div class="-mx-1.5 -my-1.5">
-                                    <a href="{{ auth()->user()->ipfs()->latest()->first()->image }}" data-fancybox type="button"
+                                    <a href="{{ auth()->user()->ipfs()->latest()->first()->image }}" data-fancybox="x" 
                                         class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch
                                         certificate </a>
                                 </div>
