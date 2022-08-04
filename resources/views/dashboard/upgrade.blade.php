@@ -375,11 +375,8 @@
     <div class="border jsc_generated_image hidden rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
     </div>
     {{-- include fancybox --}}
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/fancybox/jquery.easing-1.4.pack.js"></script>
-    <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" type="text/css" media="screen" />
 
     <script>
  
