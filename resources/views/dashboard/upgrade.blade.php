@@ -1,7 +1,7 @@
 <x-layouts.dashboard>
 
 
-{{ auth()->user()->ipfs()->latest()->first() }}
+{{ auth()->user()->ipfs()->latest()->first()->image }}
 
     <section class="hidden jsc_wallet_error px-4 mt-8">
         <div class="rounded-md bg-red-100 p-4">
