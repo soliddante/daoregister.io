@@ -382,13 +382,16 @@
     <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 
     <script>
-        $.fancybox.defaults.buttons = [
-            'slideShow',
-            'share',
-            'zoom',
-            'fullScreen',
-            'close'
-        ];
+ 
+
+
+        $('[data-fancybox]').fancybox({
+            buttons: [
+                'share',
+                'fullScreen',
+                'close'
+            ]
+        })
     </script>
 
 </x-layouts.dashboard>
