@@ -56,7 +56,6 @@
             </div>
 
             <div class="col-span-5">
-
                 <div class="show_hide_after_generate hidden">
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="rounded-md bg-green-50 p-4 pb-6">
@@ -79,18 +78,50 @@
                                             Account
                                             <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                         </button>
-                                        <div 
-                                            class="jsc_check_your_wallet text-blue-700 hidden text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
-                                       
-                                    </div>
+                                        <div class="jsc_check_your_wallet text-blue-700 hidden text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="col-span-5">
+                <div class="show_hide_after_generate hidden">
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                    <div class="rounded-md bg-blue-50 p-4 pb-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <!-- Heroicon name: solid/check-circle -->
+                                <ion-icon name="alarm-outline" class="h-5 w-5 text-blue-600" ></ion-icon>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-bold text-blue-800">Transaction Sent Successfully</h3>
+                                <div class="mt-2 text-sm text-blue-700">
+                                    <p>Wait a few moment. After your NFT is minted in the blockchain, your account will be changed to professional user level.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+
+{{--  --}}
+
+{{--  --}}
+
+
+
     </section>
     <section class="w-[700px]  mx-auto jsc_account_nft bg-white shadow fixed -z-50 -top-[9000px]">
         <header>
