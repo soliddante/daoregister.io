@@ -80,8 +80,8 @@
                                             <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                         </button>
                                         <div 
-                                            class=" text-blue-700 text-sm  underline underline-offset-8 px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
-                                        <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
+                                            class=" text-gray-700 text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
+                                       
                                     </div>
                                     </div>
                                 </div>
