@@ -16,7 +16,7 @@ class DaoController extends Controller
     public function show_dao(Request $request)
     {
         $dao = Dao::find($request->dao_id);
-        return view('dao.show',compact('dao'));
+        return view('dao.show', compact('dao'));
     }
 
     public function create_dao()
@@ -25,6 +25,9 @@ class DaoController extends Controller
     }
     public function store_dao(Request $request)
     {
+
+
+      
         // "extra_key" => $request->extra_key,
         // "extra_value" => $request->extra_value,
         // "partner_type" => $request->partner_type,
@@ -51,16 +54,17 @@ class DaoController extends Controller
             "worth" => $request->worth ?? '-',
         ]);
 
-        for ($i = 0; $i == count($request->partner_email); $i++) {
+ 
+        foreach ($request->partner_email as  $index => $partner_type) {
             DB::table('dao_user')->insert([
-                //FIXME  user id should sign uped
                 'user_id' => 1,
                 'dao_id' => $dao->id,
-                'partner_email' => $request->partner_email[$i],
-                'partner_type' => $request->partner_type[$i],
-                'partner_share' => $request->partner_share[$i],
+                'partner_email' => $request->partner_email[$index],
+                'partner_type' => $request->partner_type[$index],
+                'partner_share' => $request->partner_share[$index],
             ]);
         }
+
         return redirect()->back()->with('msg', 'Dao Generated successfully');
     }
 }

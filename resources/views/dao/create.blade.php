@@ -742,8 +742,10 @@
         let selected_input;
         $('body').on('click', '.jsc_partner_new_input',
             function(e) {
-                $('.jsc_partner_modal').modal();
                 selected_input = e.target;
+                if(!$(selected_input).hasClass('js_disable')){
+                    $('.jsc_partner_modal').modal();
+                }
             })
         $('.jsc_partner_email_submit').on('click', function() {
             //  is mail exists?
@@ -780,12 +782,22 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    //mail sent all fine
+                    $(selected_input).val($('.new_partnet_email ').val());
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('create_empty_mail_user') }}",
+                        data: {
+                            'email': $('.new_partnet_email ').val()
+                        },
+                        dataType: "dataType",
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+
+                    
+                    $(selected_input).addClass('js_disable bg-gray-100');
                     $('.jsc_before_mail_sent').hide();
-                    // FIXME
-                    // FIXME
-                    // TODO INJA BAYAD YAROO BE CONTRACT EZAFE SHE DAR HAR SOORAT
-                    // FIXME
                     $('.jsc_after_mail_sent').show();
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

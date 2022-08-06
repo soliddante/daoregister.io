@@ -153,5 +153,13 @@ class UserController extends Controller
     }
     public function create_empty_mail_user(Request $request)
     {
+        if (!User::where('email', $request->mail)->exists()) {
+            $user = User::create([
+                'email' => $request->email,
+                'type' => 'invite'
+            ]);
+            return $user;
+        }
+        return 'user_exists';
     }
 }

@@ -57,8 +57,8 @@
         </div>
     </div>
     {{-- start --}}
-    <section class="bg-white rounded border mt-2 py-8 md:w-[590px] md:mx-auto">
-        <div class="grid grid-cols-2 md:w-[590px] md:mx-auto ">
+    <section class="bg-white rounded border mt-2 py-8 md:w-[690px] md:mx-auto">
+        <div class="grid grid-cols-2 md:w-[690px] md:mx-auto ">
             <div class="col-span-2 px-2">
                 <div class="flex justify-between items-start mb-4">
 
