@@ -17,10 +17,15 @@ class Dao extends Model
         'vote_mode',
         'document',
         'lazy',
+        'extras',
     ];
 
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+    public function extras()
+    {
+        return $this->hasMany(Extra::class);
     }
 }

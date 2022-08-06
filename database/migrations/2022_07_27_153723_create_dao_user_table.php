@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('partner_email');
             $table->string('partner_type');
             $table->integer('partner_share');
+            $table->integer('partnet_accepted')->default(0)->nullable();
             $table->timestamps();
         });
     }

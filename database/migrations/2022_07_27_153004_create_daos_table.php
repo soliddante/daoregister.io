@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('vote_mode')->nullable();
             $table->string('worth')->nullable();
             $table->text('document')->nullable();
+            $table->string('extras')->nullable();
             $table->string('lazy')->nullable();
             $table->string('token')->nullable();
             $table->timestamps();

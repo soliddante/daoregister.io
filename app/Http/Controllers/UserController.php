@@ -73,6 +73,12 @@ class UserController extends Controller
             "language_second" => $request->language_second,
             "security_question" => $request->security_question,
             "security_answer" => $request->security_answer,
+            "instagram" => $request->instagram ?? '-',
+            "Twitter" => $request->Twitter ?? '-',
+            "Facebook" => $request->Facebook ?? '-',
+            "Whatsapp" => $request->Whatsapp ?? '-',
+            "Telegram" => $request->Telegram ?? '-',
+            "linkedin" => $request->linkedin ?? '-',
         ]);
 
         event(new Registered($user));
@@ -161,5 +167,44 @@ class UserController extends Controller
             return $user;
         }
         return 'user_exists';
+    }
+
+    public function sync_email(Request $request)
+    {
+        $token = $request->token;
+        return view('auth.sync', compact('token'));
+    }
+    public function sync_update(Request $request)
+    {
+        $user = User::where('email', $request->email)->update([
+            "type" => 0,
+            "firstname" => $request->firstname,
+            "lastname" => $request->lastname,
+            "birthday" => $request->birthday,
+            "gendar" => $request->gendar,
+            "phone" => $request->phone,
+            "password" =>  Hash::make($request->password),
+            "country" => $request->country,
+            "city" => $request->city,
+            "postalcode" => $request->postalcode,
+            "address" => $request->address,
+            "profession" => $request->profession,
+            "education" => $request->education,
+            "university" => $request->university,
+            "language_first" => $request->language_first,
+            "language_second" => $request->language_second,
+            "security_question" => $request->security_question,
+            "security_answer" => $request->security_answer,
+            "instagram" => $request->instagram ?? '-',
+            "Twitter" => $request->Twitter ?? '-',
+            "Facebook" => $request->Facebook ?? '-',
+            "Whatsapp" => $request->Whatsapp ?? '-',
+            "Telegram" => $request->Telegram ?? '-',
+            "linkedin" => $request->linkedin ?? '-',
+        ]);
+        $login = User::where('email', $request->email)->first();
+        
+        Auth::login($login);
+        return redirect()->route('discover_dao');
     }
 }

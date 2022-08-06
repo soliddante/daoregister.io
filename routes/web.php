@@ -8,6 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/x', function () {
+    return view('auth.update');
+});
 
 
 Route::get('/dashboard', function () {
@@ -31,6 +34,8 @@ Route::controller(UserController::class)->group(function () {
     Route::any('/check_exist_by_mail', 'check_exist_by_mail')->name('check_exist_by_mail');
     Route::any('/send_mail_to_user', 'send_mail_to_user')->name('send_mail_to_user');
     Route::any('/create_empty_mail_user', 'create_empty_mail_user')->name('create_empty_mail_user');
+    Route::any('/sync_email', 'sync_email')->name('sync_email');
+    Route::any('/sync_update', 'sync_update')->name('sync_update');
 });
 
 

@@ -27,22 +27,19 @@ class DaoController extends Controller
     {
 
 
-      
-        // "extra_key" => $request->extra_key,
-        // "extra_value" => $request->extra_value,
-        // "partner_type" => $request->partner_type,
-        // "partner_account" => $request->partner_account,
-        // "partner_share" => $request->partner_share,
-
-        $validated =  $request->validate([
-            "name" => ['required'],
-            "symbol" => ['required'],
-            "type" => ['required'],
-            "vote_mode" => ['required'],
-            "document" => ['required'],
-            "worth" => ['required'],
-        ]);
-
+        // $validated =  $request->validate([
+        //     "name" => ['required'],
+        //     "symbol" => ['required'],
+        //     "type" => ['required'],
+        //     "vote_mode" => ['required'],
+        //     "document" => ['required'],
+        //     "worth" => ['required'],
+        // ]);
+        // dd($request->extra_pv);
+        $extras = [];
+        foreach ($request->extra_key as $index => $extra_key) {
+            $extras[$request->extra_key[$index]] = [$request->extra_value[$index],  $request->extra_pv[$index]];
+        }
         $dao = Dao::create([
             "name" => $request->name,
             "symbol" => $request->symbol,
@@ -51,10 +48,11 @@ class DaoController extends Controller
             "vote_mode" => $request->vote_mode,
             "document" => $request->document,
             "lazy" => $request->lazy ?? '1',
+            "extras" => json_encode($extras),
             "worth" => $request->worth ?? '-',
         ]);
 
- 
+
         foreach ($request->partner_email as  $index => $partner_type) {
             DB::table('dao_user')->insert([
                 'user_id' => 1,
@@ -64,6 +62,7 @@ class DaoController extends Controller
                 'partner_share' => $request->partner_share[$index],
             ]);
         }
+
 
         return redirect()->back()->with('msg', 'Dao Generated successfully');
     }

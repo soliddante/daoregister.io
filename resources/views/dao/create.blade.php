@@ -236,10 +236,10 @@
             </div>
         </div>
         <div class="p-4 jsc_after_mail_sent hidden">
-            <div class="jsc_email_not_exists_alert hidden  text-center mt-2 text-sm bg-green-50 rounded-lg py-4 px-4 text-green-700"> 
+            <div class="jsc_email_not_exists_alert hidden  text-center mt-2 text-sm bg-green-50 rounded-lg py-4 px-4 text-green-700">
                 <ion-icon class="text-3xl font-semibold block mx-auto text-center" name="checkmark-circle"></ion-icon>
                 <div>Invitation mail sent successfully</div>
-                <button type="button" 
+                <button type="button"
                     class="jsc_close_modal  mx-auto block items-center mt-2 px-6 py-2 border border-transparent
                  text-base font-medium rounded-md shadow-sm   text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                     Close </button>
@@ -263,6 +263,9 @@
         // extrafields
         $('.jsc_extras_add').on('click', function() {
             $('.jsc_extras').append(`<x-extra />`);
+
+
+
         })
         $('body').on('click', '.jsc_delete_extra', function() {
             $(this).closest('.jsc_extras_item')
@@ -718,20 +721,37 @@
 
         })
     </script>
+    <script>
+        $('body').on('change', '.jsc_checkbox_input', function() {
+            if ($(this).prop('checked') == true) {
+                $(this).parent().children('.jsc_checkbox_hidden').val(1)
+            } else {
+                $(this).parent().children('.jsc_checkbox_hidden').val(0)
+            }
+        })
+    </script>
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <script>
         // mail regex
         $('.new_partnet_email').on('keyup', function() {
-            let XVAL = this.value;
+
+
             let xemail = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$', 'i');
-            if (xemail.test(XVAL)) {
+            if (xemail.test($(this).val())) {
+                console.log($(this).val());
+                console.log(xemail);
+                console.log('yes');
+
                 $('.jsc_partner_email_submit').prop('disabled', false)
                 $('.jsc_partner_email_submit').removeClass('opacity-40')
                 $('.jsc_send_invite_mail_button').prop('disabled', false)
                 $('.jsc_send_invite_mail_button').removeClass('opacity-40')
             } else {
+                console.log('no');
+                console.log($(this).val());
+                console.log(xemail);
                 $('.jsc_partner_email_submit').prop('disabled', true)
                 $('.jsc_partner_email_submit').addClass('opacity-40')
                 $('.jsc_send_invite_mail_button').prop('disabled', true)
@@ -742,10 +762,24 @@
         let selected_input;
         $('body').on('click', '.jsc_partner_new_input',
             function(e) {
-                selected_input = e.target;
-                if(!$(selected_input).hasClass('js_disable')){
+
+                if (e.target !== selected_input) {
+                    selected_input = e.target;
+                    $('.new_partnet_email').val('');
+                    $('.jsc_partner_email_submit').show();
+                    $('.jsc_before_mail_sent').show();
+                    $('.jsc_after_mail_sent').hide();
+                    $('.jsc_email_not_exists_alert').hide();
+
+                }
+
+
+                if (!$(selected_input).hasClass('js_disable')) {
                     $('.jsc_partner_modal').modal();
                 }
+
+
+
             })
         $('.jsc_partner_email_submit').on('click', function() {
             //  is mail exists?
@@ -790,13 +824,12 @@
                             'email': $('.new_partnet_email ').val()
                         },
                         dataType: "dataType",
-                        success: function (response) {
+                        success: function(response) {
                             console.log(response);
                         }
                     });
 
-                    
-                    $(selected_input).addClass('js_disable bg-gray-100');
+
                     $('.jsc_before_mail_sent').hide();
                     $('.jsc_after_mail_sent').show();
                 },
@@ -807,9 +840,9 @@
                 }
             });
         })
-        $('.jsc_close_modal').on('click',function(){
+        $('.jsc_close_modal').on('click', function() {
             $.modal.close();
-            
+
         })
     </script>
 </x-layouts.app>
