@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('worth')->nullable();
             $table->text('document')->nullable();
             $table->string('extras')->nullable();
+            $table->string('published')->nullable()->default(0);
+            $table->string('is_subset')->nullable()->default(0);
+            // FIXME nemidoonam is subset khoobe yana chon mishe ba query daravord
             $table->string('lazy')->nullable();
             $table->string('token')->nullable();
             $table->timestamps();

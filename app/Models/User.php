@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function daos()
     {
-        return $this->belongsToMany(Dao::class);
+        return $this->belongsToMany(Dao::class)->withPivot('partner_email', 'partner_type', 'partner_share', 'partner_accepted');;
     }
     public function ipfs()
     {

@@ -87,6 +87,7 @@
                     <div class="col-span-2">share</div>
                 </div>
                 <div class="jsc_partners">
+                    <x-partner owner />
                     <x-partner />
                 </div>
                 <div class="flex items-center justify-end mt-2">
@@ -107,7 +108,7 @@
                     <div class="space-y-3 text-sm">
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                                <input value="owner" name="vote_mode" type="radio" checked
+                                <input value="owner_only" name="vote_mode" type="radio" checked
                                     class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">

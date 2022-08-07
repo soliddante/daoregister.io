@@ -26,4 +26,12 @@ class DashboardController extends Controller
     {
         return view('dashboard.social');
     }
+    public function dashboard_request()
+    {
+        return view('dashboard.request');
+    }
+    public function dashboard_daos()
+    {
+        return view('dashboard.daos');
+    }
 }

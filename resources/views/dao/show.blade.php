@@ -1,5 +1,124 @@
 <x-layouts.app>
+
+
+    {{-- CONTRACT MODES
+
+
+
+    IF IS SUB --}}
+    @php
+        
+        $dao_mode = null;
+        
+        // NOT SUBSET | ALL PARTNERS AND HESABDARS SHOULD SIGN
+        if ($dao->is_subset == 0) {
+            $unsignet_daos = DB::table('dao_user')
+                ->where('partner_type', '!=', 'observer')
+                ->where('partner_accepted', 0);
+        
+            if ($unsignet_daos->exists()) {
+                $dao_mode = 0; //all members not vote
+            } else {
+                $dao_mode = 10;
+            }
+        }
+        if ($dao->is_subset == 1) {
+            switch ($dao->type) {
+                case 'owner_only':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '==', 'owner')
+                        ->where('partner_accepted', 0);
+                    if ($unsignet_daos->exists()) {
+                        $dao_mode = 1; //owner not signed
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+                case 'majority':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 0);
+                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
+                    if ($unsignet_daos->exists() && $unsignet_daos_share < 51) {
+                        $dao_mode = 2; //majority share not enough
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+                case 'both':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 0);
+                    $owner_not_signed = DB::table('dao_user')
+                        ->where('partner_type', '==', 'owner')
+                        ->where('partner_accepted', 0)
+                        ->exists();
+                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
+        
+                    if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
+                        $dao_mode = 3; //majority share not enough or owner not vote
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+            }
+        }
+        
+        // dd($dao_mode);
+        
+    @endphp
+    {{-- TODO SELL CONTRACT --}}
+
+
+
+    <script>
+        console.log("dao_mode : " + {{ $dao_mode }});
+    </script>
+
+    <style>
+        .jsc_request_alert {
+            display: none !important;
+        }
+    </style>
     {{-- this is hidden --}}
+    @php
+        $unsigned_daos = DB::table('dao_user')
+            ->where('dao_id', $dao->id)
+            ->where('partner_accepted', '0');
+    @endphp
+    @if ($unsigned_daos->exists())
+        <div class="rounded-md bg-yellow-50 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <!-- Heroicon name: solid/exclamation -->
+                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3 ">
+                    <h3 class="text-sm text-yellow-800 font-bold">Contract is not published yet </h3>
+                    <div class="mt-2 text-sm text-yellow-700">
+                        <p>
+                            There is {{ $unsigned_daos->count() }} Partner Doesn't Sign contract
+                        </p>
+                        @foreach ($unsigned_daos->get() as $unsigned_daos)
+                            <li class="mt-1">
+                                {{ $unsigned_daos->partner_email }}
+                            </li>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+
+
+
     <div class="w-[600px] fixed  mt-10 bg-[#efefef] -top-[5000px] -z-50 ">
         <div class="jsc_contract">
             <header>
@@ -63,13 +182,17 @@
                 <div class="flex justify-between items-start mb-4">
 
                     <div class="flex items-center">
-                        <div class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">L</div>
+                        <div
+                            class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
+                            L</div>
                         <div class="text-sm">
                             <div class="font-medium">{{ $dao->name }}</div>
                             <div class="-mt-[4px]">{{ $dao->type }}</div>
                         </div>
                     </div>
                     <div class="flex gap-3 text-sm items-center">
+                        <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id', $dao->id]) }}">Update Dao</a>
+
                         <div class="flex gap-1 items-center">
                             <ion-icon name="heart-outline"></ion-icon>
                             <span>46</span>
@@ -116,7 +239,9 @@
                 <div class=" font-medium text-theme-dark">Contract </div>
             </div>
             <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                <div> <a class="text-xs text-theme-light underline " href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9"> 0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
+                <div> <a class="text-xs text-theme-light underline "
+                        href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
+                        0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
             </div>
         </div>
         <div class="mt-8 grid gap-2 grid-cols-2 px-2 ">
@@ -165,6 +290,26 @@
             </div>
         </div>
     </section>
+    {{-- TODO SHOW USER SHARES AND JOINER SHARE BOLDER --}}
+    @if (auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
+        <section>
+            <div class="px-4 pt-[50px] block w-full"> </div>
+            <div class="fixed bottom-0 w-full right-0 h-[40px] bg-green-100 shadow flex items-center justify-center ">
+                <div>
+                    You are invited to participate in this Dao. Do you accept this request?
+                    {{-- TODO HARD REJECT --}}
+                </div>
+                <form action="accept_join_dao">
+                    <input type="hidden" name="dao_id" value="{{ $dao->id }}">
+                    <button type="submit" class="bg-green-500 text-white px-2 rounded cursor-pointer mx-4">Accept and Sign contract</button>
+
+                </form>
+            </div>
+        </section>
+    @endif
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
 

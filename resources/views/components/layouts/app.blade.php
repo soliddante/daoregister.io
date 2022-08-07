@@ -9,6 +9,8 @@
             {{ $slot }}
         </div>
     </main>
+    <x-layouts.dao_unsigned></x-layouts.dao_unsigned>
     @include('components.layouts.footer')
+
 </body>
 </html>

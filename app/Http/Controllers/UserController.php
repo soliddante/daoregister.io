@@ -203,8 +203,17 @@ class UserController extends Controller
             "linkedin" => $request->linkedin ?? '-',
         ]);
         $login = User::where('email', $request->email)->first();
-        
+
         Auth::login($login);
         return redirect()->route('discover_dao');
+    }
+    public function accept_join_dao(Request $request)
+    {
+        auth()->user()->daos()->where('dao_id', $request->dao_id)->update([
+            'partner_accepted'=>1,
+        ]);
+
+        return redirect()->back()->with('msg', 'You have successfully joined Dao');
+
     }
 }

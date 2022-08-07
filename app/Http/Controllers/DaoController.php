@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dao;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 
 class DaoController extends Controller
 {
@@ -26,16 +28,15 @@ class DaoController extends Controller
     public function store_dao(Request $request)
     {
 
+        $validated =  $request->validate([
+            "name" => ['required', 'min:2'],
+            "symbol" => ['required', 'min:2'],
+            "vote_mode" => ['required'],
+            "document" => ['required'],
+            "worth" => ['nullable', 'numeric'],
+        ]);
 
-        // $validated =  $request->validate([
-        //     "name" => ['required'],
-        //     "symbol" => ['required'],
-        //     "type" => ['required'],
-        //     "vote_mode" => ['required'],
-        //     "document" => ['required'],
-        //     "worth" => ['required'],
-        // ]);
-        // dd($request->extra_pv);
+
         $extras = [];
         foreach ($request->extra_key as $index => $extra_key) {
             $extras[$request->extra_key[$index]] = [$request->extra_value[$index],  $request->extra_pv[$index]];
@@ -54,16 +55,29 @@ class DaoController extends Controller
 
 
         foreach ($request->partner_email as  $index => $partner_type) {
-            DB::table('dao_user')->insert([
-                'user_id' => 1,
-                'dao_id' => $dao->id,
-                'partner_email' => $request->partner_email[$index],
-                'partner_type' => $request->partner_type[$index],
-                'partner_share' => $request->partner_share[$index],
-            ]);
+
+            if ($request->partner_email[$index] != null) {
+                DB::table('dao_user')->insert([
+                    'user_id' => User::where('email', $request->partner_email[$index])->first()->id,
+                    'dao_id' => $dao->id,
+                    'partner_email' => $request->partner_email[$index],
+                    'partner_type' => $request->partner_type[$index],
+                    'partner_share' => $request->partner_share[$index] ?? 0,
+                ]);
+            }
         }
 
+        $UserController = new UserController;
 
-        return redirect()->back()->with('msg', 'Dao Generated successfully');
+        $request = new \Illuminate\Http\Request();
+        $request->replace(['dao_id' => $dao->id]);
+
+        $UserController->accept_join_dao($request);
+
+
+        return redirect()->route('show_dao', ['dao_id' => $dao->id])->with('msg', 'Dao Generated successfully');
+    }
+    public function reform_dao(Request $request)
+    {
     }
 }

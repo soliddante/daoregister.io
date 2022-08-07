@@ -1,6 +1,6 @@
 <x-layouts.app>
 
-    <div class="relativemt-2 pb-20 px-4 sm:px-6  lg:pb-28 lg:px-8">
+    <div class="relativemt-2 md:pt-[40px] pb-20 px-4 sm:px-6  lg:pb-28 lg:px-8">
         <div class="relative max-w-7xl mx-auto">
             <a href="{{ route('create_dao') }}" class="flex justify-between  items-center pb-14   ">
                 <div class="text-xs md:text-base  py-2  ">Join Decentral organization</div>

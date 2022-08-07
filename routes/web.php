@@ -36,6 +36,7 @@ Route::controller(UserController::class)->group(function () {
     Route::any('/create_empty_mail_user', 'create_empty_mail_user')->name('create_empty_mail_user');
     Route::any('/sync_email', 'sync_email')->name('sync_email');
     Route::any('/sync_update', 'sync_update')->name('sync_update');
+    Route::any('/accept_join_dao', 'accept_join_dao')->name('accept_join_dao');
 });
 
 
@@ -56,6 +57,7 @@ Route::controller(DaoController::class)->group(function () {
     Route::get('/create_dao', 'create_dao')->name('create_dao')->middleware(['auth']);
     Route::get('/store_dao', 'store_dao')->name('store_dao')->middleware(['auth']);
     Route::get('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
+    Route::get('/reform_dao', 'reform_dao')->name('reform_dao')->middleware(['auth']);
 });
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_personal', 'dashboard_personal')->name('dashboard_personal');
@@ -63,10 +65,11 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_address', 'dashboard_address')->name('dashboard_address');
     Route::get('/dashboard_upgrade', 'dashboard_upgrade')->name('dashboard_upgrade');
     Route::get('/dashboard_social', 'dashboard_social')->name('dashboard_social');
+    Route::get('/dashboard_request', 'dashboard_request')->name('dashboard_request');
+    Route::get('/dashboard_daos', 'dashboard_daos')->name('dashboard_daos');
 });
 
 Route::controller(IpfsController::class)->group(function () {
     Route::any('/ipfs_create', 'ipfs_create')->name('ipfs_create');
     Route::any('/ipfs_last_get', 'ipfs_last_get')->name('ipfs_last_get');
-    
 });

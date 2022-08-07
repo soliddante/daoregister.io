@@ -58,7 +58,7 @@
 
 
 </nav>
-<div class="w-full mb-[128px]"></div>
+<div class="w-full mb-[64px]"></div>
 <script>
     $('.gls_menu_show').on('click', () => {
         $('.gls_menu').show();

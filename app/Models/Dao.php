@@ -17,12 +17,13 @@ class Dao extends Model
         'vote_mode',
         'document',
         'lazy',
+        'parent',
         'extras',
     ];
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('partner_email', 'partner_type', 'partner_share', 'partner_accepted');
     }
     public function extras()
     {

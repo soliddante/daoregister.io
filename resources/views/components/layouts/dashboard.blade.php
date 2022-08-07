@@ -47,6 +47,16 @@
                         <span class="mt-2">Social</span>
                     </a>
 
+                    <a href="{{ route('dashboard_request') }}" class="{!! aClass('dashboard_request') !!}">
+                        <ion-icon class="text-2xl" name="git-pull-request-outline"></ion-icon>
+                        <span class="mt-2">Requests</span>
+                    </a>
+
+                    <a href="{{ route('dashboard_daos') }}" class="{!! aClass('dashboard_daos') !!}">
+                        <ion-icon class="text-2xl" name="contract-outline"></ion-icon>
+                        <span class="mt-2">DAOs</span>
+                    </a>
+
                     <a href="{{ route('dashboard_upgrade') }}" class="{!! aClass('dashboard_upgrade') !!}">
                         <ion-icon class="text-2xl" name="flask-outline"></ion-icon>
                         <span class="mt-2">Upgrade</span>
