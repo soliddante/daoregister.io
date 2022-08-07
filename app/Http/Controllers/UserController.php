@@ -231,7 +231,8 @@ class UserController extends Controller
             }
         }
         if ($dao->is_subset == 1) {
-            switch ($dao->type) {
+    
+            switch ($dao->vote_mode) {
                 case 'owner_only':
                     $unsignet_daos = DB::table('dao_user')
                         ->where('partner_type', '==', 'owner')
@@ -262,7 +263,6 @@ class UserController extends Controller
                         ->where('partner_accepted', 0)
                         ->exists();
                     $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-
                     if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
                         $dao_mode = 3; //majority share not enough or owner not vote
                     } else {
