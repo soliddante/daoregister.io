@@ -9,8 +9,13 @@
             window.location.href = "{{ URL::previous() }}";
         }
     </script> --}}
+
+    {{-- TODO CANCEL DAO --}}
     <x-dao_modal />
-    <form action="#" class="jsc_form">
+    <form action="{{ route('store_dao') }}" class="jsc_form">
+        <input type="hidden" name="reform_number" value="{{ $reform_number ?? 0 }}">
+        <input type="hidden" name="is_subset" value="1">
+        <input type="hidden" name="parent_id" value="{{ $dao->id }}">
         <input type="hidden" name="token" class="jsc_random_token" value="{{ rand('100', '99999999') }}">
         <section class="pt-4 my-4  space-y-8 divide-y divide-gray-200 rounded bg-white border-gray-200 px-4 border">
             {{-- information --}}
@@ -191,7 +196,10 @@
                     </div>
                 </div>
                 <div class="jsc_extras">
-                    <x-extra />
+                    {{-- {{ $dao->extras }} --}}
+                    @foreach (json_decode($dao->extras) as $extra)
+                        <x-extra key="{{ $extra->key }}" value="{{ $extra->value }}" pv="{{ $extra->pv }}" />
+                    @endforeach
                 </div>
                 <div class="flex justify-start mt-2">
                     <div

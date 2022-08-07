@@ -17,8 +17,12 @@ class Dao extends Model
         'vote_mode',
         'document',
         'lazy',
+        'parent_id',
+        'is_subset',
+        'published',
         'parent',
         'extras',
+        'reform_number',
     ];
 
     public function users()

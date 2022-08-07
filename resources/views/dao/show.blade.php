@@ -84,6 +84,7 @@
     @php
         $unsigned_daos = DB::table('dao_user')
             ->where('dao_id', $dao->id)
+            ->where('partner_type', '!=' , 'observer')
             ->where('partner_accepted', '0');
     @endphp
     @if ($unsigned_daos->exists())
@@ -242,6 +243,18 @@
                 <div> <a class="text-xs text-theme-light underline "
                         href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
                         0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
+            </div>
+            <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
+                <div class=" font-medium text-theme-dark">Reform number</div>
+            </div>
+            <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                <div>{{ sprintf('%04u', $dao->reform_number) }} </div>
+            </div>
+            <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
+                <div class=" font-medium text-theme-dark">Publish Status </div>
+            </div>
+            <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                <div> {{ $dao->published == 1 ? 'True' : 'False' }} </div>
             </div>
         </div>
         <div class="mt-8 grid gap-2 grid-cols-2 px-2 ">

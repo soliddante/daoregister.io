@@ -39,7 +39,15 @@ class DaoController extends Controller
 
         $extras = [];
         foreach ($request->extra_key as $index => $extra_key) {
-            $extras[$request->extra_key[$index]] = [$request->extra_value[$index],  $request->extra_pv[$index]];
+
+            $insert = [
+                "id" => $index,
+                "key" => $request->extra_key[$index],
+                "value" => $request->extra_value[$index],
+                "pv" => $request->extra_pv[$index]
+            ];
+            array_push($extras, $insert);
+            // $extras[$request->extra_key[$index]] = [$request->extra_value[$index],  $request->extra_pv[$index]];
         }
         $dao = Dao::create([
             "name" => $request->name,
@@ -51,6 +59,9 @@ class DaoController extends Controller
             "lazy" => $request->lazy ?? '1',
             "extras" => json_encode($extras),
             "worth" => $request->worth ?? '-',
+            "parent_id" =>  $request->parent_id ?? null,
+            "is_subset" =>  $request->is_subset ?? null,
+            "reform_number" =>  ($request->reform_number + 1) ?? 0,
         ]);
 
 
@@ -80,6 +91,6 @@ class DaoController extends Controller
     public function reform_dao(Request $request)
     {
         $dao = Dao::where('id', $request->dao_id)->first();
-        return view('dao.reform',compact('dao'));
+        return view('dao.reform', compact('dao'));
     }
 }

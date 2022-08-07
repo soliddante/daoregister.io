@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dao;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -210,10 +212,74 @@ class UserController extends Controller
     public function accept_join_dao(Request $request)
     {
         auth()->user()->daos()->where('dao_id', $request->dao_id)->update([
-            'partner_accepted'=>1,
+            'partner_accepted' => 1,
         ]);
 
-        return redirect()->back()->with('msg', 'You have successfully joined Dao');
 
+        $dao = Dao::where('id', $request->dao_id)->first();
+        $dao_mode = null;
+
+        // NOT SUBSET | ALL PARTNERS AND HESABDARS SHOULD SIGN
+        if ($dao->is_subset == 0) {
+            $unsignet_daos = DB::table('dao_user')
+                ->where('partner_type', '!=', 'observer')
+                ->where('partner_accepted', 0);
+            if ($unsignet_daos->exists()) {
+                $dao_mode = 0; //all members not vote
+            } else {
+                $dao_mode = 10;
+            }
+        }
+        if ($dao->is_subset == 1) {
+            switch ($dao->type) {
+                case 'owner_only':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '==', 'owner')
+                        ->where('partner_accepted', 0);
+                    if ($unsignet_daos->exists()) {
+                        $dao_mode = 1; //owner not signed
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+                case 'majority':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 0);
+                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
+                    if ($unsignet_daos->exists() && $unsignet_daos_share < 51) {
+                        $dao_mode = 2; //majority share not enough
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+                case 'both':
+                    $unsignet_daos = DB::table('dao_user')
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 0);
+                    $owner_not_signed = DB::table('dao_user')
+                        ->where('partner_type', '==', 'owner')
+                        ->where('partner_accepted', 0)
+                        ->exists();
+                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
+
+                    if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
+                        $dao_mode = 3; //majority share not enough or owner not vote
+                    } else {
+                        $dao_mode = 10;
+                    }
+                    break;
+            }
+        }
+
+        // dd($dao_mode);
+
+        if ($dao_mode == 10) {
+            Dao::where('id', $request->dao_id)->update([
+                'published' => 1
+            ]);
+        }
+
+        return redirect()->back()->with('msg', 'You have successfully joined Dao');
     }
 }

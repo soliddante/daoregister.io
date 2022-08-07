@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory()->create([
-            "id" => 5,
+            "id" =>5,
             "email" => "3@gmail.com",
             "wallet" => NULL,
             "type" => "0",
@@ -112,8 +112,9 @@ class DatabaseSeeder extends Seeder
             "updated_at" => "2022-08-07 10:13:34",
         ]);
 
+        
         \App\Models\User::factory()->create([
-            "id" => 6,
+            "id" =>6,
             "email" => "ob@gmail.com",
             "wallet" => NULL,
             "type" => "0",
@@ -145,6 +146,7 @@ class DatabaseSeeder extends Seeder
             "updated_at" => "2022-08-07 10:13:34",
         ]);
 
+
         DB::table('daos')->insert([
             "id" => 1,
             "name" => "Lenovo",
@@ -154,31 +156,15 @@ class DatabaseSeeder extends Seeder
             "worth" => "10",
             "document" => "<p>Contract lorem</p>",
             "extras" => '[{"id":0,"key":"key1","value":"val1","pv":"1"},{"id":1,"key":"key2","value":"val2","pv":"0"}]',
-            "published" => "1",
+            "published" => "0",
             "is_subset" => "0",
             "lazy" => "on",
             "token" => "91131777",
             "created_at" => "2022-08-07 10:11:28",
             "updated_at" => "2022-08-07 10:11:28",
         ]);
-        DB::table('daos')->insert([
-            "id" => 2,
-            "reform_number" => "1",
-            "name" => "Lenovo2",
-            "symbol" => "LNV2",
-            "type" => "Limited liability company",
-            "vote_mode" => "both",
-            "worth" => "2",
-            "document" => "<p>Contract lorem 2</p>",
-            "extras" => "[{\"id\":0,\"key\":\"key1\",\"value\":\"val1\",\"pv\":\"1\"},{\"id\":1,\"key\":\"key2\",\"value\":\"val2\",\"pv\":\"0\"},{\"id\":2,\"key\":\"key3 new\",\"value\":\"val3 new\",\"pv\":\"1\"}]",
-            "published" => "0",
-            "is_subset" => "1",
-            "parent_id" => "1",
-            "lazy" => "on",
-            "token" => "1974543",
-            "created_at" => "2022-08-07 15:30:39",
-            "updated_at" => "2022-08-07 15:30:39",
-        ]);
+
+
         DB::table('dao_user')->insert([
             'user_id' => 1,
             'dao_id' => 1,
@@ -192,68 +178,26 @@ class DatabaseSeeder extends Seeder
             'dao_id' => 1,
             'partner_email' => 'subdanial@gmail.com',
             'partner_type' => 'partner',
-            'partner_share' => '35',
-            'partner_accepted' => 1,
+            'partner_share' => '20',
+            'partner_accepted' => 0,
         ]);
         DB::table('dao_user')->insert([
             'user_id' => 5,
             'dao_id' => 1,
             'partner_email' => '3@gmail.com',
             'partner_type' => 'partner',
-            'partner_share' => '35',
-            'partner_accepted' => 1,
+            'partner_share' => '20',
+            'partner_accepted' => 0,
         ]);
         DB::table('dao_user')->insert([
             'user_id' => 6,
             'dao_id' => 1,
             'partner_email' => 'ob@gmail.com',
             'partner_type' => 'observer',
-            'partner_share' => '0',
+            'partner_share' => '20',
             'partner_accepted' => 0,
         ]);
-        DB::table('dao_user')->insert([
-            "id" => 5,
-            "user_id" => 1,
-            "dao_id" => 2,
-            "partner_email" => "admin@gmail.com",
-            "partner_type" => "Owner",
-            "partner_share" => 40,
-            "partner_accepted" => 1,
-            "created_at" => NULL,
-            "updated_at" => NULL,
-        ]);
-        DB::table('dao_user')->insert([
-            "id" => 6,
-            "user_id" => 4,
-            "dao_id" => 2,
-            "partner_email" => "subdanial@gmail.com",
-            "partner_type" => "partner",
-            "partner_share" => 30,
-            "partner_accepted" => 0,
-            "created_at" => NULL,
-            "updated_at" => NULL,
-        ]);
-        DB::table('dao_user')->insert([
-            "id" => 7,
-            "user_id" => 5,
-            "dao_id" => 2,
-            "partner_email" => "3@gmail.com",
-            "partner_type" => "partner",
-            "partner_share" => 30,
-            "partner_accepted" => 0,
-            "created_at" => NULL,
-            "updated_at" => NULL,
-        ]);
-        DB::table('dao_user')->insert([
-            "id" => 8,
-            "user_id" => 6,
-            "dao_id" => 2,
-            "partner_email" => "ob@gmail.com",
-            "partner_type" => "observer",
-            "partner_share" => 0,
-            "partner_accepted" => 0,
-            "created_at" => NULL,
-            "updated_at" => NULL,
-        ]);
+
+
     }
 }

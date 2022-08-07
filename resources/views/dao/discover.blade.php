@@ -33,3 +33,4 @@
     </div>
 
 </x-layouts.app>
+{{--TODO only discover pubisheds--}}
