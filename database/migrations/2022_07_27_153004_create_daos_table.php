@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('published')->nullable()->default(0);
             $table->string('is_subset')->nullable()->default(0);
             // FIXME nemidoonam is subset khoobe yana chon mishe ba query daravord
+            $table->string('parent_id')->nullable()->default(0);
             $table->string('lazy')->nullable();
             $table->string('token')->nullable();
             $table->timestamps();
