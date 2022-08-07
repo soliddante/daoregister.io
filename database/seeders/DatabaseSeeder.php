@@ -79,6 +79,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('dao_user')->insert([
+            'user_id' => 1,
+            'dao_id' => 1,
+            'partner_email' => 'admin@gmail.com',
+            'partner_type' => 'owner',
+            'partner_share' => '40',
+            'partner_accepted' => 1,
+        ]);
+        DB::table('dao_user')->insert([
             'user_id' => 4,
             'dao_id' => 1,
             'partner_email' => 'subdanial@gmail.com',
@@ -92,7 +100,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Lenovo",
             "symbol" => "LNV",
             "type" => "Limited company",
-            "vote_mode" => "owner",
+            "vote_mode" => "majority",
             "worth" => "10",
             "document" => "<p>Contract lorem</p>",
             "extras" => "{\"Key1Pub\":[\"VAL1pub\",\"0\"],\"Key2PV\":[\"VAL2pv\",\"1\"]}",

@@ -191,7 +191,7 @@
                         </div>
                     </div>
                     <div class="flex gap-3 text-sm items-center">
-                        <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id', $dao->id]) }}">Update Dao</a>
+                        <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update Dao</a>
 
                         <div class="flex gap-1 items-center">
                             <ion-icon name="heart-outline"></ion-icon>

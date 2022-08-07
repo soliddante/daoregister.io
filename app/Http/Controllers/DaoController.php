@@ -79,5 +79,7 @@ class DaoController extends Controller
     }
     public function reform_dao(Request $request)
     {
+        $dao = Dao::where('id', $request->dao_id)->first();
+        return view('dao.reform',compact('dao'));
     }
 }

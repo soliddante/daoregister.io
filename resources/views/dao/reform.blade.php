@@ -33,7 +33,7 @@
                             Name
                         </label>
                         <div class="mt-1">
-                            <input type="text" name="name" id="name"
+                            <input type="text" value="{{ $dao->name }}" name="name" id="name"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <label for="symbol" class="block text-sm font-medium text-gray-700">
                             Symbol </label>
                         <div class="mt-1">
-                            <input type="text" name="symbol" id="symbol"
+                            <input type="text" value="{{ $dao->symbol }}" name="symbol" id="symbol"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                             Worth
                         </label>
                         <div class="mt-1">
-                            <input type="text" id="worth" name="worth"
+                            <input type="text" value="{{ $dao->worth }}" id="worth" name="worth"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
 
                         </div>
@@ -87,9 +87,16 @@
                     <div class="col-span-2">share</div>
                 </div>
                 <div class="jsc_partners">
-                    <x-partner owner />
-                    <x-partner />
-
+                    @php
+                        $pivot = DB::table('dao_user')
+                            ->where('dao_id', $dao->id)
+                            ->get();
+                    @endphp
+                    @foreach ($pivot as $partner)
+                        {{-- TODO bayad az pvot data begiram --}}
+                        <x-partner_update email="{{ $partner->partner_email }}" share="{{ $partner->partner_share }}"
+                            type="{{ $partner->partner_type }}" />
+                    @endforeach
                 </div>
                 <div class="flex items-center justify-end mt-2">
                     <div
@@ -109,7 +116,7 @@
                     <div class="space-y-3 text-sm">
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                                <input value="owner_only" name="vote_mode" type="radio" checked
+                                <input value="owner_only" name="vote_mode" type="radio" @if ($dao->vote_mode == 'owner_only') checked @endif
                                     class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
@@ -124,7 +131,7 @@
 
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                                <input value="majority" name="vote_mode" type="radio"
+                                <input value="majority" name="vote_mode" @if ($dao->vote_mode == 'majority') checked @endif type="radio"
                                     class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
@@ -139,7 +146,7 @@
 
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                                <input value="both" name="vote_mode" type="radio"
+                                <input value="both" name="vote_mode" @if ($dao->vote_mode == 'both') checked @endif type="radio"
                                     class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
@@ -162,7 +169,7 @@
                     the page about this item will put a link
                     to this URL, which users can click</p>
                 <div class="mt-4 w-full">
-                    <textarea id="thetextarea" class="jsc_contract" name="document"></textarea>
+                    <textarea id="thetextarea" class="jsc_contract" name="document">{{ $dao->document }}</textarea>
                 </div>
             </article>
             {{-- extra fields --}}
@@ -846,13 +853,5 @@
             $.modal.close();
 
         })
-    </script>
-
-
-    {{-- reform script --}}
-    <script>
-        // /       
-
-        $partner
     </script>
 </x-layouts.app>
