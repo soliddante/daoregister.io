@@ -33,4 +33,4 @@
     </div>
 
 </x-layouts.app>
-{{--TODO only discover pubisheds--}}
+{{--TODO only discover pubisheds latest--}}
