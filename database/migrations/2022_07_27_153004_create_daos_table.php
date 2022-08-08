@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('is_subset')->nullable()->default(0);
             $table->string('parent_id')->nullable()->default(0);
             $table->string('lazy')->nullable();
+            $table->string('is_minted')->nullable()->default(0);
             $table->string('reform_number')->nullable()->default(0);
             $table->string('token')->nullable();
             $table->timestamps();

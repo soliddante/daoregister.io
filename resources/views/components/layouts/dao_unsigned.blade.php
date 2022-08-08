@@ -15,6 +15,11 @@ $dao_unsigns = DB::table('dao_user')
             You have <span>{{ $dao_unsigns_count }}</span> unsigned request please check it
             <a href="{{ route('dashboard_request') }}" class="inline-flex rounded bg-white text-gray-800 mx-2 px-2  cursor-pointer">Check now</a>
         </div>
-        <ion-icon class="cursor-pointer text-xl" name="close-outline"></ion-icon>
+        <ion-icon class="jsc_close_request cursor-pointer text-xl" name="close-outline"></ion-icon>
     </div>
 @endif
+<script>
+    $('.jsc_close_request').on('click', function() {
+        $('.jsc_request_alert').hide();
+    })
+</script>

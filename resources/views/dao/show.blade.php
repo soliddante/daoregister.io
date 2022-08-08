@@ -10,15 +10,27 @@
             max-width: 100% !important;
             padding: 0 !important;
         }
+
+        .jsc_request_alert {
+            display: none !important;
+        }
     </style>
 
     @php
         
         $dao_mode = null;
-        
+        $signed_daos_display = DB::table('dao_user')
+            ->where('dao_id', $dao->id)
+            ->where('partner_type', '!=', 'observer')
+            ->where('partner_accepted', 1);
+        $refuse_daos_display = DB::table('dao_user')
+            ->where('dao_id', $dao->id)
+            ->where('partner_type', '!=', 'observer')
+            ->where('partner_accepted', '-1');
         // NOT SUBSET | ALL PARTNERS AND HESABDARS SHOULD SIGN
         if ($dao->is_subset == 0) {
             $unsignet_daos = DB::table('dao_user')
+                ->where('dao_id', $dao->id)
                 ->where('partner_type', '!=', 'observer')
                 ->where('partner_accepted', 0);
         
@@ -32,6 +44,7 @@
             switch ($dao->type) {
                 case 'owner_only':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '==', 'owner')
                         ->where('partner_accepted', 0);
                     if ($unsignet_daos->exists()) {
@@ -42,6 +55,7 @@
                     break;
                 case 'majority':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '!=', 'observer')
                         ->where('partner_accepted', 0);
                     $unsignet_daos_share = $unsignet_daos->sum('partner_share');
@@ -53,9 +67,11 @@
                     break;
                 case 'both':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '!=', 'observer')
                         ->where('partner_accepted', 0);
                     $owner_not_signed = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '==', 'owner')
                         ->where('partner_accepted', 0)
                         ->exists();
@@ -73,55 +89,6 @@
         // dd($dao_mode);
         
     @endphp
-  
-
-
-
-
-
-    <style>
-        .jsc_request_alert {
-            display: none !important;
-        }
-    </style>
-    {{-- this is hidden --}}
-    @php
-        $unsigned_daos = DB::table('dao_user')
-            ->where('dao_id', $dao->id)
-            ->where('partner_type', '!=', 'observer')
-            ->where('partner_accepted', '0');
-    @endphp
-    @if ($unsigned_daos->exists() && $dao->published != 1)
-        <div class="rounded-md bg-yellow-50 p-4">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div class="ml-3 ">
-                    <h3 class="text-sm text-yellow-800 font-bold">Contract is not published yet </h3>
-                    <div class="mt-2 text-sm text-yellow-700">
-                        <p>
-                            There is {{ $unsigned_daos->count() }} Partner Doesn't Sign contract
-                        </p>
-                        @foreach ($unsigned_daos->get() as $unsigned_daos)
-                            <li class="mt-1">
-                                {{ $unsigned_daos->partner_email }}
-                            </li>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-
-
-
-
 
     {{-- hidden dao start --}}
     <div class="w-[600px] fixed  mt-10 bg-[#efefef] -top-[5000px] -z-50 ">
@@ -180,14 +147,21 @@
             </footer>
         </div>
     </div>
-
     {{-- hidden dao end --}}
+
+
+
+
+
+
+
+
+
     <div class="grid-cols-12 grid w-full">
         <div class="col-span-5">
-            <img src="{{ asset('img/daobg.jpg') }}" class="w-full min-h-screen h-full object-cover">
+            <img src="{{ asset('img/daobg.jpg') }}" class="w-full  h-full object-cover">
         </div>
         <div class="col-span-7">
-
             <section class="bg-white py-8 px-10  ">
                 <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-2 px-2">
@@ -202,22 +176,230 @@
                                     <div class="-mt-[4px]">{{ $dao->type }}</div>
                                 </div>
                             </div>
-                            <div class="flex gap-3 text-sm items-center">
-                                <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
-                                    Dao</a>
+                            <div class="flex gap-2 text-sm items-center">
+                                <button class="jsc_mint_bulk bg-theme-dark text-white py-1 px-2 rounded">Bulk minting</button>
+                                {{-- this is last refund --}}
+                                @php
+                                    $updatable = false;
+                                    // if this is parent0 check it has child
+                                    if ($dao->parent_id == 0) {
+                                        if (App\Models\Dao::where('parent_id', $dao->id)->exists()) {
+                                            // if has child
+                                            $updatable = false;
+                                        } else {
+                                            // if not
+                                            $updatable = true;
+                                        }
+                                    }
+                                    
+                                    // if not parent 0 fimd last parent then find last child check this is that or not
+                                    if ($dao->parent_id != 0) {
+                                        $parent = App\Models\Dao::where('id', $dao->parent_id)->first();
+                                        $last_child = App\Models\Dao::where('parent_id', $parent->id)
+                                            ->latest('reform_number')
+                                            ->first();
+                                        if ($dao->id == $last_child->id) {
+                                            $updatable = true;
+                                        } else {
+                                            $updatable = false;
+                                        }
+                                    }
+                                @endphp
 
-                                <div class="flex gap-1 items-center">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                    <span>46</span>
-                                </div>
-                                <div class="flex gap-1 items-center">
-                                    <ion-icon name="eye"></ion-icon>
-                                    <span>1200</span>
-                                </div>
+                                @if ($updatable == true)
+                                    @if ($dao->published == 1)
+                                        <a class="py-1 bg-theme-light text-white px-2 rounded"
+                                            href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
+                                            Dao</a>
+                                    @else
+                                        <a class="jsc_no_update cursor-not-allowed py-1 bg-gray-400 text-white px-2 rounded" href="#">Update
+                                            Dao</a>
+                                        <script>
+                                            tippy('.jsc_no_update', {
+                                                content: "Contract should published before update   ",
+                                            });
+                                        </script>
+                                    @endif
+                                @endif
+                                <select name="" class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">
+                                    @if ($dao->parent_id == 0)
+
+                                        <option value="{{ route('show_dao', ['dao_id' => $dao->id]) }}">Brach :
+                                            {{ sprintf('%04d', $dao->reform_number) }}
+                                            | ID : {{ $dao->id }} </option>
+
+
+
+                                        @foreach (App\Models\Dao::where('parent_id', $dao->id)->get() as $branch)
+                                            <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">Brach :
+                                                {{ sprintf('%04d', $branch->reform_number) }}
+                                                | ID : {{ $branch->id }}</option>
+                                        @endforeach
+                                    @else
+                                        @php
+                                            $main_parent = App\Models\Dao::where('id', $dao->parent_id)->first();
+                                        @endphp
+                                        <option value="{{ route('show_dao', ['dao_id' => $main_parent->id]) }}">Brach :
+                                            {{ sprintf('%04d', $main_parent->reform_number) }}
+                                            | ID : {{ $main_parent->id }}</option>
+                                        </option>
+
+
+                                        @foreach (App\Models\Dao::where('parent_id', $main_parent->id)->get() as $branch)
+                                            <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">
+                                                Brach :
+                                                {{ sprintf('%04d', $branch->reform_number) }}
+                                                | ID : {{ $branch->id }}</option>
+                                        @endforeach
+                                    @endif
+
+                                </select>
                             </div>
                         </div>
                     </div>
+                </article>
+                <article>
 
+                    @php
+                        $unsigned_daos = DB::table('dao_user')
+                            ->where('dao_id', $dao->id)
+                            ->where('partner_type', '!=', 'observer')
+                            ->where('partner_accepted', '0');
+                    @endphp
+                    @if ($unsigned_daos->exists() && $dao->published != 1)
+                        <div class="rounded-md bg-yellow-50 mb-8 mt-4 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3 w-full ">
+                                    <h3 class="text-sm text-yellow-800 font-bold">Contract is not published yet </h3>
+
+                                    <div class="grid text-sm mt-2 text-yellow-700  grid-cols-3 w-full">
+                                        <div class="col-span-1">
+                                            <div>
+                                                Voting requires
+                                            </div>
+
+                                        </div>
+                                        <div class="col-span-2">
+                                            <div>
+                                                @switch($dao->vote_mode)
+                                                    @case('owner_only')
+                                                        <strong> Owner : </strong>
+                                                        Require owner vote only
+                                                    @break
+
+                                                    @case('majority')
+                                                        <strong> Majority : </strong>
+                                                        Require Majority votes only
+                                                    @break
+
+                                                    @case('both')
+                                                        <strong> Both : </strong>
+                                                        Require Majority and Owner votes
+                                                    @break
+
+                                                    @default
+                                                @endswitch
+                                            </div>
+                                        </div>
+                                        <div class="col-span-3">
+                                            <hr class="border-yellow-700 my-2">
+                                        </div>
+                                        <div class="col-span-1">
+                                            Partners who signed
+                                        </div>
+                                        <div class="col-span-2">
+
+                                            @if ($signed_daos_display->count() != 0)
+                                                @foreach ($signed_daos_display->get() as $signed_dao_display)
+                                                    <li class="mb-1 flex items-center">
+                                                        <div>
+                                                            {{ $signed_dao_display->partner_email }}
+                                                        </div>
+                                                        <div class="bg-green-600 text-xs ml-2 px-2 py-0.5 text-white rounded "> Signed </div>
+
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+
+                                        </div>
+                                        <div class="col-span-3">
+                                            <hr class="border-yellow-700 my-2">
+                                        </div>
+                                        <div class="col-span-1">
+                                            Partners who not desided
+                                        </div>
+                                        <div class="col-span-2">
+                                            @if ($unsigned_daos->count() != 0)
+                                                @foreach ($unsigned_daos->get() as $unsigned_dao)
+                                                    <li class="mb-1 flex items-center">
+                                                        <div>
+                                                            {{ $unsigned_dao->partner_email }}
+                                                        </div>
+                                                        <div class="bg-yellow-600 text-xs ml-2 px-2 py-0.5 text-white rounded ">Not signed </div>
+
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+                                        </div>
+                                        <div class="col-span-3">
+                                            <hr class="border-yellow-700 my-2">
+                                        </div>
+                                        <div class="col-span-1">
+                                            Partners who Refuse
+                                        </div>
+                                        <div class="col-span-2">
+                                            @if ($refuse_daos_display->count() != 0)
+                                                @foreach ($refuse_daos_display->get() as $refuse_dao_display)
+                                                    <li class="mb-1 flex items-center">
+                                                        <div>
+                                                            {{ $refuse_dao_display->partner_email }}
+                                                        </div>
+                                                        <div class="bg-red-600 text-xs ml-2 px-2 py-0.5 text-white rounded "> Refused </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+                                        </div>
+                                        <div class="col-span-3">
+                                            <hr class="border-yellow-700 my-2">
+                                        </div>
+                                        <div class="col-span-1">
+                                            Voting statistic
+                                        </div>
+                                        <div class="col-span-1">
+                                            <div class="w-full rounded border border-green-800 h-[16px] mt-0.5">
+                                                <div class=" rounded bg-green-800 h-[15px]"
+                                                    style="width:{{ $signed_daos_display->sum('partner_share') }}%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 ">
+                                            <span class="text-green-800 ml-2">
+                                                {{ $signed_daos_display->sum('partner_share') }}
+                                                <span class="-ml-1">%</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    @endif
+
+
+                </article>
+                <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-1 pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
                         <div class=" font-medium text-theme-dark">Contract Type</div>
                     </div>
@@ -318,29 +500,60 @@
         </div>
 
     </div>
+
+
+
     {{-- TODO SHOW USER SHARES AND JOINER SHARE BOLDER --}}
-    @if (auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
+    @if ($dao->published != 1 &&
+        auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
         <section>
             <div class="px-4 pt-[50px] block w-full"> </div>
-            <div class="fixed bottom-0 w-full right-0 h-[40px] bg-green-100 shadow flex items-center justify-center ">
+            <div class="fixed bottom-0 w-full right-0 h-[60px] bg-blue-100 shadow flex items-center justify-center ">
                 <div>
                     You are invited to participate in this Dao. Do you accept this request?
                     {{-- TODO HARD REJECT --}}
                 </div>
                 <form action="accept_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-                    <button type="submit" class="bg-green-500 text-white px-2 rounded cursor-pointer mx-4">Accept and Sign contract</button>
+                    <button type="submit" class="bg-theme-dark text-white py-1 px-4 rounded cursor-pointer ml-4 mr-1 "> Sign contract</button>
+                </form>
+                <form action="refuse_join_dao">
+                    <input type="hidden" name="dao_id" value="{{ $dao->id }}">
+                    <button type="submit" class="bg-red-800 text-white py-1 px-4 rounded cursor-pointer ">Refeuse Sign</button>
+                </form>
 
+            </div>
+        </section>
+    @endif
+
+    @if ($dao->published != 1 &&
+        auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '-1')->exists())
+        <section>
+            <div class="px-4 pt-[50px] block w-full"> </div>
+            <div class="fixed bottom-0 w-full right-0 h-[60px] bg-blue-100 shadow flex items-center justify-center ">
+                <div>
+                    You have already refused to accept this contract
+                    {{-- TODO HARD REJECT --}}
+                </div>
+                <form action="accept_join_dao">
+                    <input type="hidden" name="dao_id" value="{{ $dao->id }}">
+                    <button type="submit" class="bg-theme-dark text-white py-1 px-4 rounded cursor-pointer ml-4 mr-1 ">I changed my mind, Sign
+                        contract</button>
                 </form>
             </div>
         </section>
     @endif
 
 
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
-
+    <script>
+        $('.jsc_branches_select option[value="{{ URL::full() }}"]').prop('selected', true);
+        $('.jsc_branches_select').on('change', function() {
+            window.location.href = $(this).val();
+        })
+    </script>
     <script>
         const elementToSave = document.querySelector(".jsc_contract");
         html2canvas(elementToSave, {

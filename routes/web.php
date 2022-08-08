@@ -37,6 +37,7 @@ Route::controller(UserController::class)->group(function () {
     Route::any('/sync_email', 'sync_email')->name('sync_email');
     Route::any('/sync_update', 'sync_update')->name('sync_update');
     Route::any('/accept_join_dao', 'accept_join_dao')->name('accept_join_dao');
+    Route::any('/refuse_join_dao', 'refuse_join_dao')->name('refuse_join_dao');
 });
 
 

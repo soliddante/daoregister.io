@@ -4,6 +4,7 @@
         body {
             background: white !important;
         }
+
         .css_main_div {
             width: 100% !important;
             min-width: 100% !important;

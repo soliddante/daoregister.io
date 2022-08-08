@@ -19,6 +19,7 @@ class Dao extends Model
         'lazy',
         'parent_id',
         'is_subset',
+        'is_minted',
         'published',
         'parent',
         'extras',

@@ -296,4 +296,14 @@ class UserController extends Controller
 
         return redirect()->back()->with('msg', 'You have successfully joined Dao');
     }
+
+
+    public function refuse_join_dao(Request $request)
+    {
+        auth()->user()->daos()->where('dao_id', $request->dao_id)->update([
+            'partner_accepted' => -1,
+        ]);
+        return redirect()->back();
+
+    }
 }

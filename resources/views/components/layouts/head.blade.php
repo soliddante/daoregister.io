@@ -14,7 +14,8 @@
     <script src="{{ asset('js/walletconnect2.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/tippy-bundle.umd.min.js') }}"></script>
     <script src="{{ asset('js/just-validate.production.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v?@php echo(rand(0,100000)) @endphp">
     <style>
@@ -33,9 +34,14 @@
     </style>
 
 </head>
-{{-- //TODO ADD CANCEL CONTRACT --}}
-{{-- //TODO NOT PUBLISHED CONTRACT CANT UPDATE --}}
+{{-- //CHEKCED ADD CANCEL CONTRACT --}}
+{{-- //CHEKCED NOT PUBLISHED CONTRACT CANT UPDATE --}}
 {{-- //TODO CONTRACT ON BLOCKCHAIN BULK OR NUT --}}
 {{-- //TODO EMAIL DESIGN --}}
 {{-- //CHECKED EMAIL SHOULD CANT CHANGE --}}
 {{-- //TODO SELL CONTRACT --}}
+{{-- //CHECKED SHOW ONLY LAST PUBLISHED ON DISCOVER --}}
+{{-- //CHECKED  SHOW VAZIATE CARBARAYE CONTRACT VA KHODET --}}
+{{-- //CHECKED FAGHAT UNPUBLISHED CONTRACT BETOONE VOTE BEGIRE --}}
+{{-- //CHECKED SHOW CONTRACT OLD VERSIONS LIKE GITHUB --}}
+{{-- //TODOONLYLASTBRANCHESCANUPDATE --}}

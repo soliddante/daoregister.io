@@ -18,10 +18,24 @@
             <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 
                 @php
-                    $daos = App\Models\Dao::all();
+                    $daos = App\Models\Dao::where('published', 1)
+                        ->where('parent_id', 0)
+                        ->get();
+                    // TODO ONLY LAST VERSION
                 @endphp
                 @foreach ($daos as $dao)
-                    <x-dao_card :dao="$dao" />
+                    {{-- {{ $dao->id }} --}}
+                    @php
+                        $last_reform = App\Models\Dao::where('published', 1)
+                            ->where('parent_id', $dao->id)
+                            ->latest('reform_number')
+                            ->first();
+                        if ($last_reform == null) {
+                            $last_reform = $dao;
+                        }
+                    @endphp
+
+                    <x-dao_card :dao="$last_reform" />
                 @endforeach
 
 
@@ -33,4 +47,4 @@
     </div>
 
 </x-layouts.app>
-{{--TODO only discover pubisheds latest--}}
+{{-- TODO only discover pubisheds latest --}}
