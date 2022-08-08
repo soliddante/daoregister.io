@@ -159,7 +159,7 @@
                             Fullname
                         </div>
                         <div class="col-span-1">
-                            <span>{{ $ipfs->firstname }} {{ $ipfs->lastname }}</span>
+                            <span class="capitalize">{{ $ipfs->firstname }} {{ $ipfs->lastname }}</span>
                         </div>
                         <div class="col-span-1">
                             Email
