@@ -4,7 +4,7 @@
             {{-- top --}}
             <div class=" flex justify-between items-center">
                 <div>
-                    <div class="jsc_username ">
+                    <div class="jsc_username checked capitalize ">
                         {{ auth()->user()->firstname }}
                         {{ auth()->user()->lastname }}
                     </div>
