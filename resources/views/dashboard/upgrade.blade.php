@@ -1,7 +1,4 @@
 <x-layouts.dashboard>
-
-
-
     <section class="hidden jsc_wallet_error px-4 mt-8">
         <div class="rounded-md bg-red-100 p-4">
             <div class="flex">
@@ -25,7 +22,6 @@
         </div>
     </section>
     <section class="hidden relative jsc_upgrade_section border rounded px-8 py-12 bg-white mt-16 shadow  w-4/5 mx-auto ">
-
         @if (auth()->user()->type != 1)
             <div class="grid grid-cols-5 gap-4 ">
                 <div class="col-span-5 lg:col-span-3">
@@ -47,18 +43,14 @@
                         </div>
                         <x-ui.button class="mt-4 jsc_generate_nft ">Generate</x-ui.button>
                     </div>
-
-
                 </div>
                 <div class="col-span-5 lg:col-span-2 flex items-end">
                     <div class="w-full">
                         <a class="jsc_contract_image_link" data-fancybox>
                             <img src="" class="w-full  shadow  jsc_contract_image">
                         </a>
-
                     </div>
                 </div>
-
                 <div class="col-span-5">
                     <div class="show_hide_after_generate hidden">
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -83,19 +75,14 @@
                                                 <ion-icon class="text-lg -mb-1" name="flask"></ion-icon>
                                             </button>
                                             <div class="jsc_check_your_wallet text-blue-700 hidden text-sm px-3 py-2 ml-2 "> Check your wallet and confirm transaction.
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class="col-span-5">
                     <div class="show_after_hash_recived hidden">
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -111,18 +98,14 @@
                                         <p>Wait a few moment. After your NFT is minted in the blockchain, your account will be changed to professional user level.</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         @else
             <div class="grid grid-cols-5 gap-4">
                 <div class="col-span-5">
-
-
                     <div class="rounded-md bg-green-50 p-4">
                         <div class="flex">
                             <div class="flex-shrink-0">
@@ -138,7 +121,6 @@
                                         class="inline-flex items-center px-3 py-2 border  border-transparent text-sm leading-4 font-semibold rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Watch
                                         certificate </a>
                                 </div>
-
                             </div>
                         </div>
                         Share it
@@ -161,16 +143,12 @@
                         <div class="col-span-1">
                             Name
                         </div>
-                        
                         <div class="col-span-1">
-                           {{auth()->user()->ipfs()->name   }}
                         </div>
-                        
                     </div>
                 </div>
             </div>
         @endif
-
     </section>
     <section class="w-[700px]  mx-auto jsc_account_nft bg-white shadow fixed -z-50 -top-[9000px]">
         <header>
@@ -190,14 +168,11 @@
                             </span>
                             <span class="jsc_nft_lastname uppercase">
                                 {{ auth()->user()->lastname }}
-
                             </span>
-
                         </div>
                         <div class="flex gap-4 items-center h-[20px] justify-between">
                             <div class="text jsc_nft_email">
                                 {{ auth()->user()->email }}
-
                             </div>
                             <div class="h-[2px] mt-[22px] w-full bg-[#E6C15F]"></div>
                         </div>
@@ -240,7 +215,6 @@
                             <div class="font-bold text-sm">Birthday</div>
                             <div class="text-sm jsc_nft_gendar">
                                 {{ auth()->user()->birthday }}
-
                             </div>
                         </div>
                     </div>
@@ -403,5 +377,4 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
     <link href="https://cdn.jsdelivr.net/npm/shareon@2/dist/shareon.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/shareon@2/dist/shareon.iife.js" defer init></script>
-
 </x-layouts.dashboard>
