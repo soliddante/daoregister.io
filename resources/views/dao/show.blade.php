@@ -71,9 +71,7 @@
 
 
 
-    <script>
-        console.log("dao_mode : " + {{ $dao_mode }});
-    </script>
+   
 
     <style>
         .jsc_request_alert {
