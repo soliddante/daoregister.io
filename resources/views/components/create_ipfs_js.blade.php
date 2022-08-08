@@ -1,7 +1,4 @@
 <script>
-
-  
-
     $('.jsc_generate_nft').on('click', function() {
         const elementToSave = document.querySelector(".jsc_account_nft");
         html2canvas(elementToSave, {
@@ -97,15 +94,15 @@
 
         });
     })
-    function create_account_nft(){
-            $.ajax({
-                type: "get",
-                url: "{{ route('ipfs_last_get') }}",
-                success: function (response) {
-                    database_ipfs = response;                       
-                    console.log(database_ipfs); 
-                }
-            });
+
+    function create_account_nft() {
+        $.ajax({
+            type: "get",
+            url: "{{ route('ipfs_last_get') }}",
+            success: function(response) {
+                database_ipfs = response;
+                console.log(database_ipfs);
+            }
+        });
     }
-    // sakhte axo ipfs TODO
 </script>
