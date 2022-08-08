@@ -4,7 +4,6 @@
         body {
             background: white !important;
         }
-
         .css_main_div {
             width: 100% !important;
             min-width: 100% !important;
@@ -24,7 +23,6 @@
                         tristique.</p>
                 </div>
             </div>
-
             <!-- Contact Section -->
             <div class="relative bg-white">
                 <div class="lg:absolute lg:inset-0">
@@ -140,10 +138,7 @@
                     </div>
                 </div>
             </div>
-
-
         </main>
-
         <x-layouts.footer_theme></x-layouts.footer_theme>
     </div>
 </x-layouts.app>
