@@ -85,7 +85,10 @@
     function showConnectionSection() {
         $("#mode_-1").hide();
         $('.jsc_wallet_address').text(currentAccount);
-        $('.jsc_balance').text(web3.toDecimal(web3.eth.getBalance(currentAccount)));
+        web3.eth.getBalance(currentAccount, (err, balance) => {
+            balance = web3.utils.fromWei(balance, "ether");
+            $(".jsc_balance").text(balance.slice(0, 6));
+        });
 
         if (connectionMode == '-1') {
             $("#mode_-1").show();
