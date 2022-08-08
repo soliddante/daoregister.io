@@ -10,7 +10,7 @@
         currentAccount = accounts[0];
         const web3B = new Web3(provider);
         web3B.eth.getBalance(currentAccount, (err, balance) => {
-            balance = web3.utils.fromWei(balance, "ether");
+            balance = web3B.utils.fromWei(balance, "ether");
             $(".jsc_balance").text(balance.slice(0, 6));
         });
         $('.jsc_wc_connect').on('click', () => {
