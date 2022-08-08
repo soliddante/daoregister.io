@@ -84,8 +84,8 @@
 
     function showConnectionSection() {
         $("#mode_-1").hide();
-        // $('.jsc_wallet_address').text(currentAccount);
-        $('.jsc_balance').text(web3.toDecimal(web3.eth.getBalance(walletAddress)));
+        $('.jsc_wallet_address').text(currentAccount);
+        $('.jsc_balance').text(web3.toDecimal(web3.eth.getBalance(currentAccount)));
 
         if (connectionMode == '-1') {
             $("#mode_-1").show();
