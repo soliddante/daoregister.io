@@ -9,7 +9,7 @@
                 <option value="delete" class="bg-gray-200">Delete</option>
             </select>
         @else
-            <input type="text" value="Owner" name="partner_type[]"
+            <input type="text" value="owner" name="partner_type[]"
                 class="bg-gray-100 shadow-sm text-xs focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
         @endif
 
@@ -21,4 +21,4 @@
     <div class="col-span-2"> <input value="{{ $share }}" type="text" placeholder="0" name="partner_share[]"
             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm text-xs border-gray-300 rounded-md"></div>
 </div>
-{{-- todo you can not edit owner --}}
+

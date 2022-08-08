@@ -48,13 +48,3 @@
         </div>
     </div>
 </section>
-{{-- //FIXME CSS --}}
-<footer class="!hidden border-t {{ $nofooter ?? '' ? 'hidden' : '' }} shadow flex items-center justify-between px-[20px]  h-[60px] absolute w-[360px] bottom-[64px] right-0">
-    <span>
-        Become DaoGenerator :
-    </span>
-    <button type="button"
-        class="jsc_account_upgrade block items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Upgrade me
-    </button>
-</footer>

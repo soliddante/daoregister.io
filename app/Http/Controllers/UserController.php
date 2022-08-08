@@ -222,6 +222,7 @@ class UserController extends Controller
         // NOT SUBSET | ALL PARTNERS AND HESABDARS SHOULD SIGN
         if ($dao->is_subset == 0) {
             $unsignet_daos = DB::table('dao_user')
+                ->where('dao_id', $dao->id)
                 ->where('partner_type', '!=', 'observer')
                 ->where('partner_accepted', 0);
             if ($unsignet_daos->exists()) {
@@ -231,10 +232,11 @@ class UserController extends Controller
             }
         }
         if ($dao->is_subset == 1) {
-    
+
             switch ($dao->vote_mode) {
                 case 'owner_only':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '==', 'owner')
                         ->where('partner_accepted', 0);
                     if ($unsignet_daos->exists()) {
@@ -245,34 +247,46 @@ class UserController extends Controller
                     break;
                 case 'majority':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '!=', 'observer')
                         ->where('partner_accepted', 0);
-                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-                    if ($unsignet_daos->exists() && $unsignet_daos_share < 51) {
-                        $dao_mode = 2; //majority share not enough
-                    } else {
+                    $signet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 1);
+
+                    $signed_daos_share = $signet_daos->sum('partner_share');
+                    // age emza nakarde ha bishtaraz 50 boodan public nakon
+                    if ($signed_daos_share > 50) {
                         $dao_mode = 10;
+                    } else {
+                        $dao_mode = 2; //majority share not enough or owner not vote
                     }
-                    break;
                 case 'both':
                     $unsignet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
                         ->where('partner_type', '!=', 'observer')
                         ->where('partner_accepted', 0);
-                    $owner_not_signed = DB::table('dao_user')
-                        ->where('partner_type', '==', 'owner')
-                        ->where('partner_accepted', 0)
+                    $signet_daos = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
+                        ->where('partner_type', '!=', 'observer')
+                        ->where('partner_accepted', 1);
+                    $owner_signed = DB::table('dao_user')
+                        ->where('dao_id', $dao->id)
+                        ->where('partner_type', 'owner')
+                        ->where('partner_accepted', 1)
                         ->exists();
-                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-                    if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
-                        $dao_mode = 3; //majority share not enough or owner not vote
-                    } else {
+                    $signed_daos_share = $signet_daos->sum('partner_share');
+                    // age emza nakarde ha bishtaraz 50 boodan public nakon
+                    if (($signed_daos_share > 50) && $owner_signed) {
                         $dao_mode = 10;
+                    } else {
+                        $dao_mode = 3; //majority share not enough or owner not vote
                     }
                     break;
             }
         }
 
-        // dd($dao_mode);
 
         if ($dao_mode == 10) {
             Dao::where('id', $request->dao_id)->update([

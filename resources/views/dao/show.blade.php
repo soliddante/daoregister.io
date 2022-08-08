@@ -87,7 +87,7 @@
             ->where('partner_type', '!=' , 'observer')
             ->where('partner_accepted', '0');
     @endphp
-    @if ($unsigned_daos->exists())
+    @if ($unsigned_daos->exists() && $dao->published != 1)
         <div class="rounded-md bg-yellow-50 p-4">
             <div class="flex">
                 <div class="flex-shrink-0">
