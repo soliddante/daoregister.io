@@ -44,10 +44,7 @@
     function getCurrentAccount() {
         web3.eth.getAccounts().then(function(accounts) {
             currentAccount = accounts[0];
-            web3.eth.getBalance(currentAccount, (err, balance) => {
-                balance = web3.utils.fromWei(balance, "ether");
-                $(".jsc_balance").text(balance.slice(0, 6));
-            });
+
 
 
             console.log(currentAccount);
@@ -68,6 +65,15 @@
          * MODE 2 = WALLET CONNECTED || DATABASE FULL || NOT MATCH
          * MODE 3 = WALLET CONNECTED || DATABASE FULL || MATCH
          */
+
+        web3.eth.getBalance(currentAccount, (err, balance) => {
+            balance = web3.utils.fromWei(balance, "ether");
+            $(".jsc_balance").text(balance.slice(0, 6));
+        
+            console.log(err);
+            console.log(balance);
+        });
+
         if (currentAccount == null && databaseWallet.length == 0) {
             connectionMode = '-1';
         }
