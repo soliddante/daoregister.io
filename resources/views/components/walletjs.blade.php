@@ -9,25 +9,29 @@
 
     provider.enable().then(function(accounts) {
         currentAccount = accounts[0];
+
+
+        const web3B = new Web3(provider);
+
+        web3B.eth.getBalance(currentAccount, (err, balance) => {
+            balance = web3.utils.fromWei(balance, "ether");
+            $(".jsc_balance").text(balance.slice(0, 6));
+        });
+
+        $('.jsc_wc_connect').on('click', () => {
+            $('#walletconnect-wrapper').show();
+        });
+        provider.wc.on('connect', function() {
+            window.location.reload();
+        })
+
+
         ConnectionMode()
     });
     provider.on('disconnect', function() {
         window.location.reload()
     })
 
-    const web3B = new Web3(provider);
-
-    web3B.eth.getBalance(currentAccount, (err, balance) => {
-        balance = web3.utils.fromWei(balance, "ether");
-        $(".jsc_balance").text(balance.slice(0, 6));
-    });
-
-    $('.jsc_wc_connect').on('click', () => {
-        $('#walletconnect-wrapper').show();
-    });
-    provider.wc.on('connect', function() {
-        window.location.reload();
-    })
 
 
 
