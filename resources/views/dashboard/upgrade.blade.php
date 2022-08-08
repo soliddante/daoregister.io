@@ -141,9 +141,11 @@
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="col-span-1">
-                            Name
+                            Name ::
                         </div>
                         <div class="col-span-1">
+                        
+                        {{ auth()->user()->ipfs()->last()->first() }}
                         </div>
                     </div>
                 </div>
