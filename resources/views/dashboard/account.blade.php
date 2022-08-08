@@ -10,10 +10,10 @@
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Just fill in the inputs you want to change</p>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="email" id="email" type="email" lable="Email address" placeholder="{{ auth()->user()->email }}" empty></x-ui.input>
+                    <x-ui.input name="email" id="email" type="email" lable="Email address" value="{{ auth()->user()->email }}" disabled class="bg-gray-100"></x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="email_confrimation" id="email_confrimation" type="email" lable="Email conftimation" placeholder="{{ auth()->user()->email }}" empty></x-ui.input>
+                    <x-ui.input name="email_confrimation" id="email_confrimation" type="email" lable="Email conftimation" value="{{ auth()->user()->email }}" disabled class="bg-gray-100"></x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1 ">
                     <x-ui.input name="phone" id="phone" lable="Phone Number" class="global_phone" placeholder="{{ auth()->user()->phone }}" empty> </x-ui.input>
