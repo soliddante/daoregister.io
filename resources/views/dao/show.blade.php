@@ -1,11 +1,17 @@
 <x-layouts.app>
+    <style>
+        html,
+        body {
+            background: white !important;
+        }
 
+        .css_main_div {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+    </style>
 
-    {{-- CONTRACT MODES
-
-
-
-    IF IS SUB --}}
     @php
         
         $dao_mode = null;
@@ -67,11 +73,11 @@
         // dd($dao_mode);
         
     @endphp
-    {{-- TODO SELL CONTRACT --}}
+  
 
 
 
-   
+
 
     <style>
         .jsc_request_alert {
@@ -82,7 +88,7 @@
     @php
         $unsigned_daos = DB::table('dao_user')
             ->where('dao_id', $dao->id)
-            ->where('partner_type', '!=' , 'observer')
+            ->where('partner_type', '!=', 'observer')
             ->where('partner_accepted', '0');
     @endphp
     @if ($unsigned_daos->exists() && $dao->published != 1)
@@ -117,6 +123,7 @@
 
 
 
+    {{-- hidden dao start --}}
     <div class="w-[600px] fixed  mt-10 bg-[#efefef] -top-[5000px] -z-50 ">
         <div class="jsc_contract">
             <header>
@@ -173,133 +180,144 @@
             </footer>
         </div>
     </div>
-    {{-- start --}}
-    <section class="bg-white rounded border mt-2 py-8 md:w-[690px] md:mx-auto">
-        <div class="grid grid-cols-2 md:w-[690px] md:mx-auto ">
-            <div class="col-span-2 px-2">
-                <div class="flex justify-between items-start mb-4">
 
-                    <div class="flex items-center">
-                        <div
-                            class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
-                            L</div>
-                        <div class="text-sm">
-                            <div class="font-medium">{{ $dao->name }}</div>
-                            <div class="-mt-[4px]">{{ $dao->type }}</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-3 text-sm items-center">
-                        <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update Dao</a>
-
-                        <div class="flex gap-1 items-center">
-                            <ion-icon name="heart-outline"></ion-icon>
-                            <span>46</span>
-                        </div>
-                        <div class="flex gap-1 items-center">
-                            <ion-icon name="eye"></ion-icon>
-                            <span>1200</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-span-1 pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Contract Type</div>
-            </div>
-            <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2 ">
-                <div>Limited Liability Company</div>
-            </div>
-            <div class="col-span-1  pl-2 text-sm  bg-opacity-30 py-2 ">
-                <div class=" font-medium text-theme-dark">Date of Establishment</div>
-            </div>
-            <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                <div>2022 JUN 13</div>
-            </div>
-            <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Company worth </div>
-            </div>
-            <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div>{{ number_format($dao->worth) }} BNB</div>
-            </div>
-            <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Number of partners </div>
-            </div>
-            <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                <div>3 Members </div>
-            </div>
-            <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Token ID </div>
-            </div>
-            <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div>{{ $dao->token }} </div>
-            </div>
-            <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Contract </div>
-            </div>
-            <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                <div> <a class="text-xs text-theme-light underline "
-                        href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
-                        0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
-            </div>
-            <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Reform number</div>
-            </div>
-            <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
-                <div>{{ sprintf('%04u', $dao->reform_number) }} </div>
-            </div>
-            <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                <div class=" font-medium text-theme-dark">Publish Status </div>
-            </div>
-            <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                <div> {{ $dao->published == 1 ? 'True' : 'False' }} </div>
-            </div>
+    {{-- hidden dao end --}}
+    <div class="grid-cols-12 grid w-full">
+        <div class="col-span-5">
+            <img src="{{ asset('img/daobg.jpg') }}" class="w-full min-h-screen h-full object-cover">
         </div>
-        <div class="mt-8 grid gap-2 grid-cols-2 px-2 ">
-            <div class="col-span-1 md:text-center md:col-span-2">
-                <div class="font-bold text-lg md:text-3xl md:mb-1">{{ $dao->name }} {{ $dao->type }} </div>
-                @php
-                    function character_limiter($str, $n = 600, $end_char = '&#8230;')
-                    {
-                        if (strlen($str) < $n) {
-                            return $str;
-                        }
-                    
-                        $str = preg_replace('/\s+/', ' ', str_replace(["\r\n", "\r", "\n"], ' ', $str));
-                    
-                        if (strlen($str) <= $n) {
-                            return $str;
-                        }
-                    
-                        $out = '';
-                        foreach (explode(' ', trim($str)) as $val) {
-                            $out .= $val . ' ';
-                    
-                            if (strlen($out) >= $n) {
-                                $out = trim($out);
-                                return strlen($out) == strlen($str) ? $out : $out . $end_char;
+        <div class="col-span-7">
+
+            <section class="bg-white py-8 px-10  ">
+                <article class="grid grid-cols-2 md:mx-auto ">
+                    <div class="col-span-2 px-2">
+                        <div class="flex justify-between items-start mb-4">
+
+                            <div class="flex items-center">
+                                <div
+                                    class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
+                                    L</div>
+                                <div class="text-sm">
+                                    <div class="font-medium">{{ $dao->name }}</div>
+                                    <div class="-mt-[4px]">{{ $dao->type }}</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 text-sm items-center">
+                                <a class="py-1 bg-theme-dark text-white px-2 rounded" href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
+                                    Dao</a>
+
+                                <div class="flex gap-1 items-center">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                    <span>46</span>
+                                </div>
+                                <div class="flex gap-1 items-center">
+                                    <ion-icon name="eye"></ion-icon>
+                                    <span>1200</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Contract Type</div>
+                    </div>
+                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2 ">
+                        <div>Limited Liability Company</div>
+                    </div>
+                    <div class="col-span-1  pl-2 text-sm  bg-opacity-30 py-2 ">
+                        <div class=" font-medium text-theme-dark">Date of Establishment</div>
+                    </div>
+                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                        <div>2022 JUN 13</div>
+                    </div>
+                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Company worth </div>
+                    </div>
+                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div>{{ number_format($dao->worth) }} BNB</div>
+                    </div>
+                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Number of partners </div>
+                    </div>
+                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                        <div>3 Members </div>
+                    </div>
+                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Token ID </div>
+                    </div>
+                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div>{{ $dao->token }} </div>
+                    </div>
+                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Contract </div>
+                    </div>
+                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                        <div> <a class="text-xs text-theme-light underline "
+                                href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
+                                0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
+                    </div>
+                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Reform number</div>
+                    </div>
+                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                        <div>{{ sprintf('%04u', $dao->reform_number) }} </div>
+                    </div>
+                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
+                        <div class=" font-medium text-theme-dark">Publish Status </div>
+                    </div>
+                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                        <div> {{ $dao->published == 1 ? 'True' : 'False' }} </div>
+                    </div>
+                </article>
+                <article class="mt-8 grid gap-2 grid-cols-2 px-2 ">
+                    <div class="col-span-1 md:text-center md:col-span-2">
+                        <div class="font-bold text-lg md:text-3xl md:mb-1">{{ $dao->name }} {{ $dao->type }} </div>
+                        @php
+                            function character_limiter($str, $n = 600, $end_char = '&#8230;')
+                            {
+                                if (strlen($str) < $n) {
+                                    return $str;
+                                }
+                            
+                                $str = preg_replace('/\s+/', ' ', str_replace(["\r\n", "\r", "\n"], ' ', $str));
+                            
+                                if (strlen($str) <= $n) {
+                                    return $str;
+                                }
+                            
+                                $out = '';
+                                foreach (explode(' ', trim($str)) as $val) {
+                                    $out .= $val . ' ';
+                            
+                                    if (strlen($out) >= $n) {
+                                        $out = trim($out);
+                                        return strlen($out) == strlen($str) ? $out : $out . $end_char;
+                                    }
+                                }
                             }
-                        }
-                    }
-                @endphp
-                <div class="text-xs  md:mx-auto md:text-sm md:px-[30px] ">{!! character_limiter($dao->document) !!}</div>
-                <div class="flex md:w-[350px] md:mt-4 md:mx-auto gap-2 mt-2">
-                    <a download="contract"
-                        class="jsc_contract_download  text-center block w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm   font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save
-                        <ion-icon name="download"></ion-icon>
-                    </a>
-                    <button type="button"
-                        class="w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm    font-medium  rounded shadow-sm  text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share
-                        <ion-icon name="share"></ion-icon>
-                    </button>
-                </div>
-            </div>
-            <div class="col-span-1  md:col-span-2">
-                <a class="jsc_contract_image_link ">
-                    <img data-fancybox class="border jsc_contract_image md:w-[360px] md:mt-12 md:mx-auto">
-                </a>
-            </div>
+                        @endphp
+                        <div class="text-xs  md:mx-auto md:text-sm md:px-[30px] ">{!! character_limiter($dao->document) !!}</div>
+                        <div class="flex md:w-[350px] md:mt-4 md:mx-auto gap-2 mt-2">
+                            <a download="contract"
+                                class="jsc_contract_download  text-center block w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm   font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save
+                                <ion-icon name="download"></ion-icon>
+                            </a>
+                            <button type="button"
+                                class="w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm    font-medium  rounded shadow-sm  text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share
+                                <ion-icon name="share"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-span-1  md:col-span-2">
+                        <a class="jsc_contract_image_link ">
+                            <img data-fancybox class="border jsc_contract_image md:w-[360px] md:mt-12 md:mx-auto">
+                        </a>
+                    </div>
+                </article>
+            </section>
         </div>
-    </section>
+
+    </div>
     {{-- TODO SHOW USER SHARES AND JOINER SHARE BOLDER --}}
     @if (auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
         <section>

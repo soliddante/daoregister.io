@@ -63,7 +63,6 @@
             <div class="rounded-md w-full mx-auto bg-blue-50 p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: solid/information-circle -->
                         <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -74,7 +73,6 @@
                     <div class="ml-3 flex-1 md:flex md:justify-between">
                         <p class="text-sm text-blue-700"><strong>Wallet Address : </strong><span
                                 class="text-xs break-all block jsc_wallet_address"></span></p>
-
                     </div>
                 </div>
             </div>
@@ -82,7 +80,6 @@
             <div class="rounded-md mt-2 w-full mx-auto bg-red-50 p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: solid/x-circle -->
                         <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -112,7 +109,6 @@
             <div class="rounded-md bg-blue-50 p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: solid/information-circle -->
                         <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -140,7 +136,6 @@
             <div class="rounded-md bg-yellow-50 p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: solid/exclamation -->
                         <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
