@@ -4,7 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>DaoRegister</title>
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/walletconnect2.js') }}"></script>
     <script src="{{ asset('js/html2canvas.min.js') }}"></script>

@@ -17,7 +17,7 @@
             }
         }
     @endphp
-   
+
     <div class="h-full flex bg-gray-50">
         <!-- Narrow sidebar -->
         <div class="hidden w-28 bg-indigo-700 overflow-y-auto md:block">
@@ -112,29 +112,23 @@
                 </div>
 
                 <div class="flex-shrink-0 w-14">
-                    <!-- Dummy element to force sidebar to shrink to fit close icon -->
                 </div>
             </div>
         </div>
 
-        <!-- Content area -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="w-full">
                 <x-layouts.nav_dashboard></x-layouts.nav_dashboard>
             </header>
 
-            <!-- Main content -->
             <div class="flex-1 flex items-stretch overflow-hidden">
                 <main class="flex-1  overflow-y-auto">
-                    <!-- Primary column -->
                     <section aria-labelledby="primary-heading" class="min-w-0 flex-1 h-full  flex flex-col lg:order-last">
                         {{ $slot }}
                     </section>
                     <div class="pb-28 block w-full "></div>
                 </main>
-                {{-- space --}}
                 <div class="py-4 w-96"></div>
-                {{-- space --}}
                 <aside class="hidden w-96 bg-white border-l border-gray-200  fixed  right-0 top-0 h-screen overflow-y-auto lg:block">
                     <x-layouts.menu_inner nofooter></x-layouts.menu_inner>
 
@@ -143,7 +137,6 @@
         </div>
     </div>
     <x-walletjs></x-walletjs>
-    {{-- for upgrade codes here --}}
     <script>
         if (connectionMode != 3) {
             $('.jsc_wallet_error').show();
@@ -166,14 +159,6 @@
     {{-- set database_ipfs --}}
     <x-create_ipfs_js></x-create_ipfs_js>
     {{-- solidity --}}
-
-    {{-- test --}}
-    <script>
-        const web3x = new Web3(provider);
-        var contract_addressX = "0x22aC4FeA7E8EF9D78C2c96A4B1A80D26b1e46cC6";
-        var contractX = new web3x.eth.Contract(contract_abi, contract_addressX);
-    </script>
-    {{-- endtest --}}
     <script>
         const web3 = new Web3(provider);
         $('.jsc_upgrade_magic_button').on('click', function() {
