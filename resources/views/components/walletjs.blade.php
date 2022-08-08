@@ -44,6 +44,10 @@
     function getCurrentAccount() {
         web3.eth.getAccounts().then(function(accounts) {
             currentAccount = accounts[0];
+            web3.eth.getBalance(currentAccount, (err, balance) => {
+                balance = web3.utils.fromWei(balance, "ether");
+                $(".jsc_balance").text(balance.slice(0, 6));
+            });
 
 
             console.log(currentAccount);
@@ -85,10 +89,6 @@
     function showConnectionSection() {
         $("#mode_-1").hide();
         $('.jsc_wallet_address').text(currentAccount);
-        web3.eth.getBalance(currentAccount, (err, balance) => {
-            balance = web3.utils.fromWei(balance, "ether");
-            $(".jsc_balance").text(balance.slice(0, 6));
-        });
 
         if (connectionMode == '-1') {
             $("#mode_-1").show();
