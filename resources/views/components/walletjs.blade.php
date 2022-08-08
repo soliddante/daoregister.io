@@ -15,7 +15,7 @@
         window.location.reload()
     })
 
-
+    const web3 = new Web3(provider);
 
     $('.jsc_wc_connect').on('click', () => {
         $('#walletconnect-wrapper').show();
@@ -46,17 +46,6 @@
             currentAccount = accounts[0];
 
 
-
-            console.log(currentAccount);
-            ConnectionMode()
-
-            web3.eth.getBalance(currentAccount, (err, balance) => {
-                balance = web3.utils.fromWei(balance, "ether");
-                $(".jsc_balance").text(balance.slice(0, 6));
-
-                console.log(err);
-                console.log(balance);
-            });
 
         }).catch(function(e) {
             console.log(e);
