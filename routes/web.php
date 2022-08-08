@@ -59,6 +59,7 @@ Route::controller(DaoController::class)->group(function () {
     Route::get('/store_dao', 'store_dao')->name('store_dao')->middleware(['auth']);
     Route::get('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
     Route::get('/reform_dao', 'reform_dao')->name('reform_dao')->middleware(['auth']);
+    Route::get('/dao_ipfs_create', 'dao_ipfs_create')->name('dao_ipfs_create')->middleware(['auth']);
 });
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_personal', 'dashboard_personal')->name('dashboard_personal');

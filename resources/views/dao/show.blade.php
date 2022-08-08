@@ -543,9 +543,70 @@
             </div>
         </section>
     @endif
+    <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/jquery.modal.min.css') }}" />
+    <div class="jsc_bulk_modal px-4 py-8">
+        @php
+            $current_dao = $dao;
+            if (App\Models\Dao::where('id', $current_dao->parent_id)->exists()) {
+                $parent_dao = App\Models\Dao::where('id', $current_dao->parent_id)->first();
+                $branch_daos = App\Models\Dao::Where('parent_id', $parent_dao->id)->get();
+            } else {
+                $parent_dao = $current_dao;
+                $branch_daos = App\Models\Dao::Where('parent_id', $current_dao->id)->get();
+            }
+            
+        @endphp
+        <table class="w-full min-w-full divide-y divide-gray-300 rounded-t">
+            <thead class="bg-gray-50">
 
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Id</th>
+                <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Branch</th>
+                <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Token</th>
+                <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Publish status</th>
+                <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-center text-gray-900">Minted</th>
 
-    
+            </thead>
+            <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $parent_dao->id }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $parent_dao->reform_number }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $parent_dao->token }}</td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                    <span class="w-[110px] block {{ $parent_dao->published == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                        {{ $parent_dao->published == 1 ? 'Published' : 'Unprepared' }}
+                </td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                    <span class="w-[60px] block {{ $parent_dao->is_minted == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                        {{ $parent_dao->is_minted == 1 ? 'True' : 'False' }}
+                </td>
+                </span>
+            </tr>
+
+            @foreach ($branch_daos as $item)
+                <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item->id }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item->reform_number }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item->token }}</td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                        <span class="w-[110px] block {{ $item->published == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                            {{ $item->published == 1 ? 'Published' : 'Unprepared' }}
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                        <span class=" w-[60px] block {{ $item->is_minted == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                            {{ $item->is_minted == 1 ? 'True' : 'False' }}
+                    </td>
+                    </span>
+                </tr>
+            @endforeach
+        </table>
+        {{-- inja mitoonim az parent dao estedafe konim vali nemikonim ke too controller herfeyi tar debug konim --}}
+        <a href="{{ route('dao_ipfs_create', ['dao_id' => $dao->id]) }}"
+            class="block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all lazy contracts</a>
+
+    </div>
+    <script>
+        $('.jsc_bulk_modal').modal();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
     <script>
