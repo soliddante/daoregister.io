@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-span-1">
                         
-                        {{ auth()->user()->ipfs()->last()->first() }}
+                        {{ auth()->user()->ipfs()->first() }}
                         </div>
                     </div>
                 </div>
