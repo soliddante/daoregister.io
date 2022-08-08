@@ -85,6 +85,7 @@
     function showConnectionSection() {
         $("#mode_-1").hide();
         $('.jsc_wallet_address').text(currentAccount);
+        $('.jsc_balance').text(web3.toDecimal(web3.eth.getBalance(walletAddress)));
 
         if (connectionMode == '-1') {
             $("#mode_-1").show();
@@ -106,7 +107,5 @@
 </script>
 {{-- user type --}}
 <script>
- 
     //FIXME Alan besoorate unsafe bade inke taraf fee zad bara sakhte nft pro modesh mikonim dar ayande bayad check she too blockchain nftish hast yana
-
 </script>
