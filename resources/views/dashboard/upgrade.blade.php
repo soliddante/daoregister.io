@@ -157,6 +157,16 @@
                             <a class="whatsapp"></a>
                         </div>
                     </div>
+                    <div class="grid grid-cols-2">
+                        <div class="col-span-1">
+                            Name
+                        </div>
+                        
+                        <div class="col-span-1">
+                           {{auth()->user()->ipfs()->name   }}
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         @endif
