@@ -21,7 +21,6 @@
                 <div class="flex items-center">
                     <ion-icon class="text-gray-600 text-[24px]" name="person-outline"></ion-icon>
                 </div>
-                <!-- Profile dropdown -->
                 <div class="ml-1 relative">
                     <div>
                         <button type="button">

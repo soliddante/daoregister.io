@@ -120,7 +120,7 @@
         <!-- Content area -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="w-full">
-                <x-layouts.nav_simple></x-layouts.nav_simple>
+                <x-layouts.nav_dashboard></x-layouts.nav_dashboard>
             </header>
 
             <!-- Main content -->
