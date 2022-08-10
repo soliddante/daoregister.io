@@ -66,6 +66,7 @@ Route::controller(DaoController::class)->group(function () {
 Route::controller(DaoipfsController::class)->group(function () {
 
     Route::any('/dao_ipfs_create', 'dao_ipfs_create')->name('dao_ipfs_create')->middleware(['auth']);
+    Route::any('/find_dao_ipfs_by_token', 'find_dao_ipfs_by_token')->name('find_dao_ipfs_by_token')->middleware(['auth']);
 });
 
 Route::controller(DashboardController::class)->group(function () {

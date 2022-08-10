@@ -20,7 +20,7 @@ foreach ($branches_daos->toArray() as $branch_dao) {
 </script>
 @foreach ($all_daos as $index => $dao)
     <div class=" w-[600px] fixed  mt-10 bg-[#efefef] -top-[5000px] -z-50 ">
-        <div class="jsc_ipfs_contracts" data-daoid="{{ $dao['id'] }}">
+        <div class="jsc_ipfs_contracts" data-daoid="{{ $dao['id'] }}" data-daotoken="{{ $dao['token'] }}">
             <header>
                 <div id="label" class="w-[130px]  h-[185px] top-0 bg-[#3A3A3A]  flex items-center justify-center    relative z-10 left-[70px] ">
                     <div>

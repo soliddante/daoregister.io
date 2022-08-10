@@ -15,9 +15,7 @@
             display: none !important;
         }
     </style>
-
     @php
-        
         $dao_mode = null;
         $signed_daos_display = DB::table('dao_user')
             ->where('dao_id', $dao->id)
@@ -33,7 +31,6 @@
                 ->where('dao_id', $dao->id)
                 ->where('partner_type', '!=', 'observer')
                 ->where('partner_accepted', 0);
-        
             if ($unsignet_daos->exists()) {
                 $dao_mode = 0; //all members not vote
             } else {
@@ -76,7 +73,6 @@
                         ->where('partner_accepted', 0)
                         ->exists();
                     $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-        
                     if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
                         $dao_mode = 3; //majority share not enough or owner not vote
                     } else {
@@ -85,23 +81,11 @@
                     break;
             }
         }
-        
         // dd($dao_mode);
-        
     @endphp
-
     {{-- hidden dao start --}}
     <x-daodesign :dao="$dao"></x-daodesign>
     {{-- hidden dao end --}}
-
-
-
-
-
-
-
-
-
     <div class="grid-cols-12 grid w-full">
         <div class="col-span-5">
             <img src="{{ asset('img/daobg.jpg') }}" class="w-full  h-full object-cover">
@@ -111,7 +95,6 @@
                 <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-2 px-2">
                         <div class="flex justify-between items-start mb-4">
-
                             <div class="flex items-center">
                                 <div
                                     class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
@@ -136,7 +119,6 @@
                                             $updatable = true;
                                         }
                                     }
-                                    
                                     // if not parent 0 fimd last parent then find last child check this is that or not
                                     if ($dao->parent_id != 0) {
                                         $parent = App\Models\Dao::where('id', $dao->parent_id)->first();
@@ -150,14 +132,13 @@
                                         }
                                     }
                                 @endphp
-
                                 @if ($updatable == true)
                                     @if ($dao->published == 1)
                                         <a class="py-1 bg-theme-light text-white px-2 rounded"
                                             href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
                                             Dao</a>
                                     @else
-                                        <a class="jsc_no_update cursor-not-allowed py-1 bg-gray-400 text-white px-2 rounded" href="#">Update
+                                        <a class="jsc_no_update cursor-not-allowed  wpy-1 bg-gray-400 text-white px-2 rounded" href="#">Update
                                             Dao</a>
                                         <script>
                                             tippy('.jsc_no_update', {
@@ -168,13 +149,9 @@
                                 @endif
                                 <select name="" class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">
                                     @if ($dao->parent_id == 0)
-
                                         <option value="{{ route('show_dao', ['dao_id' => $dao->id]) }}">Brach :
                                             {{ sprintf('%04d', $dao->reform_number) }}
                                             | ID : {{ $dao->id }} </option>
-
-
-
                                         @foreach (App\Models\Dao::where('parent_id', $dao->id)->get() as $branch)
                                             <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">Brach :
                                                 {{ sprintf('%04d', $branch->reform_number) }}
@@ -188,8 +165,6 @@
                                             {{ sprintf('%04d', $main_parent->reform_number) }}
                                             | ID : {{ $main_parent->id }}</option>
                                         </option>
-
-
                                         @foreach (App\Models\Dao::where('parent_id', $main_parent->id)->get() as $branch)
                                             <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">
                                                 Brach :
@@ -197,14 +172,12 @@
                                                 | ID : {{ $branch->id }}</option>
                                         @endforeach
                                     @endif
-
                                 </select>
                             </div>
                         </div>
                     </div>
                 </article>
                 <article>
-
                     @php
                         $unsigned_daos = DB::table('dao_user')
                             ->where('dao_id', $dao->id)
@@ -224,13 +197,11 @@
                                 </div>
                                 <div class="ml-3 w-full ">
                                     <h3 class="text-sm text-yellow-800 font-bold">Contract is not published yet </h3>
-
                                     <div class="grid text-sm mt-2 text-yellow-700  grid-cols-3 w-full">
                                         <div class="col-span-1">
                                             <div>
                                                 Voting requires
                                             </div>
-
                                         </div>
                                         <div class="col-span-2">
                                             <div>
@@ -261,7 +232,6 @@
                                             Partners who signed
                                         </div>
                                         <div class="col-span-2">
-
                                             @if ($signed_daos_display->count() != 0)
                                                 @foreach ($signed_daos_display->get() as $signed_dao_display)
                                                     <li class="mb-1 flex items-center">
@@ -269,13 +239,11 @@
                                                             {{ $signed_dao_display->partner_email }}
                                                         </div>
                                                         <div class="bg-green-600 text-xs ml-2 px-2 py-0.5 text-white rounded "> Signed </div>
-
                                                     </li>
                                                 @endforeach
                                             @else
                                                 -
                                             @endif
-
                                         </div>
                                         <div class="col-span-3">
                                             <hr class="border-yellow-700 my-2">
@@ -291,7 +259,6 @@
                                                             {{ $unsigned_dao->partner_email }}
                                                         </div>
                                                         <div class="bg-yellow-600 text-xs ml-2 px-2 py-0.5 text-white rounded ">Not signed </div>
-
                                                     </li>
                                                 @endforeach
                                             @else
@@ -341,8 +308,6 @@
                                 </div>
                             </div>
                     @endif
-
-
                 </article>
                 <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-1 pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
@@ -405,17 +370,13 @@
                                 if (strlen($str) < $n) {
                                     return $str;
                                 }
-                            
                                 $str = preg_replace('/\s+/', ' ', str_replace(["\r\n", "\r", "\n"], ' ', $str));
-                            
                                 if (strlen($str) <= $n) {
                                     return $str;
                                 }
-                            
                                 $out = '';
                                 foreach (explode(' ', trim($str)) as $val) {
                                     $out .= $val . ' ';
-                            
                                     if (strlen($out) >= $n) {
                                         $out = trim($out);
                                         return strlen($out) == strlen($str) ? $out : $out . $end_char;
@@ -443,11 +404,7 @@
                 </article>
             </section>
         </div>
-
     </div>
-
-
-
     {{-- TODO SHOW USER SHARES AND JOINER SHARE BOLDER --}}
     @if ($dao->published != 1 &&
         auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
@@ -466,11 +423,9 @@
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
                     <button type="submit" class="bg-red-800 text-white py-1 px-4 rounded cursor-pointer ">Refeuse Sign</button>
                 </form>
-
             </div>
         </section>
     @endif
-
     @if ($dao->published != 1 &&
         auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '-1')->exists())
         <section>
@@ -492,7 +447,6 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.modal.min.css') }}" />
     <div class="jsc_bulk_modal hidden px-4 py-8">
         @php
-            
             $current_dao = App\Models\Dao::where('id', $dao->id)->first();
             if ($current_dao->parent_id == 0) {
                 $parent_dao = $current_dao;
@@ -515,7 +469,6 @@
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Publish status</th>
                 <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-center text-gray-900">Minted</th>
             </thead>
-
             @foreach ($all_daos as $item)
                 <tr>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item['id'] }}</td>
@@ -537,11 +490,10 @@
         <form class="jsc_ipfs_form" method="POST" action="{{ route('dao_ipfs_create') }}">
             @csrf
             <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-            <button type="submit" class="jsc_ipfs_form_submit block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all
+            <div class="cursor-pointer jsc_ipfs_form_submit block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all
                 lazy
-                contracts</button>
+                contracts</div>
         </form>
-
     </div>
     <script>
         $('.jsc_bulk_modal').modal();
@@ -567,39 +519,85 @@
         });
     </script>
 </x-layouts.app>
-
 <x-daodesign_generator :dao="$dao"> </x-daodesign_generator>
 <script>
     $('.jsc_ipfs_form_submit').on('click', function(e) {
+        $('.jsc_ipfs_form_submit').addClass('!bg-gray-300 !pointer-event-none !cursor-wait')
         e.preventDefault();
         var ctr = 0;
         $('.jsc_ipfs_contracts').each(function(i, obj) {
-
             html2canvas(obj, {
                 windowWidth: 1400,
                 width: 600
             }).then(canvas => {
                 ctr++;
-
                 $('<input>', {
                     type: 'text',
                     name: 'ipfs_images_data_array[]',
                     class: 'jsc_hiddens w-96 hidden text-xs',
-                    value:  JSON.stringify({
+                    value: JSON.stringify({
+                        'dao_id': $(obj).attr('data-daoid'),
+                        'dao_token': $(obj).attr('data-daotoken'),
                         'image': canvas.toDataURL("image/jpeg"),
-                        'dao_id': $(obj).attr('data-daoid')
                     }),
                 }).appendTo('.jsc_ipfs_form');
-
-                console.log(ctr);
                 if ($('.jsc_ipfs_contracts').length == ctr) {
-
-                    $('.jsc_ipfs_form').submit()
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('dao_ipfs_create') }}",
+                        data: $('.jsc_ipfs_form').serializeArray(),
+                        success: function(response) {
+                            if (response == 1) {
+                                // do solidity
+                                mintDaoNft();
+                                // if solidity ok
+                                // do change status
+                                // if change status ok 
+                                // do refresh
+                            }
+                        }
+                    })
                 }
-
             });
         });
-
-
     })
+</script>
+<x-dao_nft_abi></x-dao_nft_abi> {{-- return var dao_nft_abi --}}
+<script>
+    let tokenId = []
+    let tokenURI = []
+
+    function mintDaoNft() {
+        const web3 = new Web3(provider);
+
+        let contract_address = "0x447B472374b210834825A9A355C1AE421B72583E";
+        let contract = new web3.eth.Contract(dao_nft_abi, contract_address);
+        let recipient = "{{ auth()->user()->wallet }}";
+        //
+
+        $('[name="ipfs_images_data_array[]"').serializeArray().forEach(element => {
+            tokenId.push(JSON.parse(element.value).dao_token)
+            $.ajax({
+                url: "{{ route('find_dao_ipfs_by_token') }}",
+                data: {
+                    'token': JSON.parse(element.value).dao_token
+                },
+                success: function(response) {
+                    tokenURI.push(response.json);
+                }
+            });
+        });
+        //
+        contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
+            from: "{{ auth()->user()->wallet }}"
+        }, function(error, transactionHash) {
+            console.log(error);
+            console.log(transactionHash);
+            if (transactionHash.length != 0) {
+                console.log(transactionHash);
+                // do change status
+            }
+        });
+
+    }
 </script>

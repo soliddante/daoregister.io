@@ -1977,6 +1977,12 @@ select {
 .cursor-not-allowed {
   cursor: not-allowed;
 }
+.cursor-wait {
+  cursor: wait;
+}
+.\!cursor-wait {
+  cursor: wait !important;
+}
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2458,6 +2464,10 @@ select {
 .bg-indigo-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(67 56 202 / var(--tw-bg-opacity));
+}
+.\!bg-gray-300 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity)) !important;
 }
 .bg-opacity-40 {
   --tw-bg-opacity: 0.4;

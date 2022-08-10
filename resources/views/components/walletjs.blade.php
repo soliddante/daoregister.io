@@ -38,6 +38,7 @@
             });
         }
     });
+
     function getCurrentAccount() {
         web3.eth.getAccounts().then(function(accounts) {
             currentAccount = accounts[0];
@@ -48,6 +49,7 @@
     $('.jsc_wc_disconnect').on('click', () => {
         provider.disconnect();
     })
+
     function ConnectionMode() {
         /*
          * MODE -1 = WALLET CONNECTED || DATABASE EMPTY
@@ -73,6 +75,7 @@
         }
         showConnectionSection();
     }
+
     function showConnectionSection() {
         $("#mode_-1").hide();
         $('.jsc_wallet_address').text(currentAccount);

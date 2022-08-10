@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 
 class DaoipfsController extends Controller
 {
+    public function find_dao_ipfs_by_token(Request $request)
+    {
+        return Daoipfs::where('token', $request->token)->first();
+    }
     public function dao_ipfs_create(Request $request)
     {
 
@@ -111,6 +115,7 @@ class DaoipfsController extends Controller
             ]);
             Storage::disk('public_uploads')->put("dao_nft/" . $safeNamejson, json_encode($json_dao_ipfs));
         }
-        return redirect()->back()->with('msg', 'Documents minted successfully');
+        // ajax mikonim 
+        return true;
     }
 }
