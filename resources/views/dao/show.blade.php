@@ -565,10 +565,13 @@
 </script>
 <x-dao_nft_abi></x-dao_nft_abi> {{-- return var dao_nft_abi --}}
 <script>
-    let tokenId = ['91131777', '1974543']
-    let tokenURI = ['http://localhost:8000/storage/dao_nft/PlxQfUq1veHeoy2JizaRzuVQd7leWfiR1KTjHVfd.json',
-        'http://localhost:8000/storage/dao_nft/Js6tMzSoERkIuc3t6mrhMBOQAfeH25lJgJkMNduD.json'
-    ]
+    // let tokenId = ['91131777', '1974543']
+    // let tokenURI = ['http://localhost:8000/storage/dao_nft/PlxQfUq1veHeoy2JizaRzuVQd7leWfiR1KTjHVfd.json',
+    //     'http://localhost:8000/storage/dao_nft/Js6tMzSoERkIuc3t6mrhMBOQAfeH25lJgJkMNduD.json'
+    // ]
+    let tokenId = []
+    let tokenURI = []
+    let promises = []
     let recipient = "{{ auth()->user()->wallet }}";
     let xweb3 = new Web3(provider);
     //
@@ -577,32 +580,38 @@
         let contract_address = "0x1df63417e8Dd9D68cA3758AA703456A6Ac72bF6a";
         let contract = new xweb3.eth.Contract(dao_nft_abi, contract_address);
 
-        // $.each($('[name="ipfs_images_data_array[]"').serializeArray(), function(index, element) {
-        //     tokenId.push(JSON.parse(element.value).dao_token)
-        //     $.ajax({
-        //         url: "{{ route('find_dao_ipfs_by_token') }}",
-        //         data: {
-        //             'token': JSON.parse(element.value).dao_token
-        //         },
-        //         success: function(response) {
-        //             tokenURI.push(response.json);
-        //         }
-        //     });
-        // }).promise().done(function() {
-        //     alert("All was done");
-        // });
-
-
-        contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
-            from: "{{ auth()->user()->wallet }}"
-        }, function(error, transactionHash) {
-            console.log(error);
-            console.log(transactionHash);
-            if (transactionHash) {
-                console.log(transactionHash);
-                // do change status
-            }
+        $.each($('[name="ipfs_images_data_array[]"').serializeArray(), function(index, element) {
+            tokenId.push(JSON.parse(element.value).dao_token)
+            promises.push($.ajax({
+                url: "{{ route('find_dao_ipfs_by_token') }}",
+                data: {
+                    'token': JSON.parse(element.value).dao_token
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+            }).done(function(e) {
+                tokenURI.push(e)
+            }))
         });
+        $.when.apply($, tokenId).then(function() {
+
+            console.log(tokenId);
+            console.log(tokenURI);
+
+            contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
+                from: "{{ auth()->user()->wallet }}"
+            }, function(error, transactionHash) {
+                console.log(error);
+                console.log(transactionHash);
+                if (transactionHash) {
+                    console.log(transactionHash);
+                    // do change status of exists daos
+                }
+            });
+        });
+
+
 
     }
 </script>
