@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dao extends Model
+class Daoipfs extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'image',
+        'json',
         'symbol',
         'type',
         'token',
@@ -26,13 +27,4 @@ class Dao extends Model
         'picture',
         'reform_number',
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class)->withPivot('partner_email', 'partner_type', 'partner_share', 'partner_accepted');
-    }
-    public function extras()
-    {
-        return $this->hasMany(Extra::class);
-    }
 }

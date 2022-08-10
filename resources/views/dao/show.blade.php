@@ -91,62 +91,7 @@
     @endphp
 
     {{-- hidden dao start --}}
-    <div class="w-[600px] fixed  mt-10 bg-[#efefef] -top-[5000px] -z-50 ">
-        <div class="jsc_contract">
-            <header>
-                <div id="label" class="w-[130px]  h-[185px] top-0 bg-[#3A3A3A]  flex items-center justify-center    relative z-10 left-[70px] ">
-                    <div>
-                        <img src="{{ asset('qrcode.svg') }}" class="w-[90px]  mt-[44px]" alt="">
-                        <div class="text-white font-medium -mt-2 text-center">{{ $dao->name }} </div>
-                    </div>
-
-                </div>
-                <div id="ribbon" class="w-[600px]   pr-[70px] flex items-center justify-end h-[70px] bg-[#DEC173]  relative -top-[105px] left-0 ">
-                    <div class="w-max">
-                        <div class="flex items-center -mt-[18px]  justify-between">
-                            <div class="font-medium">{{ $dao->type }}</div>
-                            <div class=" text-xs">Jun 04, 2022</div>
-                        </div>
-                        <div class="text-xs">0xD613e89BcF5D54eCbCD82a29Eede797A38Fc14c0</div>
-                    </div>
-                </div>
-            </header>
-
-            <div id="body" class="px-[70px] -mt-[30px]  prose w-full">
-                {!! $dao->document !!}
-            </div>
-
-            <footer class="px-[70px]">
-                <div class="font-medium">Partners Signature</div>
-                <div class="grid grid-cols-5 mt-4">
-                    <div>
-                        <img class="mx-auto" src="{{ asset('qrcode-black.svg') }}" alt="">
-                        <div class="tet-center text-xs">Dante velli</div>
-                    </div>
-                    <div>
-                        <img class="mx-auto" src="{{ asset('qrcode-black.svg') }}" alt="">
-                        <div class="text-center text-xs">John Doe</div>
-                    </div>
-                    <div>
-                        <img class="mx-auto" src="{{ asset('qrcode-black.svg') }}" alt="">
-                        <div class="text-center text-xs">Anne Frank</div>
-                    </div>
-                    <div>
-                        <img class="mx-auto" src="{{ asset('qrcode-black.svg') }}" alt="">
-                        <div class="text-center text-xs">Jeff Dunham</div>
-                    </div>
-                    <div>
-                        <img class="mx-auto" src="{{ asset('qrcode-black.svg') }}" alt="">
-                        <div class="text-center text-xs">Danica Patrick</div>
-                    </div>
-                </div>
-                <div class="mt-[25px]">
-                    <div class="w-[130px] h-[3px] mb-[4px] bg-[#E4C374]"></div>
-                    <div class="w-[130px] h-[20px] bg-[#E4C374]"></div>
-                </div>
-            </footer>
-        </div>
-    </div>
+    <x-daodesign :dao="$dao"></x-daodesign>
     {{-- hidden dao end --}}
 
 
@@ -545,63 +490,57 @@
     @endif
     <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/jquery.modal.min.css') }}" />
-    <div class="jsc_bulk_modal px-4 py-8">
+    <div class="jsc_bulk_modal hidden px-4 py-8">
         @php
-            $current_dao = $dao;
-            if (App\Models\Dao::where('id', $current_dao->parent_id)->exists()) {
-                $parent_dao = App\Models\Dao::where('id', $current_dao->parent_id)->first();
-                $branch_daos = App\Models\Dao::Where('parent_id', $parent_dao->id)->get();
-            } else {
-                $parent_dao = $current_dao;
-                $branch_daos = App\Models\Dao::Where('parent_id', $current_dao->id)->get();
-            }
             
+            $current_dao = App\Models\Dao::where('id', $dao->id)->first();
+            if ($current_dao->parent_id == 0) {
+                $parent_dao = $current_dao;
+            } else {
+                $parent_dao = App\Models\Dao::where('id', $current_dao->parent_id)->first();
+            }
+            $branches_daos = App\Models\Dao::where('parent_id', $parent_dao->id)->get();
+            // dd($dao_mode);
+            $all_daos = [];
+            array_push($all_daos, $parent_dao->toArray());
+            foreach ($branches_daos->toArray() as $branch_dao) {
+                array_push($all_daos, $branch_dao);
+            }
         @endphp
         <table class="w-full min-w-full divide-y divide-gray-300 rounded-t">
             <thead class="bg-gray-50">
-
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Id</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Branch</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Token</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Publish status</th>
                 <th scope="col" class="px-3 py-3.5  text-sm font-semibold text-center text-gray-900">Minted</th>
-
             </thead>
-            <tr>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $parent_dao->id }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $parent_dao->reform_number }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $parent_dao->token }}</td>
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
-                    <span class="w-[110px] block {{ $parent_dao->published == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
-                        {{ $parent_dao->published == 1 ? 'Published' : 'Unprepared' }}
-                </td>
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
-                    <span class="w-[60px] block {{ $parent_dao->is_minted == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
-                        {{ $parent_dao->is_minted == 1 ? 'True' : 'False' }}
-                </td>
-                </span>
-            </tr>
 
-            @foreach ($branch_daos as $item)
+            @foreach ($all_daos as $item)
                 <tr>
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item->id }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item->reform_number }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item->token }}</td>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item['id'] }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item['reform_number'] }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item['token'] }}</td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
-                        <span class="w-[110px] block {{ $item->published == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
-                            {{ $item->published == 1 ? 'Published' : 'Unprepared' }}
+                        <span class="w-[110px] block {{ $item['published'] == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                            {{ $item['published'] == 1 ? 'Published' : 'Unprepared' }}
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
-                        <span class=" w-[60px] block {{ $item->is_minted == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
-                            {{ $item->is_minted == 1 ? 'True' : 'False' }}
+                        <span class=" w-[60px] block {{ $item['is_minted'] == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
+                            {{ $item['is_minted'] == 1 ? 'True' : 'False' }}
                     </td>
                     </span>
                 </tr>
             @endforeach
         </table>
         {{-- inja mitoonim az parent dao estedafe konim vali nemikonim ke too controller herfeyi tar debug konim --}}
-        <a href="{{ route('dao_ipfs_create', ['dao_id' => $dao->id]) }}"
-            class="block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all lazy contracts</a>
+        <form class="jsc_ipfs_form" method="POST" action="{{ route('dao_ipfs_create') }}">
+            @csrf
+            <input type="hidden" name="dao_id" value="{{ $dao->id }}">
+            <button type="submit" class="jsc_ipfs_form_submit block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all
+                lazy
+                contracts</button>
+        </form>
 
     </div>
     <script>
@@ -628,3 +567,39 @@
         });
     </script>
 </x-layouts.app>
+
+<x-daodesign_generator :dao="$dao"> </x-daodesign_generator>
+<script>
+    $('.jsc_ipfs_form_submit').on('click', function(e) {
+        e.preventDefault();
+        var ctr = 0;
+        $('.jsc_ipfs_contracts').each(function(i, obj) {
+
+            html2canvas(obj, {
+                windowWidth: 1400,
+                width: 600
+            }).then(canvas => {
+                ctr++;
+
+                $('<input>', {
+                    type: 'text',
+                    name: 'ipfs_images_data_array[]',
+                    class: 'jsc_hiddens w-96 hidden text-xs',
+                    value:  JSON.stringify({
+                        'image': canvas.toDataURL("image/jpeg"),
+                        'dao_id': $(obj).attr('data-daoid')
+                    }),
+                }).appendTo('.jsc_ipfs_form');
+
+                console.log(ctr);
+                if ($('.jsc_ipfs_contracts').length == ctr) {
+
+                    $('.jsc_ipfs_form').submit()
+                }
+
+            });
+        });
+
+
+    })
+</script>

@@ -13,23 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('daos', function (Blueprint $table) {
+        Schema::create('daoipfs', function (Blueprint $table) {
             $table->id();
+            $table->string('json')->nullable();
+            $table->string('image')->nullable();
             $table->string('name')->nullable();
             $table->string('symbol')->nullable();
             $table->string('type')->nullable();
-            $table->string('vote_mode')->nullable();
-            $table->string('worth')->nullable();
-            $table->text('document')->nullable();
-            $table->string('extras')->nullable();
-            $table->string('published')->nullable()->default(0);
-            $table->string('is_subset')->nullable()->default(0);
-            $table->string('parent_id')->nullable()->default(0);
-            $table->string('lazy')->nullable();
-            $table->string('picture')->nullable();
-            $table->string('is_minted')->nullable()->default(0);
-            $table->string('reform_number')->nullable()->default(0);
             $table->string('token')->nullable();
+            $table->string('worth')->nullable();
+            $table->string('vote_mode')->nullable();
+            $table->string('document')->nullable();
+            $table->string('lazy')->nullable();
+            $table->string('parent_id')->nullable();
+            $table->string('is_subset')->nullable();
+            $table->string('is_minted')->nullable();
+            $table->string('published')->nullable();
+            $table->string('parent')->nullable();
+            $table->string('extras')->nullable();
+            $table->string('picture')->nullable();
+            $table->string('reform_number')->nullable();
             $table->timestamps();
         });
     }
@@ -41,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daos');
+        Schema::dropIfExists('daoipfs');
     }
 };

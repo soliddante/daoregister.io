@@ -20,6 +20,8 @@ class IpfsController extends Controller
         $path_url =  url('') . '/storage/account_nft/img/' . $safeNamePic;
         $path_url_json =  url('') . '/storage/account_nft/json/' . $safeNamejson;
         file_put_contents($path, $decodedData);
+
+        
         $ipfs = ipfs::create([
             "user_id" => auth()->user()->id,
             "image" => $path_url,

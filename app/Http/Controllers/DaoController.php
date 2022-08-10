@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UserController;
 use PDO;
+use Illuminate\Support\Str;
 
 class DaoController extends Controller
 {
@@ -94,18 +95,5 @@ class DaoController extends Controller
         $dao = Dao::where('id', $request->dao_id)->first();
         return view('dao.reform', compact('dao'));
     }
-    public function dao_ipfs_create(Request $request)
-    {
-        $current_dao = Dao::where('id', $request->dao_id)->first();
-        if ($current_dao->parent_id == 0) {
-            $parent_dao = $current_dao;
-        } else {
-            $parent_dao =  Dao::where('id', $current_dao->parent_id)->first();
-        }
-        $branches_daos = Dao::where('parent_id', $parent_dao->id)->get();
-for
-        $dao_ipfs_signle_object = [];
-        
-        dd($branches_daos);
-    }
+
 }

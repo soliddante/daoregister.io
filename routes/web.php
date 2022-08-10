@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DaoController;
+use App\Http\Controllers\DaoipfsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeCotnroller;
 use App\Http\Controllers\IpfsController;
@@ -54,13 +55,19 @@ Route::controller(WalletController::class)->group(function () {
 });
 
 Route::controller(DaoController::class)->group(function () {
-    Route::get('/discover_dao', 'discover_dao')->name('discover_dao')->middleware(['auth']);
-    Route::get('/create_dao', 'create_dao')->name('create_dao')->middleware(['auth']);
-    Route::get('/store_dao', 'store_dao')->name('store_dao')->middleware(['auth']);
-    Route::get('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
-    Route::get('/reform_dao', 'reform_dao')->name('reform_dao')->middleware(['auth']);
-    Route::get('/dao_ipfs_create', 'dao_ipfs_create')->name('dao_ipfs_create')->middleware(['auth']);
+    Route::any('/discover_dao', 'discover_dao')->name('discover_dao')->middleware(['auth']);
+    Route::any('/create_dao', 'create_dao')->name('create_dao')->middleware(['auth']);
+    Route::any('/store_dao', 'store_dao')->name('store_dao')->middleware(['auth']);
+    Route::any('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
+    Route::any('/reform_dao', 'reform_dao')->name('reform_dao')->middleware(['auth']);
+    Route::any('/daodesign_generator', 'daodesign_generator')->name('daodesign_generator')->middleware(['auth']);
 });
+
+Route::controller(DaoipfsController::class)->group(function () {
+
+    Route::any('/dao_ipfs_create', 'dao_ipfs_create')->name('dao_ipfs_create')->middleware(['auth']);
+});
+
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard_personal', 'dashboard_personal')->name('dashboard_personal');
     Route::get('/dashboard_account', 'dashboard_account')->name('dashboard_account');
