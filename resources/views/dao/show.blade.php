@@ -549,6 +549,7 @@
                         success: function(response) {
                             if (response == 1) {
                                 // do solidity
+                                console.log(response);
                                 mintDaoNft();
                                 // if solidity ok
                                 // do change status
@@ -566,14 +567,14 @@
 <script>
     let tokenId = []
     let tokenURI = []
-
+    let recipient = "{{ auth()->user()->wallet }}";
+    //
     function mintDaoNft() {
-        const web3 = new Web3(provider);
+        const xweb3 = new Web3(provider);
 
         let contract_address = "0x447B472374b210834825A9A355C1AE421B72583E";
-        let contract = new web3.eth.Contract(dao_nft_abi, contract_address);
-        let recipient = "{{ auth()->user()->wallet }}";
-        //
+        let contract = new xweb3.eth.Contract(dao_nft_abi, contract_address);
+
 
         $('[name="ipfs_images_data_array[]"').serializeArray().forEach(element => {
             tokenId.push(JSON.parse(element.value).dao_token)
@@ -593,7 +594,7 @@
         }, function(error, transactionHash) {
             console.log(error);
             console.log(transactionHash);
-            if (transactionHash.length != 0) {
+            if (transactionHash) {
                 console.log(transactionHash);
                 // do change status
             }

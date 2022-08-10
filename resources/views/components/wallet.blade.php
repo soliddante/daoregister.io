@@ -180,8 +180,5 @@
 </div>
 
 <style>
-    #walletconnect-wrapper {
-        display: none;
-        /* FIXME its not perfect way */
-    }
+
 </style>
