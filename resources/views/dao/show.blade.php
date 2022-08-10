@@ -568,11 +568,11 @@
     let tokenId = []
     let tokenURI = []
     let recipient = "{{ auth()->user()->wallet }}";
+    let xweb3 = new Web3(provider);
     //
     function mintDaoNft() {
-        const xweb3 = new Web3(provider);
 
-        let contract_address = "0x447B472374b210834825A9A355C1AE421B72583E";
+        let contract_address = "0x1df63417e8Dd9D68cA3758AA703456A6Ac72bF6a";
         let contract = new xweb3.eth.Contract(dao_nft_abi, contract_address);
 
 
