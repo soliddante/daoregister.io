@@ -591,7 +591,7 @@
                     console.log(response);
                 },
             }).done(function(e) {
-                tokenURI.push(e)
+                tokenURI.push(e.json)
             }))
         });
         $.when.apply($, tokenId).then(function() {
