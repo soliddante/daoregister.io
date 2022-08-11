@@ -6,24 +6,43 @@
         infuraId: "43fc8fa086844be0831a586fe4b764b5",
         chainId: 3,
     })
-    provider.enable().then(function(accounts) {
+
+
+    function afterProviderConnected(accounts) {
         currentAccount = accounts[0];
         const web3B = new Web3(provider);
         web3B.eth.getBalance(currentAccount, (err, balance) => {
             balance = web3B.utils.fromWei(balance, "ether");
             $(".jsc_balance").text(balance.slice(0, 6));
+            ConnectionMode()
         });
-        $('.jsc_wc_connect').on('click', () => {
-            $('#walletconnect-wrapper').show();
+
+
+    }
+
+    if (provider.wc._connected == true) {
+        provider.enable().then(function(accounts) {
+            afterProviderConnected(accounts)
         });
-        provider.wc.on('connect', function() {
-            window.location.reload();
-        })
-        ConnectionMode()
+    }
+
+
+    $('.jsc_wc_connect').on('click', () => {
+        provider.enable().then(function(accounts) {
+            afterProviderConnected(accounts)
+        });
     });
+    $('.jsc_wc_disconnect').on('click', () => {
+        provider.disconnect();
+    })
+    provider.wc.on('connect', function() {
+        window.location.reload();
+    })
+
     provider.on('disconnect', function() {
         window.location.reload()
     })
+
     $('.jsc_update_wallet').on('click', function() {
         if (databaseWallet.length == 0) {
             $.ajax({
@@ -46,6 +65,8 @@
             console.log(e);
         })
     }
+
+
     $('.jsc_wc_disconnect').on('click', () => {
         provider.disconnect();
     })
@@ -67,7 +88,7 @@
         if (currentAccount == null && databaseWallet.length != 0) {
             connectionMode = '1';
         }
-        if (connectionMode != null && databaseWallet.length != 0 && currentAccount.toLowerCase() != databaseWallet.toLowerCase()) {
+        if (currentAccount != null && databaseWallet.length != 0 && currentAccount.toLowerCase() != databaseWallet.toLowerCase()) {
             connectionMode = '2';
         }
         if (currentAccount != null && databaseWallet.length != 0 && currentAccount.toLowerCase() == databaseWallet.toLowerCase()) {
@@ -94,6 +115,19 @@
         if (connectionMode == '3') {
             $("#mode_3").show();
         }
+
+
+        if (connectionMode != 3) {
+            $('.jsc_wallet_error').show();
+        } else {
+            $('.jsc_upgrade_section').show();
+        }
+        $('.jsc_dash_close_menu').on('click', function(e) {
+            $('.jsc_dash_menu').hide();
+        })
+        $('.jsc_dash_open').on('click', function(e) {
+            $('.jsc_dash_menu').show();
+        })
     }
 </script>
 {{-- user type --}}

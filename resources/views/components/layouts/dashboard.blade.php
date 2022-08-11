@@ -138,17 +138,7 @@
     </div>
     <x-walletjs></x-walletjs>
     <script>
-        if (connectionMode != 3) {
-            $('.jsc_wallet_error').show();
-        } else {
-            $('.jsc_upgrade_section').show();
-        }
-        $('.jsc_dash_close_menu').on('click', function(e) {
-            $('.jsc_dash_menu').hide();
-        })
-        $('.jsc_dash_open').on('click', function(e) {
-            $('.jsc_dash_menu').show();
-        })
+      
     </script>
     {{-- contract_abi --}}
     <script>

@@ -12,13 +12,14 @@
                     <a href="{{ route('start') }}"
                         class="{{ Route::is('start') ? 'border-indigo-500 text-gray-900' : 'border-transparent  text-gray-500' }}   inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Discover </a>
+
                     <a href="{{ route('create_dao') }}"
                         class="jsc_anchor_create_dao {{ Route::is('create_dao') ? 'border-indigo-500' : 'border-transparent' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Generate
                         Dao </a>
-                    <a href="#"
-                        class="{{ Route::is('about') ? 'border-indigo-500 text-gray-900' : 'border-transparent  text-gray-500' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                        About </a>
+                    <a href="{{ route('terms') }}"
+                        class="{{ Route::is('terms') ? 'border-indigo-500 text-gray-900' : 'border-transparent  text-gray-500' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        Terms and Conditions </a>
                     <a href="{{ route('contact') }}"
                         class="{{ Route::is('contact') ? 'border-indigo-500 text-gray-900' : 'border-transparent  text-gray-500' }} text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Contact </a>

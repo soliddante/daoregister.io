@@ -21,7 +21,7 @@
                     $daos = App\Models\Dao::where('published', 1)
                         ->where('parent_id', 0)
                         ->get();
-                    // TODO ONLY LAST VERSION
+                    // DONE ONLY LAST VERSION
                 @endphp
                 @foreach ($daos as $dao)
                     {{-- {{ $dao->id }} --}}

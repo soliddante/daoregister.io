@@ -31,8 +31,10 @@
         .iti {
             width: 100%;
         }
-    </style>
 
+   
+    </style>
+    <script></script>
 </head>
 {{-- //CHEKCED ADD CANCEL CONTRACT --}}
 {{-- //CHEKCED NOT PUBLISHED CONTRACT CANT UPDATE --}}

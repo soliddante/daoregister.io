@@ -169,16 +169,15 @@
                                     @if ($dao->published == 1)
                                         <a class=" bg-theme-light  text-white py-1 px-2 rounded"
                                             href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
-                                            Dao</>
-                                        @else
-                                            <a class="jsc_no_update cursor-not-allowed   bg-gray-300 text-white py-1 px-2 rounded"
-                                                href="#">Update
-                                                Dao</a>
-                                            <script>
-                                                tippy('.jsc_no_update', {
-                                                    content: "Contract should published before update   ",
-                                                });
-                                            </script>
+                                            Dao</a>
+                                    @else
+                                        <a class="jsc_no_update cursor-not-allowed   bg-gray-300 text-white py-1 px-2 rounded" href="#">Update
+                                            Dao</a>
+                                        <script>
+                                            tippy('.jsc_no_update', {
+                                                content: "Contract should published before update   ",
+                                            });
+                                        </script>
                                     @endif
                                 @endif
                                 <select name="" class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">

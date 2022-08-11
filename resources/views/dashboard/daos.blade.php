@@ -9,7 +9,7 @@ $dao_unsigns = auth()
 @endphp
 <x-layouts.dashboard>
     <section class="p-8">
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-3 gap-4">
             @foreach ($dao_unsigns as $dao_unsign)
                 <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
                     <div class="flex items-center justify-center flex-col relative h-48 bg-theme-dark text-white">

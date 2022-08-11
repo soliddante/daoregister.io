@@ -14,4 +14,8 @@ class HomeCotnroller extends Controller
     {
         return view('contact');
     }
+    public function terms()
+    {
+        return view('terms');
+    }
 }

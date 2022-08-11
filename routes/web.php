@@ -48,6 +48,7 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(HomeCotnroller::class)->group(function () {
     Route::get('/', 'start')->name('start')->middleware(['auth']);
     Route::get('/contact', 'contact')->name('contact');
+    Route::get('/terms', 'terms')->name('terms');
 });
 
 Route::controller(WalletController::class)->group(function () {
