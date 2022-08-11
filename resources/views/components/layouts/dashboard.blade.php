@@ -193,3 +193,4 @@
     </script>
 
 </x-layouts.app_full>
+{{-- TODO YOU SHOULD PUBLISH ALL CHANGES BEFORE MINT ERROR --}}

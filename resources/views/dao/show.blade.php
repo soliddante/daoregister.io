@@ -571,45 +571,82 @@
     // ]
     let tokenId = []
     let tokenURI = []
-    let promises = []
     let recipient = "{{ auth()->user()->wallet }}";
     let xweb3 = new Web3(provider);
     //
+
+
+
+
+
+
     function mintDaoNft() {
 
-        let contract_address = "0x1df63417e8Dd9D68cA3758AA703456A6Ac72bF6a";
-        let contract = new xweb3.eth.Contract(dao_nft_abi, contract_address);
 
         $.each($('[name="ipfs_images_data_array[]"').serializeArray(), function(index, element) {
-            tokenId.push(JSON.parse(element.value).dao_token)
-            promises.push($.ajax({
+            $.ajax({
                 url: "{{ route('find_dao_ipfs_by_token') }}",
                 data: {
                     'token': JSON.parse(element.value).dao_token
                 },
                 success: function(response) {
-                    console.log(response);
+                    tokenId.push(JSON.parse(element.value).dao_token)
+                    tokenURI.push(response.json);
                 },
-            }).done(function(e) {
-                tokenURI.push(e.json)
-            }))
-        });
-        $.when.apply($, tokenId).then(function() {
+            })
+        })
 
-            console.log(tokenId);
-            console.log(tokenURI);
 
-            contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
-                from: "{{ auth()->user()->wallet }}"
-            }, function(error, transactionHash) {
-                console.log(error);
-                console.log(transactionHash);
-                if (transactionHash) {
+        let myInterval = setInterval(() => {
+            if (tokenURI.length == $('[name="ipfs_images_data_array[]"').length) {
+                console.log(tokenId);
+                console.log(tokenURI);
+                clearInterval(myInterval);
+
+                let contract_address = "0x1df63417e8Dd9D68cA3758AA703456A6Ac72bF6a";
+                let contract = new xweb3.eth.Contract(dao_nft_abi, contract_address);
+
+
+
+                contract.methods.mintNFT(tokenId, recipient, tokenURI).send({
+                    from: "{{ auth()->user()->wallet }}"
+                }, function(error, transactionHash) {
+                    console.log(error);
                     console.log(transactionHash);
-                    // do change status of exists daos
-                }
-            });
-        });
+                    if (transactionHash) {
+                        console.log(transactionHash);
+                        let foreach_end_flag = [];
+                        tokenId.forEach(element => {
+                            $.ajax({
+                                type: "get",
+                                url: "{{ route('change_dao_minted_status') }}",
+                                data: {
+                                    dao_token: element
+                                },
+                                success: function(response) {
+                                    foreach_end_flag.push(response);
+                                },
+                                error: function(e, r, z) {
+                                    console.log(e)
+                                    console.log(r)
+                                    console.log(z)
+                                }
+                            });
+                        });
+                        secondinterval = setInterval(() => {
+                            if (foreach_end_flag.length == tokenId.length) {
+                                console.log('everything done fine');
+                                window.location.reload();
+                                clearInterval(secondinterval);
+
+                            }
+                        }, 50);
+                    }
+                });
+
+            }
+        }, 50);
+
 
 
 

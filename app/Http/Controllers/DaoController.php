@@ -96,4 +96,11 @@ class DaoController extends Controller
         return view('dao.reform', compact('dao'));
     }
 
+    public function change_dao_minted_status(Request $request)
+    {
+        Dao::where('token', $request->dao_token)->update([
+            'is_minted' => '1'
+        ]);
+        return true;
+    }
 }

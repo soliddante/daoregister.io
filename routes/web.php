@@ -61,6 +61,7 @@ Route::controller(DaoController::class)->group(function () {
     Route::any('/show_dao', 'show_dao')->name('show_dao')->middleware(['auth']);
     Route::any('/reform_dao', 'reform_dao')->name('reform_dao')->middleware(['auth']);
     Route::any('/daodesign_generator', 'daodesign_generator')->name('daodesign_generator')->middleware(['auth']);
+    Route::any('/change_dao_minted_status', 'change_dao_minted_status')->name('change_dao_minted_status')->middleware(['auth']);
 });
 
 Route::controller(DaoipfsController::class)->group(function () {
