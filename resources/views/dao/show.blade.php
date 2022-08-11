@@ -83,6 +83,9 @@
         }
         // dd($dao_mode);
     @endphp
+    @php
+        
+    @endphp
     {{-- hidden dao start --}}
     <x-daodesign :dao="$dao"></x-daodesign>
     {{-- hidden dao end --}}
@@ -105,7 +108,37 @@
                                 </div>
                             </div>
                             <div class="flex gap-2 text-sm items-center">
-                                <button class="jsc_mint_bulk bg-theme-dark text-white py-1 px-2 rounded">Bulk minting</button>
+                                @php
+                                    $unpublished_exists = false;
+                                    $current_dao = App\Models\Dao::where('id', $dao->id)->first();
+                                    if ($current_dao->parent_id == 0) {
+                                        $parent_dao = $current_dao;
+                                    } else {
+                                        $parent_dao = App\Models\Dao::where('id', $current_dao->parent_id)->first();
+                                    }
+                                    $branches_daos = App\Models\Dao::where('parent_id', $parent_dao->id)->get();
+                                    if ($parent_dao->toArray()['is_minted'] == 0) {
+                                        if ($parent_dao->toArray()['published'] == 0) {
+                                            $unpublished_exists = true;
+                                        }
+                                    }
+                                    foreach ($branches_daos->toArray() as $branch_dao) {
+                                        if ($branch_dao['published'] == 0) {
+                                            $unpublished_exists = true;
+                                        }
+                                    }
+                                @endphp
+                                @if ($unpublished_exists)
+                                    <button class="jsc_no_bulk bg-gray-300 cursor-not-allowed text-white py-1 px-2 rounded">Bulk minting</button>
+                                    <script>
+                                        tippy('.jsc_no_bulk', {
+                                            content: "All related contracts should published before mint",
+                                        });
+                                    </script>
+                                @else
+                                    <button class="jsc_mint_bulk_open_modal bg-theme-dark text-white py-1 px-2 rounded">Bulk minting</button>
+                                @endif
+
                                 {{-- this is last refund --}}
                                 @php
                                     $updatable = false;
@@ -134,17 +167,18 @@
                                 @endphp
                                 @if ($updatable == true)
                                     @if ($dao->published == 1)
-                                        <a class="py-1 bg-theme-light text-white px-2 rounded"
+                                        <a class=" bg-theme-light  text-white py-1 px-2 rounded"
                                             href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
-                                            Dao</a>
-                                    @else
-                                        <a class="jsc_no_update cursor-not-allowed  wpy-1 bg-gray-400 text-white px-2 rounded" href="#">Update
-                                            Dao</a>
-                                        <script>
-                                            tippy('.jsc_no_update', {
-                                                content: "Contract should published before update   ",
-                                            });
-                                        </script>
+                                            Dao</>
+                                        @else
+                                            <a class="jsc_no_update cursor-not-allowed   bg-gray-300 text-white py-1 px-2 rounded"
+                                                href="#">Update
+                                                Dao</a>
+                                            <script>
+                                                tippy('.jsc_no_update', {
+                                                    content: "Contract should published before update   ",
+                                                });
+                                            </script>
                                     @endif
                                 @endif
                                 <select name="" class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">
@@ -495,9 +529,7 @@
                 contracts</div>
         </form>
     </div>
-    <script>
-        $('.jsc_bulk_modal').modal();
-    </script>
+    <script></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
     <script>
@@ -651,4 +683,9 @@
 
 
     }
+</script>
+<script>
+    $('.jsc_mint_bulk_open_modal').on('click', function() {
+        $('.jsc_bulk_modal').modal();
+    })
 </script>
