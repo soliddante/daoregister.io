@@ -137,9 +137,7 @@
         </div>
     </div>
     <x-walletjs></x-walletjs>
-    <script>
-      
-    </script>
+    <script></script>
     {{-- contract_abi --}}
     <script>
         var database_ipfs = null;

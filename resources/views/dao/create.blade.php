@@ -10,7 +10,7 @@
         }
     </script> --}}
     <x-dao_modal />
-    <form action="#" class="jsc_form">
+    <form action="#" class="jsc_form py-12">
         <input type="hidden" name="token" class="jsc_random_token" value="{{ rand('100', '99999999') }}">
         <section class="pt-4 my-4  space-y-8 divide-y divide-gray-200 rounded bg-white border-gray-200 px-4 border">
             {{-- information --}}
@@ -194,7 +194,7 @@
                 </div>
             </article>
             {{-- submit --}}
-            <article>
+            <article >
                 <div class="flex justify-between mt-4 pb-4 ">
                     <div class="relative flex items-start">
                         <div class="flex  items-center mt-0.5 h-5">
@@ -209,11 +209,14 @@
                                 fee for now</p>
                         </div>
                     </div>
-                    <div
-                        class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Add partner
-                    </div>
+               
                 </div>
+            </article>
+            <article>
+                <div
+                class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    Submit Dao
+            </div>
             </article>
         </section>
     </form>
