@@ -9,11 +9,16 @@ if ($current_dao->parent_id == 0) {
 $branches_daos = App\Models\Dao::where('parent_id', $parent_dao->id)->get();
 // dd($dao_mode);
 $all_daos = [];
-array_push($all_daos, $parent_dao->toArray());
+if ($parent_dao->toArray()['is_minted'] == 0) {
+    array_push($all_daos, $parent_dao->toArray());
+}
 foreach ($branches_daos->toArray() as $branch_dao) {
-    array_push($all_daos, $branch_dao);
+    if ($branch_dao['is_minted'] == 0) {
+        array_push($all_daos, $branch_dao);
+    }
 }
 @endphp
+{{-- {{ dd($all_daos) }} --}}
 <script>
     let ipfs_images_array = [];
     let ipfs_json_array = [];
