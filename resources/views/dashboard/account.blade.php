@@ -10,13 +10,16 @@
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Just fill in the inputs you want to change</p>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="email" id="email" type="email" lable="Email address" value="{{ auth()->user()->email }}" disabled class="bg-gray-100"></x-ui.input>
+                    <x-ui.input name="email" id="email" type="email" lable="Email address" value="{{ auth()->user()->email }}" disabled
+                        class="bg-gray-100"></x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="email_confrimation" id="email_confrimation" type="email" lable="Email conftimation" value="{{ auth()->user()->email }}" disabled class="bg-gray-100"></x-ui.input>
+                    <x-ui.input name="email_confrimation" id="email_confrimation" type="email" lable="Email conftimation"
+                        value="{{ auth()->user()->email }}" disabled class="bg-gray-100"></x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1 ">
-                    <x-ui.input name="phone" id="phone" lable="Phone Number" class="global_phone" placeholder="{{ auth()->user()->phone }}" empty> </x-ui.input>
+                    <x-ui.input name="phone" id="phone" lable="Phone Number" class="global_phone" placeholder="{{ auth()->user()->phone }}"
+                        empty> </x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <div class="hidden">space</div>
@@ -25,7 +28,8 @@
                     <x-ui.input name="password" id="password" lable="Password" type="password" placeholder="********" empty></x-ui.input>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="password_confrimation" id="password_confrimation" lable="Password confrimation" type="password" placeholder="********" empty></x-ui.input>
+                    <x-ui.input name="password_confrimation" id="password_confrimation" lable="Password confrimation" type="password"
+                        placeholder="********" empty></x-ui.input>
                 </div>
 
                 <div class="col-span-2 md:col-span-1">
@@ -34,17 +38,18 @@
                     </x-ui.select>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <x-ui.input name="security_answer" id="security_answer" lable="Answer" placeholder="{{ auth()->user()->security_answer }}"></x-ui.input>
+                    <x-ui.input name="security_answer" id="security_answer" lable="Answer" placeholder="{{ auth()->user()->security_answer }}">
+                    </x-ui.input>
                 </div>
 
                 {{-- /*********
                  SUBMIT
                 ***********/ --}}
-                <div class="col-span-2 md:col-span-1 col-start-2 flex justify-end ">
+                <div class="col-span-2  flex justify-end ">
                     <x-ui.button size="md" type="submit">Update</x-ui.button>
                 </div>
             </div>
         </div>
     </form>
-   
+
 </x-layouts.dashboard>

@@ -2088,7 +2088,7 @@
 
     var rect = element.getBoundingClientRect();
     var scaleX = 1;
-    var scaleY = 1; // FIXME:
+    var scaleY = 1; 
     // `offsetWidth` returns an integer while `getBoundingClientRect`
     // returns a float. This results in `scaleX` or `scaleY` being
     // non-1 when it should be for elements that aren't a full pixel in
@@ -8646,7 +8646,6 @@ validator.settings[eventType] && validator.settings[eventType].call(validator, t
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function( value, element, param ) {
 			// bind to the blur event of the target in order to revalidate whenever the target field is updated
-			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
 			var target = $(param);
 			if ( this.settings.onfocusout ) {
 				target.unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {

@@ -194,7 +194,7 @@
                 </div>
             </article>
             {{-- submit --}}
-            <article >
+            <article class="hidden">
                 <div class="flex justify-between mt-4 pb-4 ">
                     <div class="relative flex items-start">
                         <div class="flex  items-center mt-0.5 h-5">
@@ -209,14 +209,14 @@
                                 fee for now</p>
                         </div>
                     </div>
-               
+
                 </div>
             </article>
-            <article>
+            <article class="flex justify-end py-6">
                 <div
-                class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-    Submit Dao
-            </div>
+                    class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Submit Dao
+                </div>
             </article>
         </section>
     </form>

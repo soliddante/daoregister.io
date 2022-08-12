@@ -97,6 +97,7 @@ class UserController extends Controller
     }
     public function user_update(Request $request)
     {
+     
         $user = User::find(auth()->user()->id);
         $user->update([
             'type' => $request->type ?? $user->type,
@@ -173,6 +174,7 @@ class UserController extends Controller
 
     public function sync_email(Request $request)
     {
+           // daoregister.io/user_update?token=c3ViZGFuaWFsQGdtYWlsLmNvbQo=
         $token = $request->token;
         return view('auth.sync', compact('token'));
     }

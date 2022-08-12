@@ -446,7 +446,7 @@
             <div class="fixed bottom-0 w-full right-0 h-[60px] bg-blue-100 shadow flex items-center justify-center ">
                 <div>
                     You are invited to participate in this Dao. Do you accept this request?
-                    {{-- TODO HARD REJECT --}}
+
                 </div>
                 <form action="accept_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
@@ -466,7 +466,7 @@
             <div class="fixed bottom-0 w-full right-0 h-[60px] bg-blue-100 shadow flex items-center justify-center ">
                 <div>
                     You have already refused to accept this contract
-                    {{-- TODO HARD REJECT --}}
+
                 </div>
                 <form action="accept_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">

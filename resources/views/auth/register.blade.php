@@ -326,8 +326,7 @@
     </div>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script>
-        // TODO validator https://github.com/validatorjs/validator.js/
-        // console.log(validator.isEmail($('[name="firstname"]').val()));
+
     </script>
 
     <script>

@@ -31,14 +31,12 @@
         .iti {
             width: 100%;
         }
-
-   
     </style>
     <script></script>
 </head>
 {{-- //CHEKCED ADD CANCEL CONTRACT --}}
 {{-- //CHEKCED NOT PUBLISHED CONTRACT CANT UPDATE --}}
-{{-- //TODO CONTRACT ON BLOCKCHAIN BULK OR NUT --}}
+{{-- //CHECKED CONTRACT ON BLOCKCHAIN BULK OR NUT --}}
 {{-- //TODO EMAIL DESIGN --}}
 {{-- //CHECKED EMAIL SHOULD CANT CHANGE --}}
 {{-- //TODO SELL CONTRACT --}}
@@ -48,3 +46,7 @@
 {{-- //CHECKED SHOW CONTRACT OLD VERSIONS LIKE GITHUB --}}
 {{-- //CHECKED ONLY LAST BRANCHES CAN UPDATE --}}
 {{-- //TODO IPFS Daos QR Codes and Shit --}}
+{{-- //TODO HARD REJECT DAO --}}
+{{-- //TODO Share Percentage UI --}}
+{{-- UPGRADE validator https://github.com/validatorjs/validator.js/ --}}
+{{-- UPGRADE validator METAMASK --}}
