@@ -28,20 +28,65 @@
     },
     {
         "type": "Directory",
-        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\resources\\views",
-        "parent_id": null,
-        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\resources\\views",
-        "workspaceRoot": null,
-        "workspacePath": null,
-        "id": "q2xwQCdARjIOfDna"
-    },
-    {
-        "type": "Directory",
         "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\public",
         "parent_id": null,
         "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\public",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "gFEXov4iSNlyRCmO"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\.favorites.json",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\.favorites.json",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "8K0SdGqfxX9kplcH"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\.gitignore",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\.gitignore",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "qtvsBa9w2gGLxzW6"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\composer.lock",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\composer.lock",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "Ol5hgcIexGa3ipn4"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\README.md",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\README.md",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "jauq6m2ewcQOY1zs"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\bootstrap",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\bootstrap",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "RlahLgHJvBMZAiw3"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\app\\View",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\app\\View",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "6R7PUZAbOcyqoLw8"
     }
 ]

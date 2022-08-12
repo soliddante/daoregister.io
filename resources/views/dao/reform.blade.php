@@ -1,16 +1,5 @@
 <x-layouts.app>
-    {{-- @if (auth()->user()->type != 'writer')
-        <script>
-            window.location.href = "{{ URL::previous() }}";
-        </script>
-    @endif
-    <script>
-        if (connectionStatus != 1 || currentAccount == null || databaseWallet.length == 0 || currentAccount != databaseWallet) {
-            window.location.href = "{{ URL::previous() }}";
-        }
-    </script> --}}
 
- 
     <x-dao_modal />
     <form action="{{ route('store_dao') }}" class="jsc_form">
         <input type="hidden" name="reform_number" value="{{ $reform_number ?? 0 }}">
@@ -98,7 +87,6 @@
                             ->get();
                     @endphp
                     @foreach ($pivot as $partner)
-            
                         <x-partner_update email="{{ $partner->partner_email }}" share="{{ $partner->partner_share }}"
                             type="{{ $partner->partner_type }}" />
                     @endforeach
@@ -224,14 +212,14 @@
                                 fee for now</p>
                         </div>
                     </div>
-                   
+
                 </div>
             </article>
             <article class="py-4 flex justify-end">
                 <div
-                class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-               Re-form Dao
-            </div>
+                    class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Re-form Dao
+                </div>
             </article>
         </section>
     </form>
