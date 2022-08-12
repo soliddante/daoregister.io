@@ -12,10 +12,10 @@ class HomeCotnroller extends Controller
     }
     public function contact()
     {
-        return view('contact');
+        return view('home/contact');
     }
     public function terms()
     {
-        return view('terms');
+        return view('home/terms');
     }
 }
