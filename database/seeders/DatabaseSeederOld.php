@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory()->create([
-            "id" =>5,
+            "id" => 5,
             "email" => "3@gmail.com",
             "wallet" => NULL,
             "type" => "0",
@@ -112,9 +112,9 @@ class DatabaseSeeder extends Seeder
             "updated_at" => "2022-08-07 10:13:34",
         ]);
 
-        
+
         \App\Models\User::factory()->create([
-            "id" =>6,
+            "id" => 6,
             "email" => "ob@gmail.com",
             "wallet" => NULL,
             "type" => "0",
@@ -197,7 +197,5 @@ class DatabaseSeeder extends Seeder
             'partner_share' => '20',
             'partner_accepted' => 0,
         ]);
-
-
     }
 }

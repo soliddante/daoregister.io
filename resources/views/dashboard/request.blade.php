@@ -12,7 +12,7 @@ $dao_unsigns_count = auth()
     ->count();
 
 @endphp
-<x-layouts.dashboard>
+<x-layout.dashboard>
 
     @if ($dao_unsigns_count == 0)
         <div class="p-8">
@@ -44,7 +44,7 @@ $dao_unsigns_count = auth()
                         <div class="text-4xl font-bold">{{ $dao_unsign->name ?? '' }}</div>
                         <div>{{ $dao_unsign->type ?? '' }}</div>
                         <a href="{{ route('show_dao', ['dao_id' => $dao_unsign->id]) }}" class="absolute -bottom-4 right-4 "><button type="button"
-                                class="flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Read
+                                class="flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">Read
                                 Contract <ion-icon name="barcode" class="-mb-1"></ion-icon></button></a>
                     </div>
                     <div class="flex-1 bg-white p-6 flex flex-col justify-between">
@@ -104,4 +104,4 @@ $dao_unsigns_count = auth()
     </section>
 
 
-</x-layouts.dashboard>
+</x-layout.dashboard>

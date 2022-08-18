@@ -1,236 +1,85 @@
-<x-layouts.app>
-    <style>
-        html,
-        body {
-            background: white !important;
-        }
+<style>
+    html,
+    body {
+        background: white !important;
+    }
+</style>
+@php
+$dao_group_daos = App\Models\Dao::where('group', $dao->group)->get();
+$dao_users = DB::table('dao_user')
+    ->where('dao_id', $dao->id)
+    ->get();
+$dao_main_users = $dao_users->where('partner_type', '!=', 'observer');
+$dao_main_users_who_signed = $dao_main_users->where('partner_accepted', 1);
+$dao_main_users_who_refused = $dao_main_users->where('partner_accepted', -1);
+$dao_main_users_who_not_signed = $dao_main_users->where('partner_accepted', 0);
+$is_all_group_daos_published = !App\Models\Dao::where('group', $dao->group)
+    ->where('published', 0)
+    ->exists();
+@endphp
 
-        .css_main_div {
-            width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 !important;
-        }
-
-        .jsc_request_alert {
-            display: none !important;
-        }
-    </style>
-    @php
-        $dao_mode = null;
-        $signed_daos_display = DB::table('dao_user')
-            ->where('dao_id', $dao->id)
-            ->where('partner_type', '!=', 'observer')
-            ->where('partner_accepted', 1);
-        $refuse_daos_display = DB::table('dao_user')
-            ->where('dao_id', $dao->id)
-            ->where('partner_type', '!=', 'observer')
-            ->where('partner_accepted', '-1');
-        // NOT SUBSET | ALL PARTNERS AND HESABDARS SHOULD SIGN
-        if ($dao->is_subset == 0) {
-            $unsignet_daos = DB::table('dao_user')
-                ->where('dao_id', $dao->id)
-                ->where('partner_type', '!=', 'observer')
-                ->where('partner_accepted', 0);
-            if ($unsignet_daos->exists()) {
-                $dao_mode = 0; //all members not vote
-            } else {
-                $dao_mode = 10;
-            }
-        }
-        if ($dao->is_subset == 1) {
-            switch ($dao->type) {
-                case 'owner_only':
-                    $unsignet_daos = DB::table('dao_user')
-                        ->where('dao_id', $dao->id)
-                        ->where('partner_type', '==', 'owner')
-                        ->where('partner_accepted', 0);
-                    if ($unsignet_daos->exists()) {
-                        $dao_mode = 1; //owner not signed
-                    } else {
-                        $dao_mode = 10;
-                    }
-                    break;
-                case 'majority':
-                    $unsignet_daos = DB::table('dao_user')
-                        ->where('dao_id', $dao->id)
-                        ->where('partner_type', '!=', 'observer')
-                        ->where('partner_accepted', 0);
-                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-                    if ($unsignet_daos->exists() && $unsignet_daos_share < 51) {
-                        $dao_mode = 2; //majority share not enough
-                    } else {
-                        $dao_mode = 10;
-                    }
-                    break;
-                case 'both':
-                    $unsignet_daos = DB::table('dao_user')
-                        ->where('dao_id', $dao->id)
-                        ->where('partner_type', '!=', 'observer')
-                        ->where('partner_accepted', 0);
-                    $owner_not_signed = DB::table('dao_user')
-                        ->where('dao_id', $dao->id)
-                        ->where('partner_type', '==', 'owner')
-                        ->where('partner_accepted', 0)
-                        ->exists();
-                    $unsignet_daos_share = $unsignet_daos->sum('partner_share');
-                    if (($unsignet_daos->exists() && $unsignet_daos_share < 51) || $owner_not_signed) {
-                        $dao_mode = 3; //majority share not enough or owner not vote
-                    } else {
-                        $dao_mode = 10;
-                    }
-                    break;
-            }
-        }
-        // dd($dao_mode);
-    @endphp
-    @php
-        
-    @endphp
-    {{-- hidden dao start --}}
-    <x-daodesign :dao="$dao"></x-daodesign>
-    {{-- hidden dao end --}}
-    <div class="grid-cols-12 grid w-full">
+<x-layout.app>
+    <div class="opacity-0 filter">
+        <x-dao.dao_contract_single :dao="$dao"></x-dao.dao_contract_single>
+    </div>
+    <div class="grid w-full grid-cols-16">
         <div class="col-span-5">
-            <img src="{{ asset('img/daobg.jpg') }}" class="w-full  h-full object-cover">
+            <img src="{{ asset('img/daobg.jpg') }}" class="object-cover w-full h-full">
         </div>
-        <div class="col-span-7">
-            <section class="bg-white py-8 px-10  ">
+        <div class="col-span-9">
+            <section class="px-10 py-8 bg-white ">
                 <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-2 px-2">
-                        <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center">
-                                <div
-                                    class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
+                                <div class="border-[2px] mr-1 w-[30px] h-[30px] font-bold items-center justify-center flex  text-center border-theme-dark rounded-md">
                                     L</div>
                                 <div class="text-sm">
                                     <div class="font-medium">{{ $dao->name }}</div>
                                     <div class="-mt-[4px]">{{ $dao->type }}</div>
                                 </div>
                             </div>
-                            <div class="flex gap-2 text-sm items-center">
-                                @php
-                                    $unpublished_exists = false;
-                                    $current_dao = App\Models\Dao::where('id', $dao->id)->first();
-                                    if ($current_dao->parent_id == 0) {
-                                        $parent_dao = $current_dao;
-                                    } else {
-                                        $parent_dao = App\Models\Dao::where('id', $current_dao->parent_id)->first();
-                                    }
-                                    $branches_daos = App\Models\Dao::where('parent_id', $parent_dao->id)->get();
-                                    if ($parent_dao->toArray()['is_minted'] == 0) {
-                                        if ($parent_dao->toArray()['published'] == 0) {
-                                            $unpublished_exists = true;
-                                        }
-                                    }
-                                    foreach ($branches_daos->toArray() as $branch_dao) {
-                                        if ($branch_dao['published'] == 0) {
-                                            $unpublished_exists = true;
-                                        }
-                                    }
-                                @endphp
-                                @if ($unpublished_exists)
-                                    <button class="jsc_no_bulk bg-gray-300 cursor-not-allowed text-white py-1 px-2 rounded">Bulk minting</button>
+                            <div class="flex items-center gap-2 text-sm">
+
+
+                                @if ($is_all_group_daos_published)
+                                    <a class="px-2 py-1 text-white rounded bg-theme-light" href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
+                                        Dao</a>
+                                @else
+                                    <a class="px-2 py-1 text-white bg-gray-300 rounded cursor-not-allowed jsc_no_update" href="#">Update
+                                        Dao</a>
                                     <script>
-                                        tippy('.jsc_no_bulk', {
-                                            content: "All related contracts should published before mint",
+                                        tippy('.jsc_no_update', {
+                                            content: "Last update still not published ",
                                         });
                                     </script>
-                                @else
-                                    <button class="jsc_mint_bulk_open_modal bg-theme-dark text-white py-1 px-2 rounded">Bulk minting</button>
                                 @endif
 
-                                {{-- this is last refund --}}
-                                @php
-                                    $updatable = false;
-                                    // if this is parent0 check it has child
-                                    if ($dao->parent_id == 0) {
-                                        if (App\Models\Dao::where('parent_id', $dao->id)->exists()) {
-                                            // if has child
-                                            $updatable = false;
-                                        } else {
-                                            // if not
-                                            $updatable = true;
-                                        }
-                                    }
-                                    // if not parent 0 fimd last parent then find last child check this is that or not
-                                    if ($dao->parent_id != 0) {
-                                        $parent = App\Models\Dao::where('id', $dao->parent_id)->first();
-                                        $last_child = App\Models\Dao::where('parent_id', $parent->id)
-                                            ->latest('reform_number')
-                                            ->first();
-                                        if ($dao->id == $last_child->id) {
-                                            $updatable = true;
-                                        } else {
-                                            $updatable = false;
-                                        }
-                                    }
-                                @endphp
-                                @if ($updatable == true)
-                                    @if ($dao->published == 1)
-                                        <a class=" bg-theme-light  text-white py-1 px-2 rounded"
-                                            href="{{ route('reform_dao', ['dao_id' => $dao->id]) }}">Update
-                                            Dao</a>
-                                    @else
-                                        <a class="jsc_no_update cursor-not-allowed   bg-gray-300 text-white py-1 px-2 rounded" href="#">Update
-                                            Dao</a>
-                                        <script>
-                                            tippy('.jsc_no_update', {
-                                                content: "Contract should published before update   ",
-                                            });
-                                        </script>
-                                    @endif
-                                @endif
-                                <select name="" class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">
-                                    @if ($dao->parent_id == 0)
-                                        <option value="{{ route('show_dao', ['dao_id' => $dao->id]) }}">Brach :
-                                            {{ sprintf('%04d', $dao->reform_number) }}
-                                            | ID : {{ $dao->id }} </option>
-                                        @foreach (App\Models\Dao::where('parent_id', $dao->id)->get() as $branch)
-                                            <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">Brach :
-                                                {{ sprintf('%04d', $branch->reform_number) }}
-                                                | ID : {{ $branch->id }}</option>
-                                        @endforeach
-                                    @else
-                                        @php
-                                            $main_parent = App\Models\Dao::where('id', $dao->parent_id)->first();
-                                        @endphp
-                                        <option value="{{ route('show_dao', ['dao_id' => $main_parent->id]) }}">Brach :
-                                            {{ sprintf('%04d', $main_parent->reform_number) }}
-                                            | ID : {{ $main_parent->id }}</option>
-                                        </option>
-                                        @foreach (App\Models\Dao::where('parent_id', $main_parent->id)->get() as $branch)
-                                            <option value="{{ route('show_dao', ['dao_id' => $branch->id]) }}">
-                                                Brach :
-                                                {{ sprintf('%04d', $branch->reform_number) }}
-                                                | ID : {{ $branch->id }}</option>
-                                        @endforeach
-                                    @endif
+
+                                <select class="jsc_branches_select text-sm p-0 pl-2 pr-8 rounded h-[28px]" id="">
+                                    @foreach ($dao_group_daos as $in_group_dao)
+                                        <option value="{{ route('show_dao', ['dao_id' => $in_group_dao->id]) }}"> {{ $in_group_dao->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                 </article>
                 <article>
-                    @php
-                        $unsigned_daos = DB::table('dao_user')
-                            ->where('dao_id', $dao->id)
-                            ->where('partner_type', '!=', 'observer')
-                            ->where('partner_accepted', '0');
-                    @endphp
-                    @if ($unsigned_daos->exists() && $dao->published != 1)
-                        <div class="rounded-md bg-yellow-50 mb-8 mt-4 p-4">
+
+                    @if ($dao->published != 1)
+                        <div class="p-4 mt-4 mb-8 rounded-md bg-blue-50">
                             <div class="flex">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                        aria-hidden="true">
+                                    <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd"
                                             d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <div class="ml-3 w-full ">
-                                    <h3 class="text-sm text-yellow-800 font-bold">Contract is not published yet </h3>
-                                    <div class="grid text-sm mt-2 text-yellow-700  grid-cols-3 w-full">
+                                <div class="w-full ml-3 ">
+                                    <h3 class="text-sm font-bold text-blue-800">Contract is not published yet </h3>
+                                    <div class="grid w-full grid-cols-3 mt-2 text-sm text-blue-700">
                                         <div class="col-span-1">
                                             <div>
                                                 Voting requires
@@ -259,17 +108,17 @@
                                             </div>
                                         </div>
                                         <div class="col-span-3">
-                                            <hr class="border-yellow-700 my-2">
+                                            <hr class="my-2 border-blue-700">
                                         </div>
                                         <div class="col-span-1">
                                             Partners who signed
                                         </div>
                                         <div class="col-span-2">
-                                            @if ($signed_daos_display->count() != 0)
-                                                @foreach ($signed_daos_display->get() as $signed_dao_display)
-                                                    <li class="mb-1 flex items-center">
+                                            @if ($dao_main_users_who_signed->count() > 0)
+                                                @foreach ($dao_main_users_who_signed as $user)
+                                                    <li class="flex items-center mb-1">
                                                         <div>
-                                                            {{ $signed_dao_display->partner_email }}
+                                                            {{ $user->partner_email }}
                                                         </div>
                                                         <div class="bg-green-600 text-xs ml-2 px-2 py-0.5 text-white rounded "> Signed </div>
                                                     </li>
@@ -279,19 +128,19 @@
                                             @endif
                                         </div>
                                         <div class="col-span-3">
-                                            <hr class="border-yellow-700 my-2">
+                                            <hr class="my-2 border-blue-700">
                                         </div>
                                         <div class="col-span-1">
                                             Partners who not desided
                                         </div>
                                         <div class="col-span-2">
-                                            @if ($unsigned_daos->count() != 0)
-                                                @foreach ($unsigned_daos->get() as $unsigned_dao)
-                                                    <li class="mb-1 flex items-center">
+                                            @if ($dao_main_users_who_not_signed->count() > 0)
+                                                @foreach ($dao_main_users_who_not_signed as $user)
+                                                    <li class="flex items-center mb-1">
                                                         <div>
-                                                            {{ $unsigned_dao->partner_email }}
+                                                            {{ $user->partner_email }}
                                                         </div>
-                                                        <div class="bg-yellow-600 text-xs ml-2 px-2 py-0.5 text-white rounded ">Not signed </div>
+                                                        <div class="bg-blue-600 text-xs ml-2 px-2 py-0.5 text-white rounded ">Not signed </div>
                                                     </li>
                                                 @endforeach
                                             @else
@@ -299,15 +148,15 @@
                                             @endif
                                         </div>
                                         <div class="col-span-3">
-                                            <hr class="border-yellow-700 my-2">
+                                            <hr class="my-2 border-blue-700">
                                         </div>
                                         <div class="col-span-1">
                                             Partners who Refuse
                                         </div>
                                         <div class="col-span-2">
-                                            @if ($refuse_daos_display->count() != 0)
-                                                @foreach ($refuse_daos_display->get() as $refuse_dao_display)
-                                                    <li class="mb-1 flex items-center">
+                                            @if ($dao_main_users_who_refused->count() != 0)
+                                                @foreach ($dao_main_users_who_refused as $refuse_dao_display)
+                                                    <li class="flex items-center mb-1">
                                                         <div>
                                                             {{ $refuse_dao_display->partner_email }}
                                                         </div>
@@ -319,21 +168,20 @@
                                             @endif
                                         </div>
                                         <div class="col-span-3">
-                                            <hr class="border-yellow-700 my-2">
+                                            <hr class="my-2 border-blue-700">
                                         </div>
                                         <div class="col-span-1">
                                             Voting statistic
                                         </div>
                                         <div class="col-span-1">
                                             <div class="w-full rounded border border-green-800 h-[16px] mt-0.5">
-                                                <div class=" rounded bg-green-800 h-[15px]"
-                                                    style="width:{{ $signed_daos_display->sum('partner_share') }}%;">
+                                                <div class=" rounded bg-green-800 h-[15px]" style="width:{{ $dao_main_users_who_signed->sum('partner_share') }}%;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-span-1 ">
-                                            <span class="text-green-800 ml-2">
-                                                {{ $signed_daos_display->sum('partner_share') }}
+                                            <span class="ml-2 text-green-800">
+                                                {{ $dao_main_users_who_signed->sum('partner_share') }}
                                                 <span class="-ml-1">%</span>
                                             </span>
                                         </div>
@@ -343,60 +191,59 @@
                     @endif
                 </article>
                 <article class="grid grid-cols-2 md:mx-auto ">
-                    <div class="col-span-1 pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Contract Type</div>
+                    <div class="col-span-1 py-2 pl-2 text-sm bg-gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Contract Type</div>
                     </div>
-                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2 ">
+                    <div class="col-span-1 py-2 text-sm bg-gray-800 bg-opacity-5 ">
                         <div>Limited Liability Company</div>
                     </div>
-                    <div class="col-span-1  pl-2 text-sm  bg-opacity-30 py-2 ">
-                        <div class=" font-medium text-theme-dark">Date of Establishment</div>
+                    <div class="col-span-1 py-2 pl-2 gray-800 bg-opacity-5 ">
+                        <div class="font-medium text-theme-dark">Date of Establishment</div>
                     </div>
-                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 gray-800 bg-opacity-5">
                         <div>2022 JUN 13</div>
                     </div>
-                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Company worth </div>
+                    <div class="col-span-1 py-2 pl-2 text-sm bg-gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Company worth </div>
                     </div>
-                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 text-sm bg-gray-800 bg-opacity-5">
                         <div>{{ number_format($dao->worth) }} BNB</div>
                     </div>
-                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Number of partners </div>
+                    <div class="col-span-1 py-2 pl-2 gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Number of partners </div>
                     </div>
-                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 gray-800 bg-opacity-5">
                         <div>3 Members </div>
                     </div>
-                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Token ID </div>
+                    <div class="col-span-1 py-2 pl-2 text-sm bg-gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Token ID </div>
                     </div>
-                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 text-sm bg-gray-800 bg-opacity-5">
                         <div>{{ $dao->token }} </div>
                     </div>
-                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Contract </div>
+                    <div class="col-span-1 py-2 pl-2 gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Contract </div>
                     </div>
-                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
-                        <div> <a class="text-xs text-theme-light underline "
-                                href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
+                    <div class="col-span-1 py-2 gray-800 bg-opacity-5">
+                        <div> <a class="text-xs underline text-theme-light " href="https://ropsten.etherscan.io/address/0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9">
                                 0x3d0FfEA8dc6AA0CD48136b61E4b76ea037A815d9 </a> </div>
                     </div>
-                    <div class="col-span-1  pl-2 text-sm bg-theme-light bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Reform number</div>
+                    <div class="col-span-1 py-2 pl-2 text-sm bg-gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Reform number</div>
                     </div>
-                    <div class="col-span-1 text-sm bg-theme-light bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 text-sm bg-gray-800 bg-opacity-5">
                         <div>{{ sprintf('%04u', $dao->reform_number) }} </div>
                     </div>
-                    <div class="col-span-1 pl-2 text-sm  bg-opacity-30 py-2">
-                        <div class=" font-medium text-theme-dark">Publish Status </div>
+                    <div class="col-span-1 py-2 pl-2 gray-800 bg-opacity-5">
+                        <div class="font-medium text-theme-dark">Publish Status </div>
                     </div>
-                    <div class="col-span-1 text-sm  bg-opacity-30 py-2">
+                    <div class="col-span-1 py-2 gray-800 bg-opacity-5">
                         <div> {{ $dao->published == 1 ? 'True' : 'False' }} </div>
                     </div>
                 </article>
-                <article class="mt-8 grid gap-2 grid-cols-2 px-2 ">
+                <article class="grid grid-cols-2 gap-2 px-2 mt-8 ">
                     <div class="col-span-1 md:text-center md:col-span-2">
-                        <div class="font-bold text-lg md:text-3xl md:mb-1">{{ $dao->name }} {{ $dao->type }} </div>
+                        <div class="text-lg font-bold md:text-3xl md:mb-1">{{ $dao->name }} {{ $dao->type }} </div>
                         @php
                             function character_limiter($str, $n = 600, $end_char = '&#8230;')
                             {
@@ -420,16 +267,16 @@
                         <div class="text-xs  md:mx-auto md:text-sm md:px-[30px] ">{!! character_limiter($dao->document) !!}</div>
                         <div class="flex md:w-[350px] md:mt-4 md:mx-auto gap-2 mt-2">
                             <a download="contract"
-                                class="jsc_contract_download  text-center block w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm   font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save
+                                class="items-center block w-full px-2 py-1 text-xs font-medium text-center text-white bg-indigo-600 border border-transparent rounded shadow-sm jsc_contract_download md:text-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save
                                 <ion-icon name="download"></ion-icon>
                             </a>
                             <button type="button"
-                                class="w-full items-center px-2 py-1 border border-transparent text-xs md:text-sm    font-medium  rounded shadow-sm  text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share
+                                class="items-center w-full px-2 py-1 text-xs font-medium text-indigo-700 bg-indigo-100 border border-transparent rounded shadow-sm md:text-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share
                                 <ion-icon name="share"></ion-icon>
                             </button>
                         </div>
                     </div>
-                    <div class="col-span-1  md:col-span-2">
+                    <div class="col-span-1 md:col-span-2">
                         <a class="jsc_contract_image_link ">
                             <img data-fancybox class="border jsc_contract_image md:w-[360px] md:mt-12 md:mx-auto">
                         </a>
@@ -437,8 +284,20 @@
                 </article>
             </section>
         </div>
+        <div class="h-screen col-span-2 px-4 pt-8">
+            <div class="flex items-center justify-center p-4 rounded shadow">
+                <innerxxxx>
+                    <div>
+                        <i class="block text-xl fa-regular fa-mailbox"></i>
+                    </div>
+                    <div>
+                        LETTERS
+                    </div>
+                </innerxxxx>
+            </div>
+        </div>
     </div>
-    {{-- TODO SHOW USER SHARES AND JOINER SHARE BOLDER --}}
+
     @if ($dao->published != 1 &&
         auth()->user()->daos()->where('dao_id', $dao->id)->wherePivot('partner_accepted', '0')->exists())
         <section>
@@ -450,11 +309,11 @@
                 </div>
                 <form action="accept_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-                    <button type="submit" class="bg-theme-dark text-white py-1 px-4 rounded cursor-pointer ml-4 mr-1 "> Sign contract</button>
+                    <button type="submit" class="px-4 py-1 ml-4 mr-1 text-white rounded cursor-pointer bg-theme-dark "> Sign contract</button>
                 </form>
                 <form action="refuse_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-                    <button type="submit" class="bg-red-800 text-white py-1 px-4 rounded cursor-pointer ">Refeuse Sign</button>
+                    <button type="submit" class="px-4 py-1 text-white bg-red-800 rounded cursor-pointer ">Refeuse Sign</button>
                 </form>
             </div>
         </section>
@@ -470,7 +329,7 @@
                 </div>
                 <form action="accept_join_dao">
                     <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-                    <button type="submit" class="bg-theme-dark text-white py-1 px-4 rounded cursor-pointer ml-4 mr-1 ">I changed my mind, Sign
+                    <button type="submit" class="px-4 py-1 ml-4 mr-1 text-white rounded cursor-pointer bg-theme-dark ">I changed my mind, Sign
                         contract</button>
                 </form>
             </div>
@@ -478,7 +337,7 @@
     @endif
     <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/jquery.modal.min.css') }}" />
-    <div class="jsc_bulk_modal hidden px-4 py-8">
+    <div class="hidden px-4 py-8 jsc_bulk_modal">
         @php
             $current_dao = App\Models\Dao::where('id', $dao->id)->first();
             if ($current_dao->parent_id == 0) {
@@ -504,14 +363,14 @@
             </thead>
             @foreach ($all_daos as $item)
                 <tr>
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $item['id'] }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item['reform_number'] }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-900">{{ $item['token'] }}</td>
-                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                    <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">{{ $item['id'] }}</td>
+                    <td class="px-3 py-4 text-sm text-center text-gray-900 whitespace-nowrap">{{ $item['reform_number'] }}</td>
+                    <td class="px-3 py-4 text-sm text-center text-gray-900 whitespace-nowrap">{{ $item['token'] }}</td>
+                    <td class="relative px-2 py-4 pl-3 pr-4 text-xs font-medium text-center text-white rounded whitespace-nowrap sm:pr-6">
                         <span class="w-[110px] block {{ $item['published'] == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
                             {{ $item['published'] == 1 ? 'Published' : 'Unprepared' }}
                     </td>
-                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center rounded text-white px-2  text-xs font-medium sm:pr-6">
+                    <td class="relative px-2 py-4 pl-3 pr-4 text-xs font-medium text-center text-white rounded whitespace-nowrap sm:pr-6">
                         <span class=" w-[60px] block {{ $item['is_minted'] == 1 ? 'bg-green-600' : ' bg-gray-800' }} rounded py-1 px-2">
                             {{ $item['is_minted'] == 1 ? 'True' : 'False' }}
                     </td>
@@ -523,7 +382,7 @@
         <form class="jsc_ipfs_form" method="POST" action="{{ route('dao_ipfs_create') }}">
             @csrf
             <input type="hidden" name="dao_id" value="{{ $dao->id }}">
-            <div class="cursor-pointer jsc_ipfs_form_submit block w-full py-2 text-sm mt-6 bg-theme-dark text-white text-center rounded">Mint all
+            <div class="block w-full py-2 mt-6 text-sm text-center text-white rounded cursor-pointer jsc_ipfs_form_submit bg-theme-dark">Mint all
                 lazy
                 contracts</div>
         </form>
@@ -549,8 +408,8 @@
             $('.jsc_contract_download').attr('href', image)
         });
     </script>
-</x-layouts.app>
-<x-daodesign_generator :dao="$dao"> </x-daodesign_generator>
+</x-layout.app>
+{{-- <x-daodesign_generator :dao="$dao"> </x-daodesign_generator> --}}
 <script>
     $('.jsc_ipfs_form_submit').on('click', function(e) {
         $('.jsc_ipfs_form_submit').addClass('!bg-gray-300 !pointer-event-none !cursor-wait')
@@ -594,12 +453,11 @@
         });
     })
 </script>
-<x-dao_nft_abi></x-dao_nft_abi> {{-- return var dao_nft_abi --}}
+{{-- <x-dao_nft_abi></x-dao_nft_abi> --}}
+
+
+{{-- return var dao_nft_abi --}}
 <script>
-    // let tokenId = ['91131777', '1974543']
-    // let tokenURI = ['http://localhost:8000/storage/dao_nft/PlxQfUq1veHeoy2JizaRzuVQd7leWfiR1KTjHVfd.json',
-    //     'http://localhost:8000/storage/dao_nft/Js6tMzSoERkIuc3t6mrhMBOQAfeH25lJgJkMNduD.json'
-    // ]
     let tokenId = []
     let tokenURI = []
     let recipient = "{{ auth()->user()->wallet }}";

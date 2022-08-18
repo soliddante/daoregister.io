@@ -5,13 +5,17 @@ use App\Http\Controllers\DaoipfsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeCotnroller;
 use App\Http\Controllers\IpfsController;
+use App\Http\Controllers\LetterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
+use App\Http\Middleware\CheckPlan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/x', function () {
     return view('auth.update');
 });
+Route::get('#', function () {
+})->name('#');
 
 
 Route::get('/dashboard', function () {
@@ -22,10 +26,15 @@ Route::get('/login_form', function () {
     return view('auth.login');
 })->name('login_form');
 
-
 Route::get('/register_form', function () {
     return view('auth.register');
 })->name('register_form');
+
+Route::get('/plan', function () {
+    return view('auth.plan');
+})->name('plan');
+
+Route::auto('/dao/letter', LetterController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/register_store', 'register_store')->name('register_store');

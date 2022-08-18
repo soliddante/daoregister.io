@@ -22,6 +22,7 @@ class Dao extends Model
         'is_minted',
         'published',
         'parent',
+        'group',
         'extras',
         'picture',
         'reform_number',

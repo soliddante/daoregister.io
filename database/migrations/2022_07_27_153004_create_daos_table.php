@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('published')->nullable()->default(0);
             $table->string('is_subset')->nullable()->default(0);
             $table->string('parent_id')->nullable()->default(0);
+            $table->string('group')->nullable();
             $table->string('lazy')->nullable();
             $table->string('picture')->nullable();
             $table->string('is_minted')->nullable()->default(0);

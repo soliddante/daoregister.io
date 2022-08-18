@@ -1,4 +1,4 @@
-<x-layouts.app_full>
+<x-layout>
 
     <style>
         .glb_navigation {
@@ -25,7 +25,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="firstname" value="{{ old('firstname') ?? '' }}"
                                             value="{{ old('firstname') ?? '' }}" id="firstname" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                                 <div class="sm:col-span-3">
@@ -33,7 +33,7 @@
                                     <div class="mt-1">
                                         <input type="text" name="lastname" value="{{ old('lastname') ?? '' }}" id="lastname"
                                             autocomplete="family-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -42,7 +42,7 @@
                                     <div class="mt-1">
                                         <input type="date" name="birthday" value="{{ old('birthday') ?? '' }}" id="birthday"
                                             autocomplete="family-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -53,12 +53,12 @@
                                             <div class="flex gap-4">
                                                 <div class="flex items-center">
                                                     <input id="man" value="man" name="gendar" value="{{ old('gendar') ?? '' }}"
-                                                        type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                                        type="radio" class="focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300">
                                                     <label for="man" class="ml-1 block text-sm font-medium text-gray-700"> Man </label>
                                                 </div>
                                                 <div class="flex items-center">
                                                     <input id="woman" value="woman" name="gendar" value="{{ old('gendar') ?? '' }}"
-                                                        type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                                        type="radio" class="focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300">
                                                     <label for="woman" class="ml-1 block text-sm font-medium text-gray-700"> Woman </label>
                                                 </div>
                                             </div>
@@ -77,14 +77,14 @@
                                     <div class="mt-1">
                                         <input type="email" readonly name="email" value="{{ base64_decode($token) }}" id="email"
                                             autocomplete="given-name"
-                                            class="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="bg-gray-100 shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                                 <div class="sm:col-span-3 col-span-2">
                                     <label for="email_confirmation " class="block text-sm font-medium text-gray-700">Email repeat </label>
                                     <div class="mt-1">
                                         <input type="email" readonly value="{{  base64_decode($token) }}" name="email_confirmation"
-                                            class="shadow-sm bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm bg-gray-100 focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -92,7 +92,7 @@
                                     <label for="phone" class=" block text-sm font-medium text-gray-700">Phone number </label>
                                     <div class="mt-1">
                                         <input type="text" name="phone" value="{{ old('phone') ?? '' }}" id="phone"
-                                            class="global_phone shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block !w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="global_phone shadow-sm focus:ring-theme-500 focus:border-theme-500 block !w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -101,7 +101,7 @@
                                     <div class="mt-1">
                                         <input type="password" placeholder="at least 8 characters" name="password"
                                             value="{{ old('password') ?? '' }}" id="password"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                                 <div class="sm:col-span-3 ">
@@ -109,7 +109,7 @@
                                     <div class="mt-1">
                                         <input type="password" name="password_confirmation" value="{{ old('password') ?? '' }}"
                                             id="password_confirmation"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -118,10 +118,10 @@
                         <article class="pt-5 ">
                             <div class="flex justify-end">
                                 <a href="{{ route('login_form') }}"
-                                    class=" inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class=" inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Login instead</a>
                                 <div
-                                    class="jsc_page_next ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="jsc_page_next ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Next</div>
                             </div>
                         </article>
@@ -136,7 +136,7 @@
                                     <label for="country" class="block text-sm font-medium text-gray-700"> Country </label>
                                     <div class="mt-1">
                                         <select name="country" value="{{ old('country') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                             <option value="US">US</option>
                                         </select>
                                     </div>
@@ -145,7 +145,7 @@
                                     <label for="country" class="block text-sm font-medium text-gray-700"> City </label>
                                     <div class="mt-1">
                                         <select name="city" value="{{ old('city') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Åland Islands">Åland Islands</option>
 
@@ -156,14 +156,14 @@
                                     <label for="postalcode" class="block text-sm font-medium text-gray-700"> PostalCode </label>
                                     <div class="mt-1">
                                         <input type="text" name="postalcode" value="{{ old('postalcode') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                                 <div class="sm:col-span-6 col-span-2">
                                     <label class="block text-sm font-medium text-gray-700"> Address </label>
                                     <div class="mt-1">
                                         <textarea name="address" autocomplete="given-name"
-                                            class=" h-28 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">{{ old('address') ?? '' }}</textarea>
+                                            class=" h-28 shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">{{ old('address') ?? '' }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Profession </label>
                                     <div class="mt-1">
                                         <input type="text" name="profession" value="{{ old('profession') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -186,7 +186,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Education </label>
                                     <div class="mt-1">
                                         <input type="text" name="education" value="{{ old('education') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
 
@@ -194,7 +194,7 @@
                                     <label class="block text-sm font-medium text-gray-700">University </label>
                                     <div class="mt-1">
                                         <input type="text" name="university" value="{{ old('university') ?? '' }}" autocomplete="given-name"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>
@@ -203,10 +203,10 @@
                         <article class="pt-5 ">
                             <div class="flex justify-end">
                                 <div
-                                    class="jsc_page_back inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="jsc_page_back inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Previous</div>
                                 <div
-                                    class="jsc_page_next ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="jsc_page_next ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Next</div>
                             </div>
                         </article>
@@ -221,7 +221,7 @@
                                     <label class="block text-sm font-medium text-gray-700"> Native language </label>
                                     <div class="mt-1">
                                         <select name="language_first" value="{{ old('language_first') ?? '' }}"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                             <option value="English">English</option>
                                         </select>
                                     </div>
@@ -231,7 +231,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Second language </label>
                                     <div class="mt-1">
                                         <select name="language_second" value="{{ old('language_second') ?? '' }}"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                             <option value="spanish">Spanish</option>
                                         </select>
                                     </div>
@@ -242,7 +242,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Security question </label>
                                     <div class="mt-1">
                                         <select name="security_question" value="{{ old('security_question') ?? '' }}"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                             <option value="animal">What is your favorit animal</option>
                                         </select>
                                     </div>
@@ -252,7 +252,7 @@
                                     <label class="block text-sm font-medium text-gray-700">Answer : </label>
                                     <div class="mt-1">
                                         <input type="text" name="security_answer" value="{{ old('security_answer') ?? '' }}"
-                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                            class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>
@@ -269,42 +269,42 @@
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         Instagram </span>
                                     <input type="text" name="instagram" value="{{ old('instagram') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                                 <div class="mt-3 flex rounded-md shadow-sm col-span-2 sm:col-span-1">
                                     <span
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         Twitter </span>
                                     <input type="text" name="Twitter" value="{{ old('Twitter') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                                 <div class="mt-3 flex rounded-md shadow-sm col-span-2 sm:col-span-1">
                                     <span
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         Facebook </span>
                                     <input type="text" name="Facebook" value="{{ old('Facebook') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                                 <div class="mt-3 flex rounded-md shadow-sm col-span-2 sm:col-span-1">
                                     <span
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         Whatsapp </span>
                                     <input type="text" name="Whatsapp" value="{{ old('Whatsapp') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                                 <div class="mt-3 flex rounded-md shadow-sm col-span-2 sm:col-span-1">
                                     <span
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         Telegram </span>
                                     <input type="text" name="Telegram" value="{{ old('Telegram') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                                 <div class="mt-3 flex rounded-md shadow-sm col-span-2 sm:col-span-1">
                                     <span
                                         class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 w-[90px] text-gray-500 sm:text-sm">
                                         linkedin </span>
                                     <input type="text" name="linkedin" value="{{ old('linkedin') ?? '' }}"
-                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300">
+                                        class="flex-1 min-w-0 text-sm block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-theme-500 focus:border-theme-500 sm:text-sm border-gray-300">
                                 </div>
                             </div>
                         </article>
@@ -313,10 +313,10 @@
                         <article class="pt-5">
                             <div class="flex justify-end">
                                 <div
-                                    class="jsc_page_back inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="jsc_page_back inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Previous</div>
                                 <div
-                                    class="jsc_page_submit ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="jsc_page_submit ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                                     Submit</div>
                             </div>
                         </article>
@@ -353,4 +353,4 @@
             })
         }
     </script>
-    </x-layouts.app>
+    </x-layout.app>

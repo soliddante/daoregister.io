@@ -1,16 +1,17 @@
-<x-layouts.app>
+<x-layout.app mainClass="w-[70vw] mx-auto">
 
-    <x-dao_modal />
-    <form action="{{ route('store_dao') }}" class="jsc_form">
+    {{-- <x-dao_modal /> --}}
+    <form action="{{ route('store_dao') }}" class="jsc_form py-12">
         <input type="hidden" name="reform_number" value="{{ $reform_number ?? 0 }}">
         <input type="hidden" name="is_subset" value="1">
+        <input type="hidden" name="group" value="{{ $dao->group }}">
         <input type="hidden" name="parent_id" value="{{ $dao->id }}">
         <input type="hidden" name="token" class="jsc_random_token" value="{{ rand('100', '99999999') }}">
         <section class="pt-4 my-4  space-y-8 divide-y divide-gray-200 rounded bg-white border-gray-200 px-4 border">
             {{-- information --}}
             <article>
                 <h1 class="text-2xl  leading-8 font-bold text-gray-900">
-                    Generate Dao</h1>
+                    Reform Dao</h1>
                 <div class="text-xs text-gray-500 ">
                     Lorem ipsum dolor sit amet consectetur
                     adipisicing elit. Eius, facere ipsum.
@@ -28,7 +29,7 @@
                         </label>
                         <div class="mt-1">
                             <input type="text" value="{{ $dao->name }}" name="name" id="name"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                     <div class="sm:col-span-3 col-span-1">
@@ -36,7 +37,7 @@
                             Symbol </label>
                         <div class="mt-1">
                             <input type="text" value="{{ $dao->symbol }}" name="symbol" id="symbol"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                     <div class="sm:col-span-3 col-span-2">
@@ -45,7 +46,7 @@
                         </label>
                         <div class="mt-1">
                             <select id="type" name="type"
-                                class="jsc_type_select shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                class="jsc_type_select shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 <option value="Limited company">
                                     LTD : Limited company
                                 </option>
@@ -61,7 +62,7 @@
                         </label>
                         <div class="mt-1">
                             <input type="text" value="{{ $dao->worth }}" id="worth" name="worth"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                class="shadow-sm focus:ring-theme-500 focus:border-theme-500 block w-full sm:text-sm border-gray-300 rounded-md">
 
                         </div>
                     </div>
@@ -87,13 +88,13 @@
                             ->get();
                     @endphp
                     @foreach ($pivot as $partner)
-                        <x-partner_update email="{{ $partner->partner_email }}" share="{{ $partner->partner_share }}"
+                        <x-dao.row_partner_update email="{{ $partner->partner_email }}" share="{{ $partner->partner_share }}"
                             type="{{ $partner->partner_type }}" />
                     @endforeach
                 </div>
                 <div class="flex items-center justify-end mt-2">
                     <div
-                        class="jsc_partners_add inline-flex items-center justify-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                        class="jsc_partners_add inline-flex items-center justify-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-theme-700 bg-theme-100 hover:bg-theme-200">
                         Member +
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
                                 <input value="owner_only" name="vote_mode" type="radio" @if ($dao->vote_mode == 'owner_only') checked @endif
-                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                    class="focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
                                 <label for="small" class="font-medium  text-gray-700">Owner
@@ -125,7 +126,7 @@
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
                                 <input value="majority" name="vote_mode" @if ($dao->vote_mode == 'majority') checked @endif type="radio"
-                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                    class="focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
                                 <label for="medium" class="font-medium text-gray-700 ">Majority
@@ -140,7 +141,7 @@
                         <div class="relative flex items-start">
                             <div class="flex items-center h-5">
                                 <input value="both" name="vote_mode" @if ($dao->vote_mode == 'both') checked @endif type="radio"
-                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                                    class="focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300">
                             </div>
                             <div class="ml-3 ">
                                 <label for="large" class="font-medium  text-gray-700">Both
@@ -186,12 +187,12 @@
                 <div class="jsc_extras">
                     {{-- {{ $dao->extras }} --}}
                     @foreach (json_decode($dao->extras) as $extra)
-                        <x-extra key="{{ $extra->key }}" value="{{ $extra->value }}" pv="{{ $extra->pv }}" />
+                        <x-dao.row_extra key="{{ $extra->key }}" value="{{ $extra->value }}" pv="{{ $extra->pv }}" />
                     @endforeach
                 </div>
                 <div class="flex justify-start mt-2">
                     <div
-                        class="jsc_extras_add inline-flex items-center justify-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                        class="jsc_extras_add inline-flex items-center justify-center px-3 py-2 border border-transparent text-xs font-medium rounded-md text-theme-700 bg-theme-100 hover:bg-theme-200">
                         Extra Field +
                     </div>
                 </div>
@@ -202,7 +203,7 @@
                     <div class="relative flex items-start">
                         <div class="flex  items-center mt-0.5 h-5">
                             <input name="lazy" type="checkbox" checked
-                                class="jsc_lazy focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                class="jsc_lazy focus:ring-theme-500 h-4 w-4 text-theme-600 border-gray-300 rounded">
                         </div>
                         <div class="ml-3 text-sm">
                             <label for="comments" class="font-medium text-gray-700">Lazy
@@ -217,7 +218,7 @@
             </article>
             <article class="py-4 flex justify-end">
                 <div
-                    class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    class="jsc_submit cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                     Re-form Dao
                 </div>
             </article>
@@ -230,7 +231,7 @@
             <input type="mail" class="new_partnet_email border rounded py-2  w-full mt-2 px-2" placeholder="mail@example.com" id="">
             <button type="button" disabled
                 class="jsc_partner_email_submit block items-center mt-2 px-4 py-2 border border-transparent
-                 text-base font-medium rounded-md shadow-sm filter opacity-40 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                 text-base font-medium rounded-md shadow-sm filter opacity-40 text-white bg-theme-600 hover:bg-theme-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-500">
                 Add
                 Partner</button>
             <div class="jsc_email_not_exists_alert hidden  mt-2 text-sm bg-blue-50 rounded-lg py-4 px-4 text-blue-700">This email does not exist in
@@ -259,7 +260,7 @@
     <script>
         // partners
         $('.jsc_partners_add').on('click', function() {
-            $('.jsc_partners').append(`<x-partner />`);
+            $('.jsc_partners').append(`<x-dao.row_partner_create />`);
         })
         $('body').on('change', '.jsc_partner_select',
             function() {
@@ -270,7 +271,7 @@
             })
         // extrafields
         $('.jsc_extras_add').on('click', function() {
-            $('.jsc_extras').append(`<x-extra />`);
+            $('.jsc_extras').append(`<x-dao.row_extra />`);
 
 
 
@@ -853,4 +854,4 @@
 
         })
     </script>
-</x-layouts.app>
+</x-layout.app>

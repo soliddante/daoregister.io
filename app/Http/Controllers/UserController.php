@@ -56,7 +56,7 @@ class UserController extends Controller
         ]);
 
         $user = User::create([
-            "type" => 0,
+            "plan" => 'free',
             "firstname" => $request->firstname,
             "lastname" => $request->lastname,
             "birthday" => $request->birthday,
@@ -100,7 +100,7 @@ class UserController extends Controller
      
         $user = User::find(auth()->user()->id);
         $user->update([
-            'type' => $request->type ?? $user->type,
+            'plan' => $request->plan ?? $user->plan,
             'email' => $request->email ?? $user->email,
             'password' => Hash::make($request->password) ?? $user->password,
             'wallet' => $request->wallet ?? $user->wallet,

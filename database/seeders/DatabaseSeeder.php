@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'email' => 'admin@gmail.com',
-            'type' => NULL,
+            'plan' => 'empty',
             'firstname' => 'danial',
             'lastname' => 'rafiee',
             'birthday' => '2022-01-31',
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             "id" => 4,
             "email" => "subdanial@gmail.com",
             "wallet" => NULL,
-            "type" => "0",
+            "plan" => "free",
             "firstname" => "danial",
             "lastname" => "rafiee",
             "birthday" => "2021-07-06",
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
             "id" => 5,
             "email" => "3@gmail.com",
             "wallet" => NULL,
-            "type" => "0",
+            "plan" => "free",
             "firstname" => "danial",
             "lastname" => "rafiee",
             "birthday" => "2021-07-06",
@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
             "id" => 6,
             "email" => "ob@gmail.com",
             "wallet" => NULL,
-            "type" => "0",
+            "plan" => "free",
             "firstname" => "danial",
             "lastname" => "rafiee",
             "birthday" => "2021-07-06",
@@ -255,5 +255,30 @@ class DatabaseSeeder extends Seeder
             "created_at" => NULL,
             "updated_at" => NULL,
         ]);
+
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('letters')->insert([
+                'receiver_id' => rand(1,2),
+                'receiver_signed' => 1,
+                'sender_id' => rand(1,2),
+                'sender_signed' => 0,
+                'title' => fake()->company(),
+                'content' => fake()->text('100'),
+                'extra_fields' => json_encode([
+                    [
+                        'key' => 'size',
+                        'value' => 'M',
+                    ],
+                    [
+                        'key' => 'Color',
+                        'value' => 'Red',
+                    ],
+                ]),
+                'is_minted' => 1,
+                'token' => rand(1, 9999999999999),
+                "created_at" => now(),
+                "updated_at" => now(),
+            ]);
+        }
     }
 }

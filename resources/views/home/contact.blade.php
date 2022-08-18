@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layout.app>
     <style>
         html,
         body {
@@ -140,6 +140,6 @@
                 </div>
             </div>
         </main>
-        <x-layouts.footer_theme></x-layouts.footer_theme>
+        <x-layout.nav_footer></x-layout.nav_footer>
     </div>
-</x-layouts.app>
+</x-layout.app>

@@ -18,4 +18,5 @@ class HomeCotnroller extends Controller
     {
         return view('home/terms');
     }
+   
 }

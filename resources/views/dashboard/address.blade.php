@@ -1,4 +1,4 @@
-<x-layouts.dashboard>
+<x-layout.dashboard>
     <form id="form" action="{{ route('user_update') }}">
 
      <div class="border rounded px-8 py-12 bg-white mt-4 mb-4 md:mt-16 shadow block md:w-4/5 w-[92vw] mx-auto ">
@@ -11,30 +11,30 @@
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
             </div>
             <div class="md:col-span-1 col-span-2">
-                <x-ui.select name="country" lable="country">
+                <x-form.select name="country" lable="country">
                     <option value="US" @if (auth()->user()->country == 'US') selected @endif>US</option>
-                </x-ui.select>
+                </x-form.select>
 
             </div>
             <div class="md:col-span-1 col-span-2">
-                <x-ui.select name="city" lable="city">
+                <x-form.select name="city" lable="city">
                     <option value="New York" @if (auth()->user()->city == 'New York') selected @endif>New York</option>
-                </x-ui.select>
+                </x-form.select>
             </div>
             <div class="md:col-span-1 col-span-2">
-                <x-ui.input name="postalcode" lable="postalcode" placeholder="{{ auth()->user()->postalcode }}" ></x-ui.input>
+                <x-form.input name="postalcode" lable="postalcode" placeholder="{{ auth()->user()->postalcode }}" ></x-form.input>
             </div>
             <div class="col-span-2">
-                <x-ui.textarea name="address" lable="Address" class="h-[150px]">{{ auth()->user()->address }}</x-ui.textarea>
+                <x-form.textarea name="address" lable="Address" class="h-[150px]">{{ auth()->user()->address }}</x-form.textarea>
             </div>
             {{-- /*********
                  SUBMIT
                 ***********/ --}}
             <div class="col-span-2 flex justify-end ">
-                <x-ui.button size="md" type="submit">Update</x-ui.button>
+                <x-form.button size="md" type="submit">Update</x-form.button>
             </div>
         </div>
     </div>
 </form>
 
-</x-layouts.dashboard>
+</x-layout.dashboard>

@@ -58,6 +58,7 @@ class DaoController extends Controller
             "token" => $request->token,
             "vote_mode" => $request->vote_mode,
             "document" => $request->document,
+            "group" => $request->group,
             "lazy" => $request->lazy ?? '1',
             "extras" => json_encode($extras),
             "worth" => $request->worth ?? '-',

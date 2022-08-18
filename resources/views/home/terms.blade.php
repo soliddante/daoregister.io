@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layout.app>
     <style>
         .css_main_div {
             width: 100% !important;
@@ -286,5 +286,5 @@
             </div>
         </div>
     </section>
-    <x-layouts.footer_theme></x-layouts.footer_theme>
-</x-layouts.app>
+    <x-layout.nav_footer></x-layout.nav_footer>
+</x-layout.app>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea709c74daf4f55e2eb36ea74104e8e7",
+    "content-hash": "2ff4bc52d5957065ebafd89c7b56d159",
     "packages": [
         {
             "name": "brick/math",
@@ -509,6 +509,79 @@
             "time": "2022-02-20T15:07:15+00:00"
         },
         {
+            "name": "glhd/aire",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glhd/aire.git",
+                "reference": "498d00162075b4b0a3b06b37836f7a9d70cd8842"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glhd/aire/zipball/498d00162075b4b0a3b06b37836f7a9d70cd8842",
+                "reference": "498d00162075b4b0a3b06b37836f7a9d70cd8842",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/events": "~5.8.0|^6.0|^7.0|^8.0|^9.0|dev-master",
+                "illuminate/support": "~5.8.28|^6.0|^7.0|^8.0|^9.0|dev-master",
+                "illuminate/view": "~5.8.0|^6.0|^7.0|^8.0|^9.0|dev-master"
+            },
+            "require-dev": {
+                "barryvdh/reflection-docblock": "^2.0",
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "guzzlehttp/guzzle": "~6.0|~7.0",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.23|^7.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^9.5",
+                "symfony/css-selector": "^5.4",
+                "symfony/dom-crawler": "^5.4"
+            },
+            "suggest": {
+                "glhd/aire-tailwind-custom-forms": "Use the Tailwind custom forms plugin for even nicer looking forms"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Galahad\\Aire\\Support\\AireServiceProvider"
+                    ],
+                    "aliases": {
+                        "Aire": "Galahad\\Aire\\Support\\Facades\\Aire"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Galahad\\Aire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Morrell",
+                    "homepage": "http://www.cmorrell.com"
+                }
+            ],
+            "description": "Modern Laravel form builder. Remembers old input, retrieves error messages and comes with beautiful Tailwind-based markup out of the box.",
+            "keywords": [
+                "Forms",
+                "aire",
+                "laravel",
+                "tailwind"
+            ],
+            "support": {
+                "issues": "https://github.com/glhd/aire/issues",
+                "source": "https://github.com/glhd/aire/tree/2.6.0"
+            },
+            "time": "2022-08-08T18:20:17+00:00"
+        },
+        {
             "name": "graham-campbell/result-type",
             "version": "v1.0.4",
             "source": {
@@ -892,6 +965,76 @@
                 }
             ],
             "time": "2022-06-20T21:43:11+00:00"
+        },
+        {
+            "name": "izniburak/laravel-auto-routes",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/izniburak/laravel-auto-routes.git",
+                "reference": "f196f912fc024840252456d7c3373e8d4013400a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/izniburak/laravel-auto-routes/zipball/f196f912fc024840252456d7c3373e8d4013400a",
+                "reference": "f196f912fc024840252456d7c3373e8d4013400a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5|^8.0.2"
+            },
+            "require-dev": {
+                "illuminate/routing": "^8.0",
+                "phpunit/phpunit": "^8.5 || ^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Buki\\AutoRoute\\AutoRouteServiceProvider"
+                    ],
+                    "aliases": {
+                        "AutoRoute": "Buki\\AutoRoute\\AutoRouteFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Buki\\AutoRoute\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "İzni Burak Demirtaş",
+                    "email": "info@burakdemirtas.org",
+                    "homepage": "https://burakdemirtas.org"
+                }
+            ],
+            "description": "Auto Route Generating (Auto-Discovery) Package for Laravel",
+            "homepage": "https://github.com/izniburak/laravel-auto-routes",
+            "keywords": [
+                "auto-route",
+                "laravel",
+                "route",
+                "route-discovery",
+                "route-generator",
+                "router"
+            ],
+            "support": {
+                "issues": "https://github.com/izniburak/laravel-auto-routes/issues",
+                "source": "https://github.com/izniburak/laravel-auto-routes/tree/v1.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://buymeacoff.ee/izniburak",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-03-27T21:40:58+00:00"
         },
         {
             "name": "laravel/framework",
