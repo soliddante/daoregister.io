@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('letters', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('dao_id');
-            $table->string('receiver_id');
-            $table->string('receiver_signed');
-            $table->string('sender_id');
-            $table->string('sender_signed');
-            $table->string('title');
-            $table->string('content');
+            $table->string('name');
+            $table->string('image');
+            $table->string('price');
             $table->string('token');
             $table->string('extra_fields');
             $table->string('is_minted');
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('letters');
+        Schema::dropIfExists('products');
     }
 };

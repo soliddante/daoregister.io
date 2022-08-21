@@ -59,6 +59,16 @@ class AppServiceProvider extends ServiceProvider
 
                 ]
             ],
+            [
+                'parent' => 'no',
+                'name' => 'Products',
+                'route' => 'dao/product.index',
+            ],
+            [
+                'parent' => 'no',
+                'name' => 'Accounting',
+                'route' => 'dao/accounting.index',
+            ],
 
             [
                 'parent' => 'no',

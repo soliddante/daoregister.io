@@ -1,10 +1,10 @@
 <x-layout.app>
 
-    <div class="max-w-7xl p-4 rounded my-20 shadow mx-auto bg-white">
+    <div class="p-4 mx-auto my-20 bg-white rounded shadow max-w-7xl">
 
         <div class="grid grid-cols-12">
-            <div class="py-2 flex justify-between col-span-12 ">
-                <div class=" font-semibold items-center flex gap-2">
+            <div class="flex justify-between col-span-12 py-2 ">
+                <div class="flex items-center gap-2 font-semibold ">
                     <div>
                         <a href="{{ URL::previous() }}" class="text-lg">
                             <i class="fa-light fa-circle-chevron-left"></i>
@@ -18,28 +18,28 @@
                 </div>
             </div>
 
-            <div class=" border  px-4  py-2 col-span-2">
+            <div class="col-span-2 px-4 py-2 border ">
                 <div>Sender : </div>
             </div>
-            <div class=" border  px-4  py-2 col-span-10">
+            <div class="col-span-10 px-4 py-2 border ">
                 {{ auth()->user()->where('id', $letter->sender_id)->first()->email }}
             </div>
-            <div class=" border  px-4  py-2 col-span-2">
+            <div class="col-span-2 px-4 py-2 border ">
                 <div>Receiver : </div>
             </div>
-            <div class=" border  px-4  py-2 col-span-10">
+            <div class="col-span-10 px-4 py-2 border ">
                 {{ auth()->user()->where('id', $letter->receiver_id)->first()->email }}
             </div>
-            <div class=" border  px-4  py-2 col-span-2">
+            <div class="col-span-2 px-4 py-2 border ">
                 <div>Token : </div>
             </div>
-            <div class=" border  px-4  py-2 col-span-10">
+            <div class="col-span-10 px-4 py-2 border ">
                 {{ $letter->token }}
             </div>
-            <div class=" border  px-4  py-2 col-span-2">
+            <div class="col-span-2 px-4 py-2 border ">
                 <div>Content : </div>
             </div>
-            <div class=" border  px-4  py-2 col-span-10">
+            <div class="col-span-10 px-4 py-2 border ">
                 {{ $letter->content }}
             </div>
         </div>
@@ -47,14 +47,14 @@
         EXTRA
         *********/ --}}
         <div class="grid grid-cols-12 mt-6">
-            <div class="py-2 font-semibold col-span-12 ">
+            <div class="col-span-12 py-2 font-semibold ">
                 <div> Extra Fields</div>
             </div>
             @foreach (json_decode($letter->extra_fields) as $extra)
-                <div class=" border  px-4  py-2 col-span-2">
+                <div class="col-span-2 px-4 py-2 border ">
                     <div> {{ $extra->key }}</div>
                 </div>
-                <div class=" border  px-4  py-2 col-span-10">
+                <div class="col-span-10 px-4 py-2 border ">
                     {{ $extra->value }}
                 </div>
             @endforeach
@@ -63,11 +63,11 @@
         * SIGNS *
         *********/ --}}
         <div class="grid grid-cols-12 mt-6">
-            <div class="py-2 font-semibold col-span-12 ">
+            <div class="col-span-12 py-2 font-semibold ">
                 <div>Signatures</div>
             </div>
-            <div class="col-span-10 flex items-end">
-                <div class="p-4 border items-center flex">
+            <div class="flex items-end col-span-10">
+                <div class="flex items-center p-4 border">
                     <div>
                         <img src="{{ asset('qrcode-black.svg') }}" alt="">
                     </div>
@@ -84,7 +84,7 @@
 
                     </div>
                 </div>
-                <div class="p-4 border items-center flex">
+                <div class="flex items-center p-4 border">
                     <div>
                         <img src="{{ asset('qrcode-black.svg') }}" alt="">
                     </div>
@@ -102,9 +102,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-2 flex  gap-1 justify-end items-end">
-                <button class="bg-red-800 py-1 text-smv  px-4 text-white">Refuse</button>
-                <button class="bg-theme-dark py-1 text-smv  px-4 text-white">Accept</button>
+            <div class="flex items-end justify-end col-span-2 gap-1">
+                <button class="px-4 py-1 text-white bg-red-800 text-smv">Refuse</button>
+                <button class="px-4 py-1 text-white bg-theme-dark text-smv">Accept</button>
             </div>
         </div>
     </div>

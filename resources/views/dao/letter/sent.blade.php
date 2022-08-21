@@ -1,11 +1,18 @@
 <x-layout.app>
-    <div class="max-w-7xl p-8 my-24 rounded shadow bg-white mx-auto">
+    <div class="p-8 mx-auto my-24 bg-white rounded shadow max-w-7xl">
         <div class="grid grid-cols-6">
-            <div class="col-span-6">
-                <div class="font-semibold text-xl mb-4"> Sent messages</div>
+            <div class="flex items-center justify-between col-span-6">
+                <div class="mb-4 text-xl font-semibold"> Sent messages</div>
+                <div class="mb-4 text-xl ">
+                    <x-form.select class="font-light w-[200px]">
+                        <option value="1" >ALL DAOS </option>
+                        <option value="1" >Dao 1 </option>
+                        <option value="1" >Dao 2 </option>
+                    </x-form.select>
+                </div>
             </div>
-            <div class="col-span-6 border-b border-gray-700 mb-2 pb-1 ">
-                <div class="grid-cols-12 grid">
+            <div class="col-span-6 pb-1 mb-2 border-b border-gray-700 ">
+                <div class="grid grid-cols-12">
                     <div class="col-span-2">Title</div>
                     <div class="col-span-5">Summary</div>
                     <div class="col-span-2 ">Sender</div>
@@ -16,7 +23,7 @@
             </div>
             <div class="col-span-6 ">
                 @foreach ($letters as $letter)
-                    <div class="cursor-pointer  w-full grid grid-cols-12 justify-between items-center border-b hover:border-gray-300 hover:shadow-sm hover:bg-gray-50  py-3">
+                    <div class="grid items-center justify-between w-full grid-cols-12 py-3 border-b cursor-pointer hover:border-gray-300 hover:shadow-sm hover:bg-gray-50">
                         <div class="col-span-2 gap-4 ">
                             <div class="font-semibold"> {{ Str::limit($letter->title, 18) }} </div>
                         </div>
@@ -25,22 +32,22 @@
                                 {{ Str::limit($letter->content, 50) }}
                             </div>
                         </div>
-                        <div class="text-gray-500 col-span-2"> {{ auth()->user()->where('id', $letter->receiver_id)->first()->email }}</div>
-                        <div class="text-gray-500 col-span-1 text-center">
+                        <div class="col-span-2 text-gray-500"> {{ auth()->user()->where('id', $letter->receiver_id)->first()->email }}</div>
+                        <div class="col-span-1 text-center text-gray-500">
                             <i class="fas fa-check"></i>
                         </div>
-                        <div class="text-gray-500 col-span-1 text-center">
+                        <div class="col-span-1 text-center text-gray-500">
                             <i class="fas fa-check"></i>
                         </div>
-                        <div class="col-span-1 flex justify-end">
-                            <div class="flex  text-xs w-max  rounded  text-white divide-x">
-                                <a href="{{ route('dao/letter.show', ['letter_id' => $letter->id]) }}" class="block px-2 py-1 bg-gray-800 hover:bg-gray-600 rounded-l  text-white">
+                        <div class="flex justify-end col-span-1">
+                            <div class="flex text-xs text-white divide-x rounded w-max">
+                                <a href="{{ route('dao/letter.show', ['letter_id' => $letter->id]) }}" class="block px-2 py-1 text-white bg-gray-800 rounded-l hover:bg-gray-600">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <div class="block px-2 py-1 bg-gray-800 hover:bg-gray-600  text-white">
+                                <div class="block px-2 py-1 text-white bg-gray-800 hover:bg-gray-600">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <div class="block px-2 py-1 bg-gray-800 hover:bg-gray-600  rounded-r text-white">
+                                <div class="block px-2 py-1 text-white bg-gray-800 rounded-r hover:bg-gray-600">
                                     <i class="fas fa-download"></i>
                                 </div>
                             </div>

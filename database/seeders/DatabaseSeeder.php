@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
+        $this->call([
+            ProductSeeder::class,
+        ]);
+
         \App\Models\User::factory()->create([
             'email' => 'admin@gmail.com',
             'plan' => 'empty',
@@ -258,6 +264,7 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('letters')->insert([
+                'dao_id' => 1,
                 'receiver_id' => rand(1,2),
                 'receiver_signed' => 1,
                 'sender_id' => rand(1,2),

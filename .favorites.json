@@ -34,5 +34,23 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "pduP98G4iMAFNnUC"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\tailwind.config.js",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\tailwind.config.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "GrLUpTXYWvDino5m"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Dante\\Desktop\\daoregister.io\\resources\\css\\app.scss",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\Dante\\Desktop\\daoregister.io\\resources\\css\\app.scss",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "2WkfaQmIEwANTyMo"
     }
 ]

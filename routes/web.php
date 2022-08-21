@@ -34,7 +34,6 @@ Route::get('/plan', function () {
     return view('auth.plan');
 })->name('plan');
 
-Route::auto('/dao/letter', LetterController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/register_store', 'register_store')->name('register_store');
@@ -94,3 +93,8 @@ Route::controller(IpfsController::class)->group(function () {
     Route::any('/ipfs_create', 'ipfs_create')->name('ipfs_create');
     Route::any('/ipfs_last_get', 'ipfs_last_get')->name('ipfs_last_get');
 });
+
+
+Route::auto('/dao/letter', LetterController::class);
+Route::auto('/dao/accounting', AccountingController::class);
+Route::auto('/dao/product', ProductController::class);

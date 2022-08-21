@@ -22,12 +22,12 @@ $is_all_group_daos_published = !App\Models\Dao::where('group', $dao->group)
     <div class="opacity-0 filter">
         <x-dao.dao_contract_single :dao="$dao"></x-dao.dao_contract_single>
     </div>
-    <div class="grid w-full grid-cols-16">
+    <div class="grid w-full grid-cols-14">
         <div class="col-span-5">
             <img src="{{ asset('img/daobg.jpg') }}" class="object-cover w-full h-full">
         </div>
-        <div class="col-span-9">
-            <section class="px-10 py-8 bg-white ">
+        <div class="col-span-8">
+            <section class="px-4 py-8 bg-white ">
                 <article class="grid grid-cols-2 md:mx-auto ">
                     <div class="col-span-2 px-2">
                         <div class="flex items-start justify-between mb-4">
@@ -284,17 +284,48 @@ $is_all_group_daos_published = !App\Models\Dao::where('group', $dao->group)
                 </article>
             </section>
         </div>
-        <div class="h-screen col-span-2 px-4 pt-8">
-            <div class="flex items-center justify-center p-4 rounded shadow">
-                <innerxxxx>
-                    <div>
-                        <i class="block text-xl fa-regular fa-mailbox"></i>
-                    </div>
-                    <div>
-                        LETTERS
-                    </div>
-                </innerxxxx>
-            </div>
+        <div class="flex flex-col pt-8 space-y-3 items-centercol-span-1">
+            @php
+                $buttons = [
+                    [
+                        'icon' => 'fa-light fa-mailbox',
+                        'link' => '#',
+                        'text' => 'Letters',
+                    ],
+                    [
+                        'icon' => 'fa-light fa-box',
+                        'link' => '#',
+                        'text' => 'Products',
+                    ],
+                    [
+                        'icon' => 'fa-light fa-coins',
+                        'link' => '#',
+                        'text' => 'Croudfund',
+                    ],
+                    [
+                        'icon' => 'fa-light fa-border-all',
+                        'link' => '#',
+                        'text' => 'Accounting',
+                    ],
+                ];
+            @endphp
+            @foreach ($buttons as $button)
+                <button_dao_show--side>
+                    <a href="{{ $button['link'] }}">
+                        <inner>
+                            <icon>
+                                <i class="{{ $button['icon'] }}"></i>
+                            </icon>
+                            <text>
+                                {{ $button['text'] }}
+                            </text>
+                        </inner>
+                    </a>
+                </button_dao_show--side>
+            @endforeach
+
+
+
         </div>
     </div>
 

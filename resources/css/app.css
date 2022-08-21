@@ -1,10 +1,130 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
-* {
-    font-family: Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+col-1 {
+  display: block;
+  grid-column: span 1/span 1;
 }
 
+col-2 {
+  display: block;
+  grid-column: span 2/span 2;
+}
+
+col-3 {
+  display: block;
+  grid-column: span 3/span 3;
+}
+
+col-4 {
+  display: block;
+  grid-column: span 4/span 4;
+}
+
+col-5 {
+  display: block;
+  grid-column: span 5/span 5;
+}
+
+col-6 {
+  display: block;
+  grid-column: span 6/span 6;
+}
+
+col-7 {
+  display: block;
+  grid-column: span 7/span 7;
+}
+
+col-8 {
+  display: block;
+  grid-column: span 8/span 8;
+}
+
+col-9 {
+  display: block;
+  grid-column: span 9/span 9;
+}
+
+col-10 {
+  display: block;
+  grid-column: span 10/span 10;
+}
+
+col-11 {
+  display: block;
+  grid-column: span 11/span 11;
+}
+
+col-12 {
+  display: block;
+  grid-column: span 12/span 12;
+}
+
+col-13 {
+  display: block;
+  grid-column: span 13/span 13;
+}
+
+col-14 {
+  display: block;
+  grid-column: span 14/span 14;
+}
+
+col-15 {
+  display: block;
+  grid-column: span 15/span 15;
+}
+
+col-16 {
+  display: block;
+  grid-column: span 16/span 16;
+}
+
+@layer components {
+  flex {
+    @apply flex !important;
+  }
+  information col-1 {
+    @apply px-2 py-1 text-sm text-center border-b border-gray-200;
+  }
+  information col-1[role=key] {
+    @apply font-semibold;
+  }
+  button_dao_show--side {
+    @apply block;
+  }
+  button_dao_show--side icon {
+    @apply flex items-center justify-center;
+  }
+  button_dao_show--side a {
+    @apply cursor-pointer hover:bg-theme-500 hover:text-white flex items-center justify-center mx-auto  w-[90px] h-[90px] text-theme-700 font-medium rounded shadow bg-theme-50 block w-[90px] h-[90px];
+  }
+  button_dao_show--side text {
+    @apply block pt-1 text-sm;
+  }
+  button_dao_show--side i {
+    @apply block text-3xl;
+  }
+  datatable__accounting a {
+    @apply border-none rounded-none text-theme-700 bg-theme-200   !important;
+  }
+  datatable__accounting table {
+    @apply w-full text-sm text-left text-theme-500 dark:text-theme-400;
+  }
+  datatable__accounting thead {
+    @apply text-xs uppercase text-theme-700 bg-theme-50 dark:bg-theme-700 dark:text-theme-400;
+  }
+  datatable__accounting thead th {
+    @apply px-6 py-4  !important;
+  }
+  datatable__accounting tbody tr {
+    @apply bg-white border-b dark:bg-theme-800 dark:border-theme-700;
+  }
+  datatable__accounting tbody td {
+    @apply px-6 py-4;
+  }
+  datatable__accounting input[type=search] {
+    @apply mb-2 w-[200px] rounded border-gray-300 bg-white !important;
+  }
+}/*# sourceMappingURL=app.css.map */
